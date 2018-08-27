@@ -76,10 +76,10 @@ b, strong{
 /* Header 13 */
 
 .header_13{
-	background:#2b48e7 url(../i/header_13_bg.jpg) 50% 100%;
+	background:#2b48e7 url("https://res.cloudinary.com/anand-chowdhary/image/upload/c_scale,w_1920/v1535389481/ara/bg.png") 50% 100%;
 	background-size:cover;
 	@media#{$retina}{
-		background-image:url(../i/header_13_bg_2x.jpg);
+		background-image:url("https://res.cloudinary.com/anand-chowdhary/image/upload/v1535389481/ara/bg.png");
 	}
 }
 
