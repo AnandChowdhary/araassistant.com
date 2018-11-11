@@ -22,7 +22,7 @@
 						</b-icon>
 					</b-table-column>
 					<b-table-column label="Delete">
-						<button type="button" @click.prevent="deleteEmail(props.row.id)" class="button is-secondary is-small">
+						<button type="button" @click.prevent="deleteEmail(props.row.id)" class="button is-danger is-outlined is-small">
 							<b-icon style="margin-right: 0.25rem" pack="fas" icon="trash" />
 							Delete
 						</button>
@@ -79,6 +79,7 @@ export default {
 				this.$axios.get("http://localhost:8080/emails")
 			).then(list => {
 				this.data = list.data.emails;
+				this.$snackbar.open("Your new email has been added 👍");
 			}).catch(error => {
 				alert(error.response.data.error);
 			}).then(() => {
@@ -87,25 +88,32 @@ export default {
 			});
 		},
 		deleteEmail(id) {
-			let confirm = window.confirm("Are you sure you want to delete this email?");
-			if (!confirm) return;
-			this.$axios.delete("http://localhost:8080/emails", {
-				data: {
-					id
+			this.$dialog.confirm({
+			title: "Deleting email",
+			message: "Are you sure you want to <b>delete</b> this email? This action cannot be undone.",
+			confirmText: "Delete email",
+			type: "is-danger",
+			hasIcon: true,
+			onConfirm: () => {
+				this.$axios.delete("http://localhost:8080/emails", {
+						data: {
+							id
+						}
+					}).then(() =>
+						this.$axios.get("http://localhost:8080/emails")
+					).then(list => {
+						this.$snackbar.open({
+							type: "is-danger",
+							message: "This email has been deleted 🗑"
+						});
+						this.data = list.data.emails;
+					}).catch(error => {
+						alert(error.response.data.error);
+					}).then(() => {
+						this.loading = false;
+					});
 				}
-			}).then(() =>
-				this.$axios.get("http://localhost:8080/emails")
-			).then(list => {
-				this.$snackbar.open({
-					type: "is-danger",
-					message: "This email has been deleted 🗑"
-				});
-				this.data = list.data.emails;
-			}).catch(error => {
-				alert(error.response.data.error);
-			}).then(() => {
-				this.loading = false;
-			});
+			})
 		}
 	}
 }

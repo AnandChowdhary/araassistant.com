@@ -1,0 +1,284 @@
+<template>
+	<main>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe1exctmeJjIb4guyT6newSpyJ7kA3aLc&libraries=places"></script>
+		<h1 class="title">Places and profiles</h1>
+		<p class="subtitle">Where you like to have meetings</p>
+		<p>Ara selects a place from here when you ask her to set up a meeting, so it's best to have all your contact information and preferred locations here. Ara will share these details with your guests, e.g., call {{user.informal_name}} at (your number).</p>
+		<section class="card" style="margin-top: 1.5rem">
+			<b-table
+				:data="data"
+				:striped="true"
+				:loading="loading"
+				:mobile-cards="true">
+				<template slot-scope="props">
+					<b-table-column field="name" label="Name">
+						{{ props.row.name }}
+					</b-table-column>
+					<b-table-column field="option" label="Type">
+						{{ props.row.option }}
+					</b-table-column>
+					<b-table-column field="value" label="Location">
+						{{ props.row.place && props.row.place.address_components ? props.row.place.name || props.row.place.formatted_address : props.row.value }}
+					</b-table-column>
+					<b-table-column label="Details">
+						<nuxt-link :to="`/settings/places/${props.row.id}`" class="button is-info is-outlined is-small">
+							<b-icon style="margin-right: 0.25rem" pack="fas" icon="info-circle" />
+							View
+						</nuxt-link>
+					</b-table-column>
+					<b-table-column label="Delete">
+						<button type="button" @click.prevent="deletePlace(props.row.id)" class="button is-danger is-outlined is-small">
+							<b-icon style="margin-right: 0.25rem" pack="fas" icon="trash" />
+							Delete
+						</button>
+					</b-table-column>
+				</template>
+				<template slot="empty">
+					<section class="section">
+						<div class="content has-text-grey has-text-centered">
+							<p>
+								<b-icon class="ml" pack="fas" icon="frown-open" size="is-large" />
+							</p>
+							<p>You don't have any places or profiles.</p>
+						</div>
+					</section>
+				</template>
+			</b-table>
+		</section>
+		<div class="card">
+			<form @submit.prevent="update" class="card-content">
+				<h3 class="title is-5">Have another place or profile?</h3>
+				<b-field label="Name">
+					<b-input required v-model="add.name" placeholder="Enter a name for this place or profile" />
+				</b-field>
+				<div class="columns">
+					<div class="column">
+						<b-field label="Type">
+							<b-select v-model="add.type" @input="updateOptions" expanded>
+								<option value="1">Phone number for voice calls</option>
+								<option value="4">Web account for video calls</option>
+								<option value="2">Web account for conferences</option>
+								<option value="3">Location for in-person meetings</option>
+							</b-select>
+						</b-field>
+					</div>
+					<div class="column">
+						<b-field label="Type">
+							<b-select v-model="add.option" expanded>
+								<option v-for="(item, index) in add_options[add.type]" :key="'o_' + index" :value="item.slug">{{item.title}}</option>
+							</b-select>
+						</b-field>
+					</div>
+				</div>
+				<b-field v-if="add.type == 3" label="Map location">
+					<vue-google-autocomplete v-if="googleLoaded" v-model="add.value" id="map" classname="input" placeholder="Find the location..." v-on:placechanged="getAddressData" />
+				</b-field>
+				<b-field v-else label="Value">
+					<b-input required v-model="add.value" placeholder="Enter details" />
+				</b-field>
+				<b-field label="Instructions">
+					<b-input type="textarea" v-model="add.instructions" placeholder="Add any additional instructions to share with guests here..." />
+				</b-field>
+				<!-- isDefault -->
+				<button type="submit" class="button is-primary">Add new place or profile</button>
+			</form>
+		</div>
+	</main>
+</template>
+
+<script>
+import VueGoogleAutocomplete from "vue-google-autocomplete";
+export default {
+	data() {
+		return {
+			loading: false,
+			googleLoaded: false,
+			data: [],
+			addressString: null,
+			add: {
+				name: "",
+				place: "",
+				instructions: "",
+				isDefault: false,
+				type: 1,
+				option: "cell_phone",
+				value: ""
+			},
+			add_options: {
+				1: [
+					{
+						slug: "cell_phone",
+						title: "Personal cell phone"
+					},
+					{
+						slug: "work_phone",
+						title: "Work phone"
+					}
+				],
+				2: [
+					{
+						slug: "zoom",
+						title: "Zoom link"
+					},
+					{
+						slug: "appearin",
+						title: "Appear.in link"
+					},
+					{
+						slug: "hangouts",
+						title: "Google Hangouts email"
+					},
+					{
+						slug: "gotomeeting",
+						title: "GoToMeeting link"
+					},
+					{
+						slug: "joinme",
+						title: "join.me link"
+					},
+					{
+						slug: "webex",
+						title: "WebEx link"
+					},
+					{
+						slug: "webconference",
+						title: "WebConference link"
+					}
+				],
+				3: [
+					{
+						slug: "office",
+						title: "Office"
+					},
+					{
+						slug: "home",
+						title: "Home"
+					},
+					{
+						slug: "breakfast",
+						title: "Breakfast"
+					},
+					{
+						slug: "brunch",
+						title: "Brunch"
+					},
+					{
+						slug: "lunch",
+						title: "Lunch"
+					},
+					{
+						slug: "coffee",
+						title: "Coffee"
+					},
+					{
+						slug: "dinner",
+						title: "Dinner"
+					},
+					{
+						slug: "drinks",
+						title: "Drinks"
+					},
+				],
+				4: [
+					{
+						slug: "skype",
+						title: "Skype username"
+					},
+					{
+						slug: "messenger",
+						title: "Facebook Messenger username"
+					},
+					{
+						slug: "whatsapp",
+						title: "WhatsApp number"
+					},
+					{
+						slug: "duo",
+						title: "Google Duo number"
+					}
+				]
+			}
+		}
+	},
+	computed: {
+		user() {
+			return this.$store.getters.user;
+		}
+	},
+	mounted() {
+		this.$axios.get("http://localhost:8080/locations").then(response => {
+			this.data = response.data;
+		});
+		const interval = setInterval(() => {
+			if (window.google) {
+				this.googleLoaded = true;
+				clearInterval(interval);
+			}
+		}, 100);
+	},
+	methods: {
+		updateOptions() {
+			this.add.option = this.add_options[this.add.type][0].slug;
+		},
+		getAddressData(address) {
+			this.addressString = JSON.stringify(address);
+		},
+		deletePlace(id) {
+			this.$dialog.confirm({
+			title: "Deleting place or profile",
+			message: "Are you sure you want to <b>delete</b> this place or profile? This action cannot be undone.",
+			confirmText: "Delete place or profile",
+			type: "is-danger",
+			hasIcon: true,
+			onConfirm: () => {
+				this.$axios.delete("http://localhost:8080/locations", {
+						data: {
+							id
+						}
+					}).then(() =>
+						this.$axios.get("http://localhost:8080/locations")
+					).then(response => {
+						this.$snackbar.open({
+							type: "is-danger",
+							message: "This place or profile has been deleted 🗑"
+						});
+						this.data = response.data;
+					}).catch(error => {
+						alert(error.response.data.error);
+					}).then(() => {
+						this.loading = false;
+					});
+				}
+			});
+		},
+		update() {
+			this.$axios.put("http://localhost:8080/locations", {
+				name: this.add.name,
+				type: this.add.type,
+				place: this.addressString,
+				value: this.add.value,
+				option: this.add.option,
+				instructions: this.add.instructions,
+				isDefault: false,
+			}).then(() =>
+				this.$axios.get("http://localhost:8080/locations")
+			).then(response => {
+				this.data = response.data;
+				this.$snackbar.open("Your new place or profile has been added 👍");
+			}).catch(error => {
+				alert(error.response.data.error);
+			}).then(() => {
+				this.loading = false;
+				this.add = {
+					type: 1,
+					option: "cell_phone",
+					value: ""
+				};
+			});
+		}
+	},
+	components: {
+		VueGoogleAutocomplete
+	}
+}
+</script>
