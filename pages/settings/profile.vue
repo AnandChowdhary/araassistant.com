@@ -118,6 +118,7 @@ export default {
 			}).then(() =>
 				this.$axios.get("http://localhost:8080/settings")
 			).then(profile => {
+				this.$snackbar.open("Your profile has been updated 👍");
 				this.$store.commit("updateUser", profile.data.user);
 			}).catch(error => {
 				alert(error.response.data.error);

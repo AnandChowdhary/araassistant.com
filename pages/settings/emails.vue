@@ -96,6 +96,10 @@ export default {
 			}).then(() =>
 				this.$axios.get("http://localhost:8080/emails")
 			).then(list => {
+				this.$snackbar.open({
+					type: "is-danger",
+					message: "This email has been deleted 🗑"
+				});
 				this.data = list.data.emails;
 			}).catch(error => {
 				alert(error.response.data.error);
