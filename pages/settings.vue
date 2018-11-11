@@ -9,19 +9,19 @@
 							<router-link to="/settings">Profile</router-link>
 							<ul>
 								<li><router-link to="/settings/profile">General</router-link></li>
-								<li><router-link to="/">Emails</router-link></li>
+								<li><router-link to="/settings/emails">Emails</router-link></li>
 							</ul>
 						</li>
-						<li><router-link to="/">Scheduling</router-link></li>
-						<li><router-link to="/">Assistant</router-link></li>
-						<li><router-link to="/">Places and profiles</router-link></li>
-						<li><router-link to="/">Templates</router-link></li>
+						<li><router-link to="/settings/scheduling">Scheduling</router-link></li>
+						<li><router-link to="/settings/assistant">Assistant</router-link></li>
+						<li><router-link to="/settings/places">Places and profiles</router-link></li>
+						<li><router-link to="/settings/templates">Templates</router-link></li>
 					</ul>
 					<p class="menu-label">Billing</p>
 					<ul class="menu-list">
-						<li><router-link to="/">Subscription</router-link></li>
-						<li><router-link to="/">Invoices</router-link></li>
-						<li><router-link to="/">Promotions</router-link></li>
+						<li><router-link to="/settings/subscription">Subscription</router-link></li>
+						<li><router-link to="/settings/invoices">Invoices</router-link></li>
+						<li><router-link to="/settings/promotions">Promotions</router-link></li>
 					</ul>
 				</aside>
 			</div>
