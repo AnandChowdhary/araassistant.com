@@ -9,7 +9,7 @@
 							<router-link to="/settings">Profile</router-link>
 							<ul>
 								<li><router-link to="/settings/profile">General</router-link></li>
-								<li><router-link to="/settings/emails">Emails</router-link></li>
+								<li><router-link to="/settings/emails">Your emails</router-link></li>
 							</ul>
 						</li>
 						<li><router-link to="/settings/scheduling">Scheduling</router-link></li>
