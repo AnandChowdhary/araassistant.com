@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<nav class="navbar is-light" role="navigation" aria-label="main navigation" style="margin-bottom: 2rem">
+		<nav class="navbar is-light" role="navigation" aria-label="main navigation">
 			<div class="navbar-brand">
 				<nuxt-link class="navbar-item" to="/">
 					<strong>Ara</strong>
@@ -19,12 +19,12 @@
 					<nuxt-link to="/feedback" class="navbar-item">Feedback</nuxt-link>
 				</div>
 				<div class="navbar-end">
-					<a class="navbar-item">
+					<nuxt-link to="/settings/profile" class="navbar-item">
 						<figure class="image" style="margin-right: 0.75rem">
 							<img style="width: auto" class="is-rounded" alt="" :src="`https://platform.oswaldlabs.com/v1/profile-picture/${user.email}`">
 						</figure>
 						{{user.name}}
-					</a>
+					</nuxt-link>
 					<div class="navbar-item">
 						<div class="buttons">
 							<button @click.prevent="logout" class="button is-light">Logout</button>
@@ -48,7 +48,7 @@
 				</div>
 			</div>
 		</nav>
-		<div>
+		<div style="margin: 2rem 0">
 			<nuxt />
 		</div>
 	</div>
@@ -59,7 +59,7 @@ export default {
 	data() {
 		return {}
 	},
-	mounted() {
+	created() {
 		if (this.token) {
 			this.$axios.setToken(this.token, "Bearer");
 		}
@@ -80,3 +80,14 @@ export default {
 	}
 }
 </script>
+
+<style>
+@import url("https://use.fontawesome.com/releases/v5.5.0/css/all.css");
+.navbar-item.nuxt-link-exact-active {
+	background-color: #e8e8e8;
+	color: #363636;
+}
+.card + .card {
+	margin-top: 1rem;
+}
+</style>

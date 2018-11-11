@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.0.0",
+    "compact-timezone-list": "^1.0.5",
+    "country-list": "^1.1.1",
     "cross-env": "^5.2.0",
     "jwt-decode": "^2.2.0",
     "nuxt": "^2.0.0",

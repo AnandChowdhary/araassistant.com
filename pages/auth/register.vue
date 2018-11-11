@@ -142,8 +142,8 @@ export default {
 </script>
 
 <style>
-.loading-icon:after {
-	z-index: 5;
+.loading-overlay, .loading-icon:after {
+	z-index: 500;
 }
 .fade-enter-active, .fade-leave-active {
 	transition: opacity 0.3s;

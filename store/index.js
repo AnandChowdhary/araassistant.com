@@ -15,6 +15,9 @@ const createStore = () => {
 					state.token = token;
 				} catch (e) {}
 			},
+			updateUser(state, user) {
+				state.user = user;
+			},
 			logout(state) {
 				state.user = {};
 				state.token = null;

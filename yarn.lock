@@ -1472,6 +1472,10 @@ commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
 
+compact-timezone-list@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/compact-timezone-list/-/compact-timezone-list-1.0.5.tgz#08ceb553840b49a7a1488ce14f751d2f2a6d3e01"
+
 component-emitter@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"
@@ -1628,6 +1632,10 @@ cosmiconfig@^5.0.0:
     is-directory "^0.3.1"
     js-yaml "^3.9.0"
     parse-json "^4.0.0"
+
+country-list@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/country-list/-/country-list-1.1.1.tgz#daa9237456b443aee104161766aad2cf0883660b"
 
 create-ecdh@^4.0.0:
   version "4.0.3"
