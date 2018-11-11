@@ -18,11 +18,15 @@ const createStore = () => {
 			logout(state) {
 				state.user = {};
 				state.token = null;
+				this.$axios.setToken("");
 			}
 		},
 		getters: {
 			user(state) {
 				return state.user;
+			},
+			token(state) {
+				return state.token;
 			}
 		},
 		plugins: [createPersistedState()]
