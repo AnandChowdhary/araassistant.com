@@ -83,7 +83,7 @@ export default {
 	},
 	mounted() {
 		if (!this.$store.state.token) return this.$router.replace("/auth/login");
-		this.$axios.get("http://localhost:8080/contexts").then(data => {
+		this.$axios.get("/contexts").then(data => {
 			this.contexts = data.data.contexts;
 		}).then(() => this.loading = false);
 	},

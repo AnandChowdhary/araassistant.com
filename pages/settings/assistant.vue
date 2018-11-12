@@ -95,7 +95,7 @@ export default {
 	methods: {
 		update() {
 			this.loading = true;
-			this.$axios.post("http://localhost:8080/assistant", {
+			this.$axios.post("/assistant", {
 				assistant_name: this.assistant_name,
 				assistant_signature: this.assistant_signature,
 				smtp_enabled: this.smtp_enabled,
@@ -105,7 +105,7 @@ export default {
 				smtp_username: this.smtp_username,
 				smtp_password: this.smtp_password,
 			}).then(() =>
-				this.$axios.get("http://localhost:8080/settings")
+				this.$axios.get("/settings")
 			).then(profile => {
 				this.$snackbar.open("Assistant preferences have been updated 👍");
 				this.$store.commit("updateUser", profile.data.user);

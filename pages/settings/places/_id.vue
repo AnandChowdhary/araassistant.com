@@ -192,7 +192,7 @@ export default {
 		if (this.$route.params.id !== "new") {
 			this.editing = true;
 			this.loading = true;
-			this.$axios.get("http://localhost:8080/locations/" + this.$route.params.id).then(response => {
+			this.$axios.get("/locations/" + this.$route.params.id).then(response => {
 				this.instructions = response.data[0].instructions;
 				this.name = response.data[0].name;
 				this.id = response.data[0].id;
@@ -222,12 +222,12 @@ export default {
 			type: "is-danger",
 			hasIcon: true,
 			onConfirm: () => {
-				this.$axios.delete("http://localhost:8080/locations", {
+				this.$axios.delete("/locations", {
 						data: {
 							id: this.id
 						}
 					}).then(() =>
-						this.$axios.get("http://localhost:8080/locations")
+						this.$axios.get("/locations")
 					).then(response => {
 						this.$snackbar.open({
 							type: "is-danger",
@@ -245,7 +245,7 @@ export default {
 		},
 		selectLocation(place) {
 			this.loading = true;
-			this.$axios.post("http://localhost:8080/places", {
+			this.$axios.post("/places", {
 				q: place.description
 			}).then(response => {
 				try {
@@ -256,7 +256,7 @@ export default {
 			}).then(this.loading = false);
 		},
 		realFindLocation() {
-			this.$axios.post("http://localhost:8080/autocomplete", {
+			this.$axios.post("/autocomplete", {
 				q: this.value
 			}).then(response => {
 				this.locationRecommendations = response.data.predictions;
@@ -276,7 +276,7 @@ export default {
 		},
 		update() {
 			this.loading = true;
-			this.$axios[this.editing ? "post" : "put"]("http://localhost:8080/locations", {
+			this.$axios[this.editing ? "post" : "put"]("/locations", {
 				id: this.id,
 				name: this.name,
 				type: this.type,
@@ -286,7 +286,7 @@ export default {
 				instructions: this.instructions,
 				isDefault: false,
 			}).then(() =>
-				this.$axios.get("http://localhost:8080/locations")
+				this.$axios.get("/locations")
 			).then(response => {
 				this.data = response.data;
 				this.$snackbar.open(this.editing ? "Your place or profile has been updated 👍" : "Your new place or profile has been added 👍");

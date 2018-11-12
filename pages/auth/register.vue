@@ -98,7 +98,7 @@ export default {
 	methods: {
 		enrichment() {
 			this.loading = true;
-			this.$axios.$post("http://localhost:8080/auth/enrichment", {
+			this.$axios.$post("/auth/enrichment", {
 				email: this.email
 			}).then(data => {
 				this.loading = false;
@@ -118,7 +118,7 @@ export default {
 		},
 		register() {
 			this.loading = true;
-			this.$axios.$put("http://localhost:8080/auth/register", {
+			this.$axios.$put("/auth/register", {
 				email: this.email,
 				name: this.firstName + " " + this.lastName,
 				password: this.password

@@ -171,7 +171,7 @@ export default {
 	},
 	mounted() {
 		this.loading = true;
-		this.$axios.get("http://localhost:8080/locations").then(response => {
+		this.$axios.get("/locations").then(response => {
 			this.data = response.data;
 		}).catch(error => {
 			if (error.response.data.error) alert(error.response.data.error);
@@ -192,12 +192,12 @@ export default {
 			type: "is-danger",
 			hasIcon: true,
 			onConfirm: () => {
-				this.$axios.delete("http://localhost:8080/locations", {
+				this.$axios.delete("/locations", {
 						data: {
 							id
 						}
 					}).then(() =>
-						this.$axios.get("http://localhost:8080/locations")
+						this.$axios.get("/locations")
 					).then(response => {
 						this.$snackbar.open({
 							type: "is-danger",

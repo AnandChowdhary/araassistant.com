@@ -46,7 +46,7 @@ export default {
 		if (this.$route.params.id !== "new") {
 			this.editing = true;
 			this.loading = true;
-			this.$axios.get("http://localhost:8080/templates/" + this.$route.params.id).then(response => {
+			this.$axios.get("/templates/" + this.$route.params.id).then(response => {
 				this.loading = false;
 				this.id = response.data.results[0].id;
 				this.name = response.data.results[0].name;
@@ -62,14 +62,14 @@ export default {
 		},
 		update() {
 			this.loading = true;
-			this.$axios[this.editing ? "post" : "put"]("http://localhost:8080/templates", {
+			this.$axios[this.editing ? "post" : "put"]("/templates", {
 				id: this.id,
 				name: this.name,
 				labels: JSON.stringify(this.labels),
 				subject: this.subject,
 				body: this.body
 			}).then(() =>
-				this.$axios.get("http://localhost:8080/templates")
+				this.$axios.get("/templates")
 			).then(response => {
 				this.data = response.data;
 				this.$snackbar.open(this.editing ? "Your template has been updated 👍" : "Your new template has been added 👍");
@@ -89,12 +89,12 @@ export default {
 			hasIcon: true,
 			onConfirm: () => {
 				this.loading = true;
-				this.$axios.delete("http://localhost:8080/templates", {
+				this.$axios.delete("/templates", {
 						data: {
 							id: this.id
 						}
 					}).then(() =>
-						this.$axios.get("http://localhost:8080/templates")
+						this.$axios.get("/templates")
 					).then(response => {
 						this.$snackbar.open({
 							type: "is-danger",

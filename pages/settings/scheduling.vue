@@ -142,14 +142,14 @@ export default {
 		},
 		update() {
 			this.loading = true;
-			this.$axios.post("http://localhost:8080/scheduling", {
+			this.$axios.post("/scheduling", {
 				duration: this.duration,
 				calendars: JSON.stringify(this.calendars),
 				scheduling_days: JSON.stringify(this.scheduling_days),
 				scheduling_start_time: this.scheduling_start_time,
 				scheduling_end_time: this.scheduling_end_time,
 			}).then(() =>
-				this.$axios.get("http://localhost:8080/settings")
+				this.$axios.get("/settings")
 			).then(profile => {
 				this.$snackbar.open("Your preferences have been updated 👍");
 				this.$store.commit("updateUser", profile.data.user);

@@ -38,7 +38,7 @@ export default {
 	methods: {
 		login() {
 			this.loading = true;
-			this.$axios.$post("http://localhost:8080/auth/login", {
+			this.$axios.$post("/auth/login", {
 				email: this.email,
 				password: this.password
 			}).then(data => {

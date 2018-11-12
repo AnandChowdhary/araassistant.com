@@ -63,7 +63,7 @@ export default {
 	},
 	mounted() {
 		this.loading = true;
-		this.$axios.get("http://localhost:8080/emails").then(list => {
+		this.$axios.get("/emails").then(list => {
 			this.data = list.data.emails;
 		}).catch(error => {
 			if (error.response.data.error) alert(error.response.data.error);
@@ -73,10 +73,10 @@ export default {
 	},
 	methods: {
 		add() {
-			this.$axios.put("http://localhost:8080/emails", {
+			this.$axios.put("/emails", {
 				email: this.newEmail
 			}).then(() =>
-				this.$axios.get("http://localhost:8080/emails")
+				this.$axios.get("/emails")
 			).then(list => {
 				this.data = list.data.emails;
 				this.$snackbar.open("Your new email has been added 👍");
@@ -95,12 +95,12 @@ export default {
 			type: "is-danger",
 			hasIcon: true,
 			onConfirm: () => {
-				this.$axios.delete("http://localhost:8080/emails", {
+				this.$axios.delete("/emails", {
 						data: {
 							id
 						}
 					}).then(() =>
-						this.$axios.get("http://localhost:8080/emails")
+						this.$axios.get("/emails")
 					).then(list => {
 						this.$snackbar.open({
 							type: "is-danger",

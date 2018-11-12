@@ -105,7 +105,7 @@ export default {
 	methods: {
 		update() {
 			this.loading = true;
-			this.$axios.post("http://localhost:8080/settings", {
+			this.$axios.post("/settings", {
 				name: this.name,
 				gender: this.gender,
 				informal_name: this.informal_name,
@@ -116,7 +116,7 @@ export default {
 				timezone: this.timezone,
 				language: this.language,
 			}).then(() =>
-				this.$axios.get("http://localhost:8080/settings")
+				this.$axios.get("/settings")
 			).then(profile => {
 				this.$snackbar.open("Your profile has been updated 👍");
 				this.$store.commit("updateUser", profile.data.user);
