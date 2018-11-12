@@ -77,7 +77,7 @@ export default {
 			editing: false,
 			debounce: debounce,
 			loading: false,
-			id: 0,
+			id: undefined,
 			addressString: {},
 			instructions: "",
 			locationRecommendations: [],
@@ -214,6 +214,7 @@ export default {
 	},
 	methods: {
 		deletePlace() {
+			this.loading = true;
 			this.$dialog.confirm({
 			title: "Deleting place or profile",
 			message: "Are you sure you want to <b>delete</b> this place or profile? This action cannot be undone.",
@@ -274,7 +275,9 @@ export default {
 			this.value = address.formatted_address;
 		},
 		update() {
-			this.$axios.put("http://localhost:8080/locations", {
+			this.loading = true;
+			this.$axios[this.editing ? "post" : "put"]("http://localhost:8080/locations", {
+				id: this.id,
 				name: this.name,
 				type: this.type,
 				place: JSON.stringify(this.addressString),
@@ -286,7 +289,7 @@ export default {
 				this.$axios.get("http://localhost:8080/locations")
 			).then(response => {
 				this.data = response.data;
-				this.$snackbar.open("Your new place or profile has been added 👍");
+				this.$snackbar.open(this.editing ? "Your place or profile has been updated 👍" : "Your new place or profile has been added 👍");
 				this.$router.push("/settings/places");
 			}).catch(error => {
 				if (error.response.data.error) if (error.response.data.error) alert(error.response.data.error);

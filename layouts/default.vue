@@ -90,4 +90,8 @@ export default {
 .card + .card {
 	margin-top: 1rem;
 }
+.list {
+	margin-left: 2rem;
+	list-style-type: disc;
+}
 </style>

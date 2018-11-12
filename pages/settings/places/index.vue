@@ -1,6 +1,5 @@
 <template>
 	<main>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe1exctmeJjIb4guyT6newSpyJ7kA3aLc&libraries=places"></script>
 		<h1 class="title">Places and profiles</h1>
 		<p class="subtitle">Where you like to have meetings</p>
 		<p>Ara selects a place from here when you ask her to set up a meeting, so it's best to have all your contact information and preferred locations here. Ara will share these details with your guests, e.g., call {{user.informal_name}} at (your number).</p>
@@ -23,7 +22,7 @@
 					<b-table-column label="Details">
 						<nuxt-link :to="`/settings/places/${props.row.id}`" class="button is-info is-outlined is-small">
 							<b-icon style="margin-right: 0.25rem" pack="fas" icon="info-circle" />
-							View
+							Edit
 						</nuxt-link>
 					</b-table-column>
 					<b-table-column label="Delete">
