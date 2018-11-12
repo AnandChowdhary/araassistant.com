@@ -154,7 +154,7 @@ export default {
 				this.$snackbar.open("Your preferences have been updated 👍");
 				this.$store.commit("updateUser", profile.data.user);
 			}).catch(error => {
-				alert(error.response.data.error);
+				if (error.response.data.error) alert(error.response.data.error);
 			}).then(() => this.loading = false);
 		},
 	}

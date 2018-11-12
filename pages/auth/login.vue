@@ -45,7 +45,7 @@ export default {
 				this.$store.commit("updateAuth", data.token);
 				this.$router.push("/dashboard");
 			}).catch(error => {
-				alert(error.response.data.error);
+				if (error.response.data.error) alert(error.response.data.error);
 			}).then(() => {
 				this.loading = false;
 			});

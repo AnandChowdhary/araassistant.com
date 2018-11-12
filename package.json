@@ -16,9 +16,9 @@
     "country-list": "^1.1.1",
     "cross-env": "^5.2.0",
     "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.11",
     "nuxt": "^2.0.0",
     "nuxt-buefy": "^0.2.1",
-    "vue-google-autocomplete": "^1.1.0",
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {

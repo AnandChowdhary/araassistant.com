@@ -125,7 +125,7 @@ export default {
 			}).then(data => {
 				this.next();
 			}).catch(error => {
-				alert(error.response.data.error);
+				if (error.response.data.error) alert(error.response.data.error);
 				this.page = 0;
 			}).then(() => {
 				this.loading = false;

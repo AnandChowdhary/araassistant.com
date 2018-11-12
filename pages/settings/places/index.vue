@@ -45,49 +45,14 @@
 				</template>
 			</b-table>
 		</section>
-		<div class="card">
-			<form @submit.prevent="update" class="card-content">
-				<h3 class="title is-5">Have another place or profile?</h3>
-				<b-field label="Name">
-					<b-input required v-model="add.name" placeholder="Enter a name for this place or profile" />
-				</b-field>
-				<div class="columns">
-					<div class="column">
-						<b-field label="Type">
-							<b-select v-model="add.type" @input="updateOptions" expanded>
-								<option value="1">Phone number for voice calls</option>
-								<option value="4">Web account for video calls</option>
-								<option value="2">Web account for conferences</option>
-								<option value="3">Location for in-person meetings</option>
-							</b-select>
-						</b-field>
-					</div>
-					<div class="column">
-						<b-field label="Type">
-							<b-select v-model="add.option" expanded>
-								<option v-for="(item, index) in add_options[add.type]" :key="'o_' + index" :value="item.slug">{{item.title}}</option>
-							</b-select>
-						</b-field>
-					</div>
-				</div>
-				<b-field v-if="add.type == 3" label="Map location">
-					<vue-google-autocomplete v-if="googleLoaded" v-model="add.value" id="map" classname="input" placeholder="Find the location..." v-on:placechanged="getAddressData" />
-				</b-field>
-				<b-field v-else label="Value">
-					<b-input required v-model="add.value" placeholder="Enter details" />
-				</b-field>
-				<b-field label="Instructions">
-					<b-input type="textarea" v-model="add.instructions" placeholder="Add any additional instructions to share with guests here..." />
-				</b-field>
-				<!-- isDefault -->
-				<button type="submit" class="button is-primary">Add new place or profile</button>
-			</form>
+		<div class="card card-content">
+			<h3 class="title is-5">Have another place or profile?</h3>
+			<nuxt-link to="/settings/places/new" class="button is-primary">Add new place or profile</nuxt-link>
 		</div>
 	</main>
 </template>
 
 <script>
-import VueGoogleAutocomplete from "vue-google-autocomplete";
 export default {
 	data() {
 		return {
@@ -206,15 +171,12 @@ export default {
 		}
 	},
 	mounted() {
+		this.loading = true;
 		this.$axios.get("http://localhost:8080/locations").then(response => {
 			this.data = response.data;
-		});
-		const interval = setInterval(() => {
-			if (window.google) {
-				this.googleLoaded = true;
-				clearInterval(interval);
-			}
-		}, 100);
+		}).catch(error => {
+			if (error.response.data.error) alert(error.response.data.error);
+		}).then(this.loading = false);
 	},
 	methods: {
 		updateOptions() {
@@ -244,41 +206,13 @@ export default {
 						});
 						this.data = response.data;
 					}).catch(error => {
-						alert(error.response.data.error);
+						if (error.response.data.error) alert(error.response.data.error);
 					}).then(() => {
 						this.loading = false;
 					});
 				}
 			});
-		},
-		update() {
-			this.$axios.put("http://localhost:8080/locations", {
-				name: this.add.name,
-				type: this.add.type,
-				place: this.addressString,
-				value: this.add.value,
-				option: this.add.option,
-				instructions: this.add.instructions,
-				isDefault: false,
-			}).then(() =>
-				this.$axios.get("http://localhost:8080/locations")
-			).then(response => {
-				this.data = response.data;
-				this.$snackbar.open("Your new place or profile has been added 👍");
-			}).catch(error => {
-				alert(error.response.data.error);
-			}).then(() => {
-				this.loading = false;
-				this.add = {
-					type: 1,
-					option: "cell_phone",
-					value: ""
-				};
-			});
 		}
-	},
-	components: {
-		VueGoogleAutocomplete
 	}
 }
 </script>

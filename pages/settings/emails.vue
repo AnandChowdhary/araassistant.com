@@ -66,7 +66,7 @@ export default {
 		this.$axios.get("http://localhost:8080/emails").then(list => {
 			this.data = list.data.emails;
 		}).catch(error => {
-			alert(error.response.data.error);
+			if (error.response.data.error) alert(error.response.data.error);
 		}).then(() => {
 			this.loading = false;
 		});
@@ -81,7 +81,7 @@ export default {
 				this.data = list.data.emails;
 				this.$snackbar.open("Your new email has been added 👍");
 			}).catch(error => {
-				alert(error.response.data.error);
+				if (error.response.data.error) alert(error.response.data.error);
 			}).then(() => {
 				this.loading = false;
 				this.newEmail = "";
@@ -108,7 +108,7 @@ export default {
 						});
 						this.data = list.data.emails;
 					}).catch(error => {
-						alert(error.response.data.error);
+						if (error.response.data.error) alert(error.response.data.error);
 					}).then(() => {
 						this.loading = false;
 					});
