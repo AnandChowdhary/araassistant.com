@@ -23,7 +23,7 @@ module.exports = {
 		"nuxt-buefy"
 	],
 	axios: {
-		baseURL: "http://localhost:8080"
+		baseURL: "https://v1.araassistant.com"
 	},
 	build: {
 		extend(config, ctx) {
