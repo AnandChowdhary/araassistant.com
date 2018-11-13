@@ -214,7 +214,6 @@ export default {
 	},
 	methods: {
 		deletePlace() {
-			this.loading = true;
 			this.$dialog.confirm({
 			title: "Deleting place or profile",
 			message: "Are you sure you want to <b>delete</b> this place or profile? This action cannot be undone.",
@@ -222,6 +221,7 @@ export default {
 			type: "is-danger",
 			hasIcon: true,
 			onConfirm: () => {
+				this.loading = true;
 				this.$axios.delete("/locations", {
 						data: {
 							id: this.id

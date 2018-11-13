@@ -1,6 +1,13 @@
 <template>
 	<main>
-		<b-loading :is-full-page="true" :active.sync="loading"></b-loading>
+		<b-loading v-if="!done" :is-full-page="true" :active.sync="loading"></b-loading>
+		<div v-else class="content has-text-grey has-text-centered">
+			<p>
+				<b-icon class="ml" pack="fab" icon="google" size="is-large" />
+			</p>
+			<h1 class="title">Calendar Connected</h1>
+			<p>Your Google Calendar has been successfully connected.</p>
+		</div>
 	</main>
 </template>
 
@@ -8,7 +15,8 @@
 export default {
 	data() {
 		return {
-			loading: true
+			loading: false,
+			done: true
 		}
 	},
 	mounted() {
@@ -21,7 +29,6 @@ export default {
 			).then(profile => {
 				this.$store.commit("updateUser", profile.data.user);
 				this.$snackbar.open("Your Google Calendar has been linked 👍");
-				setTimeout(this.$router.push("/"), 100);
 			}).catch(error => {
 				if (error.response.data.error) alert(error.response.data.error);
 			}).then(() => this.loading = false);

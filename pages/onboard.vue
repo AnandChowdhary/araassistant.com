@@ -19,7 +19,7 @@
 			<div class="container">
 				<div class="columns columns is-mobile is-centered">
 					<div class="column is-half-tablet">
-						<h2 v-if="chat.length === 1" class="subtitle is-5">Click on a response to reply to Ara:</h2>
+						<h2 v-if="chat.length === 1" class="subtitle is-5 pulse">Click on a response to reply to Ara:</h2>
 						<div class="message_user" :key="'r_' + index" v-for="(item, index) in responses">
 							<form @submit.prevent="respond(newMessage, item.modal)" v-if="item && item.type">
 								<div style="margin-bottom: 1rem; font-weight: bold">
@@ -37,6 +37,9 @@
 									</p>
 								</b-field>
 							</form>
+							<a :href="item.redirect_link" target="_blank" v-else-if="item.redirect_link" class="responds text">
+								{{item.text || item}}
+							</a>
 							<button v-else @click.prevent="respond(item, item.modal)" class="responds text">
 								{{item.text || item}}
 							</button>
@@ -58,10 +61,9 @@ export default {
 			time: 100,
 			typing: false,
 			chat: [],
-			lastResponse: "",
 			newMessage: "",
 			responses: [],
-			current: 0
+			current: 14 // 0
 		}
 	},
 	computed: {
@@ -77,7 +79,7 @@ export default {
 	},
 	methods: {
 		say(text, responses = []) {
-			this.lastResponse = "";
+			this.newMessage = "";
 			this.typing = true;
 			if (typeof text === "string") {
 				setTimeout(() => {
@@ -127,29 +129,63 @@ export default {
 			}
 			if (modal) {
 				this.user[modal] = input.value || text || this.user[modal];
-				this.$axios.post("/scheduling", {
-					duration: this.user.duration,
-					calendars: JSON.stringify(this.user.calendars),
-					scheduling_days: JSON.stringify(this.user.scheduling_days),
-					scheduling_start_time: this.user.scheduling_start_time,
-					scheduling_end_time: this.user.scheduling_end_time
-				}).then(() => this.$axios.post("/settings", {
-					name: this.user.name,
-					gender: this.user.gender,
-					informal_name: this.user.informal_name,
-					companyName: this.user.companyName,
-					companyDomain: this.user.companyDomain,
-					companyTitle: this.user.companyTitle,
-					country: this.user.country,
-					timezone: this.user.timezone,
-					language: this.user.language
-				})).then(() =>
-					this.$axios.get("/settings")
-				).then(profile => {
-					this.$store.commit("updateUser", profile.data.user);
-				});
+				if (modal === "name") this.user.informal_name = (input.value || text).split(" ")[0] || this.user.informal_name;
+				if (["duration", "calendars", "scheduling_days", "scheduling_start_time", "scheduling_end_time"].includes(modal)) {
+					this.$axios.post("/scheduling", {
+						duration: this.user.duration,
+						calendars: JSON.stringify(this.user.calendars),
+						scheduling_days: JSON.stringify(this.user.scheduling_days),
+						scheduling_start_time: this.user.scheduling_start_time,
+						scheduling_end_time: this.user.scheduling_end_time
+					}).then(() =>
+						this.$axios.get("/settings")
+					).then(profile => {
+						this.$store.commit("updateUser", profile.data.user);
+					});
+				} else if (["new_skype", "new_work_phone", "new_personal_cell"].includes(modal)) {
+					if (this.user[modal] !== "Incomplete_details") {
+						const placeDetails = {};
+						if (modal === "new_skype") {
+							placeDetails.name = "Skype";
+							placeDetails.type = 4;
+							placeDetails.value = this.user[modal];
+							placeDetails.option = "skype";
+							placeDetails.isDefault = true;
+						} else if (modal === "new_work_phone") {
+							placeDetails.name = "Work phone";
+							placeDetails.type = 1;
+							placeDetails.value = this.user[modal];
+							placeDetails.option = "work_phone";
+							placeDetails.isDefault = true;
+						} else if (modal === "new_personal_cell") {
+							placeDetails.name = "Personal cell";
+							placeDetails.type = 1;
+							placeDetails.value = this.user[modal];
+							placeDetails.option = "cell_phone";
+							placeDetails.isDefault = true;
+						}
+						this.$axios.put("/locations", placeDetails);
+					} else {
+						delete this.user[modal];
+					}
+				} else {
+					this.$axios.post("/settings", {
+						name: this.user.name,
+						gender: this.user.gender,
+						informal_name: this.user.informal_name,
+						companyName: this.user.companyName,
+						companyDomain: this.user.companyDomain,
+						companyTitle: this.user.companyTitle,
+						country: this.user.country,
+						timezone: this.user.timezone,
+						language: this.user.language
+					}).then(() =>
+						this.$axios.get("/settings")
+					).then(profile => {
+						this.$store.commit("updateUser", profile.data.user);
+					});
+				}
 			}
-			this.lastResponse = input.value || text;
 			this.chat.push({
 				text,
 				from: "user"
@@ -180,23 +216,24 @@ export default {
 					}]);
 					break;
 				case 4:
-					this.say(["Perfect, I'll call you " + this.user.name, "I have your email saved as " + this.user.email, "Do you have another email?"], [{
-						text: "Yes, add another email",
-						case: 5
-					}, {
-						text: "No, that's it",
-						case: 6
-					}]);
+					if (this.user.tokens) {
+						this.say(["Perfect, I'll call you " + this.user.informal_name], ["Sounds good!"]);
+					} else {
+						this.say(["Perfect, I'll call you " + this.user.informal_name], ["Sounds good!"]);
+					}
 					break;
 				case 5:
-					this.say(["What's the email address?"], [{
-						type: "input",
-						placeholder: "Enter your email",
-						modal: "new_email"
-					}]);
+					if (this.user.tokens) {
+						this.say(["I see that you've already connected your Google Calendar, so let's continue!"], ["Yes, let's do it"]);
+					} else {
+						this.say(["You haven't connected your Google Calendar yet, so let's get that out of the way first.", "Once you're done, come back here and we'll continue"], [{
+							text: "Connect Google Calendar",
+							redirect_link: "/settings/reconnect"
+						}, "Done, let's continue!"]);
+					}
 					break;
 				case 6:
-					this.say(["Alright, thanks!", "When I write emails for you, I might have to say things like 'call his phone' or 'Skype with her'", "I know it's " + new Date().getFullYear() + " and it's silly to stick to binary genders, but I need the pronoun", "So, can you share your preferred gender with me?"], [
+					this.say(["Let's get started!", "When I write emails for you, I might have to say things like 'call his phone' or 'Skype with her'", "I know it's " + new Date().getFullYear() + " and it's silly to stick to binary genders, but I need the pronoun", "So, can you share your preferred gender with me?"], [
 						{ modal: "gender", value: "1", text: "Male (his)" },
 						{ modal: "gender", value: "2", text: "Female (her)" }
 					]);
@@ -228,7 +265,7 @@ export default {
 					}]);
 					break;
 				case 10:
-					this.say(["Let's talk about setting meetings now", "How long should your meetings be?", "Of course, you can also specify durations for individual meetings", "But by default, what do you prefer?"], [
+					this.say(["Let's talk about setting up meetings now", "How long should your meetings be?", "Of course, you can also specify durations for individual meetings", "But by default, what do you prefer?"], [
 						{ modal: "duration", text: "15 minutes", value: 15 },
 						{ modal: "duration", text: "30 minutes", value: 30 },
 						{ modal: "duration", text: "45 minutes", value: 45 },
@@ -375,5 +412,15 @@ footer .message_user {
 }
 .responds {
 	margin-left: 1rem;
+}
+@keyframes pulse {
+	0% { transform: scale(1.05) }
+	50% { transform: scale(1) }
+	100% { transform: scale(1.05) }
+}
+.pulse {
+	animation: pulse 3s ease-out;
+	animation-iteration-count: infinite; 
+	opacity: 1;
 }
 </style>
