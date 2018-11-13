@@ -2,7 +2,7 @@
 	<main>
 		<div class="container">
 			<div class="columns columns is-mobile is-centered">
-				<div class="column is-half">
+				<div class="column is-half-tablet">
 					<div v-for="(item, index) in chat" :key="'c_' + index" :class="`message_${item.from}`">
 						<div class="text">
 							{{item.text}}
@@ -11,7 +11,13 @@
 					<div class="message_ara" v-if="typing">
 						<div class="text">&bullet; &bullet; &bullet;</div>
 					</div>
-					<div style="margin-top: 5rem">
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div class="container">
+				<div class="columns columns is-mobile is-centered">
+					<div class="column is-half-tablet">
 						<h2 v-if="chat.length === 1" class="subtitle is-5">Click on a response to reply to Ara:</h2>
 						<div class="message_user">
 								<button @click.prevent="respond(item)" v-for="(item, index) in responses" :key="'r_' + index" class="responds text">
@@ -21,7 +27,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</footer>
 	</main>
 </template>
 
@@ -60,6 +66,9 @@ export default {
 					this.typing = false;
 					setTimeout(() => {
 						this.responses = responses;
+						setTimeout(() => {
+							window.scrollTo(0, document.body.scrollHeight);
+						}, 5);
 					}, this.time / 2);
 				}, this.time);
 			} else {
@@ -71,12 +80,18 @@ export default {
 							text: text[i],
 							from: "ara"
 						});
+						setTimeout(() => {
+							window.scrollTo(0, document.body.scrollHeight);
+						}, 5);
+						if (i === text.length - 1) this.typing = false;
 						i++;
 					} else {
 						clearInterval(chatInterval);
-						this.typing = false;
 						setTimeout(() => {
 							this.responses = responses;
+							setTimeout(() => {
+								window.scrollTo(0, document.body.scrollHeight);
+							}, 5);
 						}, this.time / 2);
 					}
 				}, this.time);
@@ -124,7 +139,22 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+main {
+	margin-bottom: 10rem;
+}
+footer {
+	background-color: #eee;
+	position: fixed;
+	z-index: 1;
+	left: 0; right: 0;
+	bottom: 0;
+	padding: 2rem 0;
+}
+footer .text {
+	background-color: #fff;
+	box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+}
 .text {
 	background-color: #eee;
 	padding: 0.5rem 1rem;
