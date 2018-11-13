@@ -43,7 +43,9 @@ export default {
 				password: this.password
 			}).then(data => {
 				this.$store.commit("updateAuth", data.token);
-				this.$router.push("/dashboard");
+				setTimeout(() => {
+					this.$router.push("/dashboard");
+				}, 10);
 			}).catch(error => {
 				if (error.response.data.error) alert(error.response.data.error);
 			}).then(() => {

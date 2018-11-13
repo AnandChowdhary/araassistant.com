@@ -115,7 +115,7 @@ export default {
 				companyTitle: this.companyTitle,
 				country: this.country,
 				timezone: this.timezone,
-				language: this.language,
+				language: this.language
 			}).then(() =>
 				this.$axios.get("/settings")
 			).then(profile => {

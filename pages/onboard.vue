@@ -7,6 +7,7 @@
 						<div class="text">
 							{{item.text}}
 						</div>
+						<img v-if="item.from === 'user'" alt="" :src="`https://platform.oswaldlabs.com/v1/profile-picture/anandchowdhary@gmail.com`">
 					</div>
 					<div class="message_ara" v-if="typing">
 						<div class="text">&bullet; &bullet; &bullet;</div>
@@ -36,7 +37,7 @@
 									</p>
 								</b-field>
 							</form>
-							<button v-else @click.prevent="respond(item)" class="responds text">
+							<button v-else @click.prevent="respond(item, item.modal)" class="responds text">
 								{{item.text || item}}
 							</button>
 						</div>
@@ -60,8 +61,7 @@ export default {
 			lastResponse: "",
 			newMessage: "",
 			responses: [],
-			current: 0,
-			newDetails: {}
+			current: 0
 		}
 	},
 	computed: {
@@ -77,6 +77,7 @@ export default {
 	},
 	methods: {
 		say(text, responses = []) {
+			this.lastResponse = "";
 			this.typing = true;
 			if (typeof text === "string") {
 				setTimeout(() => {
@@ -121,12 +122,34 @@ export default {
 			} else {
 				this.current++;
 			}
-			if (modal) {
-				this.newDetails[modal] = text;
-				this.user[modal] = text;
-				console.log(text, modal, this.newDetails);
+			if (input.redirect) {
+				return this.$router.push(input.redirect);
 			}
-			this.lastResponse = text;
+			if (modal) {
+				this.user[modal] = input.value || text || this.user[modal];
+				this.$axios.post("/scheduling", {
+					duration: this.user.duration,
+					calendars: JSON.stringify(this.user.calendars),
+					scheduling_days: JSON.stringify(this.user.scheduling_days),
+					scheduling_start_time: this.user.scheduling_start_time,
+					scheduling_end_time: this.user.scheduling_end_time
+				}).then(() => this.$axios.post("/settings", {
+					name: this.user.name,
+					gender: this.user.gender,
+					informal_name: this.user.informal_name,
+					companyName: this.user.companyName,
+					companyDomain: this.user.companyDomain,
+					companyTitle: this.user.companyTitle,
+					country: this.user.country,
+					timezone: this.user.timezone,
+					language: this.user.language
+				})).then(() =>
+					this.$axios.get("/settings")
+				).then(profile => {
+					this.$store.commit("updateUser", profile.data.user);
+				});
+			}
+			this.lastResponse = input.value || text;
 			this.chat.push({
 				text,
 				from: "user"
@@ -173,7 +196,10 @@ export default {
 					}]);
 					break;
 				case 6:
-					this.say(["Alright, thanks!", "When I write emails for you, I might have to say things like 'call his phone' or 'Skype with her'", "I know it's " + new Date().getFullYear() + " and it's silly to stick to binary genders, but I need the pronoun", "So, can you share your preferred gender with me?"], ["Male (his)", "Female (her)"]);
+					this.say(["Alright, thanks!", "When I write emails for you, I might have to say things like 'call his phone' or 'Skype with her'", "I know it's " + new Date().getFullYear() + " and it's silly to stick to binary genders, but I need the pronoun", "So, can you share your preferred gender with me?"], [
+						{ modal: "gender", value: "1", text: "Male (his)" },
+						{ modal: "gender", value: "2", text: "Female (her)" }
+					]);
 					break;
 				case 7:
 					this.say(["Awesome!", "In which country do you live?"], [{
@@ -201,6 +227,89 @@ export default {
 						options: languages
 					}]);
 					break;
+				case 10:
+					this.say(["Let's talk about setting meetings now", "How long should your meetings be?", "Of course, you can also specify durations for individual meetings", "But by default, what do you prefer?"], [
+						{ modal: "duration", text: "15 minutes", value: 15 },
+						{ modal: "duration", text: "30 minutes", value: 30 },
+						{ modal: "duration", text: "45 minutes", value: 45 },
+						{ modal: "duration", text: "1 hour", value: 60 }
+					]);
+					break;
+				case 11:
+					this.say(["Lovely, I'll remember that", "What days do you work on?", "I won't disturb you on other days 😊"], [
+						{ modal: "scheduling_days", text: "Monday to Thursday", value: ["mon", "tue", "wed", "thu"] },
+						{ modal: "scheduling_days", text: "Monday to Friday", value: ["mon", "tue", "wed", "thu", "fri"] },
+						{ modal: "scheduling_days", text: "Monday to Sunday", value: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] },
+					]);
+					break;
+				case 12:
+					this.say(["What time should I start scheduling in the morning?"], [
+						{ modal: "scheduling_start_time", text: "8:30 am, I'm an early riser", value: "08:30" },
+						{ modal: "scheduling_start_time", text: "9:00 am", value: "09:00" },
+						{ modal: "scheduling_start_time", text: "9:30 am", value: "09:30" }
+					]);
+					break;
+				case 13:
+					this.say(["And what time should I stop scheduling in the evening?"], [
+						{ modal: "scheduling_end_time", text: "4:30 pm", value: "16:30" },
+						{ modal: "scheduling_end_time", text: "5:00 pm", value: "17:00" },
+						{ modal: "scheduling_end_time", text: "5:30 pm", value: "17:30" }
+					]);
+					break;
+				case 14:
+					this.say(["That sounds good", "Thanks, " + this.user.informal_name + "!", "Now, I want to know how to reach you", "So when I set up a Skype call, for example, I can share you Skype info with the guests", "Sounds good?"], ["Yes, let's get started!"]);
+					break;
+				case 15:
+					this.say(["Perfect", "What's your Skype username?"], [{
+						type: "input",
+						placeholder: "Enter your Skype username",
+						modal: "new_skype"
+					}, {
+						text: "I don't have a Skype account",
+						modal: "new_skype",
+						value: "Incomplete_details"
+					}]);
+					break;
+				case 16:
+					this.say(["Okay", "What's your work phone number?"], [{
+						type: "input",
+						placeholder: "Enter your work phone number",
+						modal: "new_work_phone"
+					}, {
+						text: "I don't have a work number",
+						modal: "new_work_phone",
+						value: "Incomplete_details"
+					}]);
+					break;
+				case 17:
+					this.say(["Okay", "And what about your personal cell phone?"], [{
+						type: "input",
+						placeholder: "Enter your personal phone number",
+						modal: "new_personal_cell"
+					}, {
+						text: "I'd rather not share that",
+						modal: "new_personal_cell",
+						value: "Incomplete_details"
+					}]);
+					break;
+				case 18:
+					this.say(["Fantastic", "If you have an office location or preferred coffee meeting places, you can add that in 'Places and profiles' under 'Settings' later", "For now, we're good to go!", "Do you want to learn how to ask me to schedule meetings?"], [{
+						text: "Yes, please!",
+						case: 19
+					}, {
+						text: "No, thanks",
+						case: 20
+					}]);
+					break;
+				case 19:
+					this.say(["So, I'm your personal assistant for work", "When you want to set up a meeting with someone, for example, I can do it for you", "My email is " + this.user.email_prefix + "@my.araassistant.com", "This is just for you, and you can CC me on anything", "So let's say you want to set up a meeting with Steve", "Just send Steve an email, like 'Hi Steve, looking forward to meeting with you'", "And CC me in the email, 'Ara, can you set up a Skype call with Steve?'", "And I'll get on it!", "I'll find the right time that works for both of you and send you both an invitation", "You can change my email (like add a custom domain) and customize my name, signature, etc., by going to 'Settings'"], ["Sounds good 🤩"]);
+					break;
+				case 20:
+					this.say(["That's it for now!", "Thanks for talking to me", "Let's go to your dashboard now!"], [{
+						text: "Let's go!",
+						redirect: "/dashboard"
+					}]);
+					break;
 			}
 		}
 	}
@@ -223,6 +332,11 @@ footer {
 footer .text {
 	background-color: #fff;
 	box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+	transition: 0.2s;
+}
+footer .text:hover {
+	box-shadow: 0 3px 14px rgba(0, 0, 0, 0.15);
+	transform: scale(1.05);
 }
 .text {
 	background-color: #eee;
@@ -233,6 +347,15 @@ footer .text {
 	border: none;
 	text-align: left;
 	margin: 0.5rem 0;
+}
+.text + img {
+	height: 1.5rem;
+	width: 1.5rem;
+	vertical-align: bottom;
+	float: right;
+	margin-top: 1.25rem;
+	margin-left: 0.75rem;
+	border-radius: 100%;
 }
 .message_ara .text {
 	max-width: 80%;

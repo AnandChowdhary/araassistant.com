@@ -50,13 +50,23 @@
 			<div class="card">
 				<div class="card-content">
 					<h3 class="title is-5">Which calendars should Ara check for conflicts?</h3>
-					<section>
+					<section v-if="calendars && calendars.length">
 						<div class="field" v-for="(item, index) in calendars" :key="'c_' + index">
 							<b-checkbox @input="value => {
 								updateCalendars(index, value);
 							}" v-bind:value="item.use">{{item.summary}}</b-checkbox>
 						</div>
 					</section>
+					<div v-else class="content has-text-grey has-text-centered">
+						<p>
+							<b-icon class="ml" pack="fas" icon="frown-open" size="is-large" />
+						</p>
+						<p>You don't have any calendars.</p>
+					</div>
+					<button style="margin-top: 1rem" @click.prevent="reconnect" class="button is-secondary">
+						<b-icon class="ml" pack="fab" icon="google" style="margin-right: 0.5rem" />
+						Reconnect Google Calendar
+					</button>
 				</div>
 			</div>
 			<button style="margin-top: 1rem" type="submit" class="button is-primary is-medium">Update your preferences</button>
@@ -69,7 +79,7 @@ export default {
 	data() {
 		return {
 			duration: "",
-			calendars: "",
+			calendars: [],
 			scheduling_days: "",
 			scheduling_start_time: "",
 			scheduling_end_time: "",
@@ -113,7 +123,7 @@ export default {
 	},
 	mounted() {
 		this.duration = this.user.duration;
-		this.calendars = this.user.calendars;
+		this.calendars = this.user.calendars || [];
 		try {
 			this.calendars = JSON.parse(this.user.calendars);
 		} catch (e) {}
@@ -129,6 +139,15 @@ export default {
 		if (this.scheduling_days.includes("sun")) this.Sunday = true;
 	},
 	methods: {
+		reconnect() {
+			this.loading = true;
+			this.$axios.get("/google").then(response => {
+				this.loading = false;
+				if (response.data.url) {
+					location.href = response.data.url;
+				}
+			});
+		},
 		updateCalendars(index, value) {
 			this.calendars[index].use = value;
 		},
