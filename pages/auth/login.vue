@@ -7,7 +7,7 @@
 						<div class="card-content">
 							<h1 class="title">Login</h1>
 							<div class="content">
-								<b-loading v-if="loading" :is-full-page="false" :active.sync="loading"></b-loading>
+								<b-loading v-if="loading" :active.sync="loading"></b-loading>
 								<form @submit.prevent="login">
 									<b-field label="Email">
 										<b-input required v-model="email" placeholder="Enter your work email" />

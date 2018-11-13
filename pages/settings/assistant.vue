@@ -3,7 +3,7 @@
 		<h1 class="title">Assistant</h1>
 		<p class="subtitle">Your assistant's settings</p>
 		<form @submit.prevent="update">
-			<b-loading v-if="loading" :is-full-page="false" :active.sync="loading"></b-loading>
+			<b-loading v-if="loading" :active.sync="loading"></b-loading>
 			<div class="card">
 				<div class="card-content">
 					<h3 class="title is-5">How should Ara address her emails?</h3>
@@ -25,6 +25,7 @@
 					<b-field>
 						<b-switch true-value="1" false-value="0" v-model="smtp_enabled">
 							Use a custom email account
+							<b-tag style="margin-left: 0.5rem" class="is-danger">Free in beta</b-tag>
 						</b-switch>
 					</b-field>
 					<b-field label="Email provider">
@@ -53,6 +54,7 @@
 					<b-field label="Password">
 						<b-input :disabled="smtp_enabled != 1" type="password" v-model="smtp_password" password-reveal />
 					</b-field>
+					<button type="button" class="button is-secondary" @click.prevent="smtpTest" v-if="smtp_enabled == 1">Test SMTP configuration</button>
 				</div>
 			</div>
 			<button style="margin-top: 1rem" type="submit" class="button is-primary is-medium">Update settings</button>
@@ -93,6 +95,26 @@ export default {
 		this.smtp_password = this.user.smtp_password;
 	},
 	methods: {
+		smtpTest() {
+			this.loading = true;
+			this.$axios.post("/smtp", {
+				smtp_type: this.smtp_type,
+				smtp_host: this.smtp_host,
+				smtp_port: this.smtp_port,
+				smtp_username: this.smtp_username,
+				smtp_password: this.smtp_password,
+			}).then(response => {
+				if (response.data.status) {
+					this.$snackbar.open("SMTP works perfectly 👍");
+				} else {
+					this.$snackbar.open({
+						type: "is-danger",
+						message: "Error! SMTP doesn't work 🚫"
+					});
+				}
+				this.loading = false;
+			});
+		},
 		update() {
 			this.loading = true;
 			this.$axios.post("/assistant", {

@@ -3,7 +3,7 @@
 		<h1 class="title">Scheduling</h1>
 		<p class="subtitle">Meeting and timing preferences</p>
 		<form @submit.prevent="update">
-			<b-loading v-if="loading" :is-full-page="false" :active.sync="loading"></b-loading>
+			<b-loading v-if="loading" :active.sync="loading"></b-loading>
 			<div class="card">
 				<div class="card-content">
 					<h3 class="title is-5">How long should your meetings be?</h3>

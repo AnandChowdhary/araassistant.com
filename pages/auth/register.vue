@@ -7,7 +7,7 @@
 						<div class="card-content">
 							<h1 class="title">Register</h1>
 							<div class="content">
-								<b-loading v-if="loading" :is-full-page="false" :active.sync="loading"></b-loading>
+								<b-loading v-if="loading" :active.sync="loading"></b-loading>
 								<transition-group name="fade" mode="out-in">
 									<form key="animation_1" @submit.prevent="enrichment" v-if="page === 0">
 										<b-field label="Email">

@@ -2,7 +2,7 @@
 	<main>
 		<div class="container">
 			<h1 class="title" style="text-align: center">My meetings</h1>
-			<b-loading v-if="loading" :is-full-page="false" :active.sync="loading"></b-loading>
+			<b-loading v-if="loading" :active.sync="loading"></b-loading>
 			<div class="columns is-mobile is-centered">
 				<div class="column is-three-quarters">
 					<div class="card" v-for="(context, index) in contexts" :key="index" style="margin-bottom: 2rem">

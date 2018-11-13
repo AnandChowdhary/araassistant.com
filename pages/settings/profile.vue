@@ -3,7 +3,7 @@
 		<h1 class="title">Profile</h1>
 		<p class="subtitle">General settings</p>
 		<form @submit.prevent="update">
-			<b-loading v-if="loading" :is-full-page="false" :active.sync="loading"></b-loading>
+			<b-loading v-if="loading" :active.sync="loading"></b-loading>
 			<div class="card">
 				<div class="card-content">
 					<h3 class="title is-5">What should Ara call you?</h3>
