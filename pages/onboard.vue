@@ -343,9 +343,9 @@ export default {
 					this.say(["So, I'm your personal assistant for work", "When you want to set up a meeting with someone, for example, I can do it for you", "My email is " + this.user.email_prefix + "@my.araassistant.com", "This is just for you, and you can CC me on anything", "So let's say you want to set up a meeting with Steve", "Just send Steve an email, like 'Hi Steve, looking forward to meeting with you'", "And CC me in the email, 'Ara, can you set up a Skype call with Steve?'", "And I'll get on it!", "I'll find the right time that works for both of you and send you both an invitation", "You can change my email (like add a custom domain) and customize my name, signature, etc., by going to 'Settings'"], ["Sounds good 🤩"]);
 					break;
 				case 20:
-					this.say(["That's it for now!", "Thanks for talking to me", "Let's go to your dashboard now!"], [{
+					this.say(["That's it for now!", "Thanks for talking to me", "Let's check out your settings now!"], [{
 						text: "Let's go!",
-						redirect: "/dashboard"
+						redirect: "/settings?startTour=true"
 					}]);
 					break;
 			}

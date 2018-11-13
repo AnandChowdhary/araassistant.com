@@ -94,4 +94,7 @@ export default {
 	margin-left: 2rem;
 	list-style-type: disc;
 }
+.v-step {
+	z-index: 10;
+}
 </style>
