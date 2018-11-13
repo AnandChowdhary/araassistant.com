@@ -13,7 +13,7 @@ export default {
 	},
 	mounted() {
 		this.loading = true;
-		this.$axios.get("/google").then(response => {
+		this.$axios.get(`/google?to=${location.protocol}//${location.host}/auth/google`).then(response => {
 			this.loading = false;
 			if (response.data.url) {
 				location.href = response.data.url;
