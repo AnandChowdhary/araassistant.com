@@ -174,7 +174,7 @@ export default {
 		this.$axios.get("/locations").then(response => {
 			this.data = response.data;
 		}).catch(error => {
-			if (error.response.data.error) alert(error.response.data.error);
+			if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
 		}).then(this.loading = false);
 	},
 	methods: {
@@ -205,7 +205,7 @@ export default {
 						});
 						this.data = response.data;
 					}).catch(error => {
-						if (error.response.data.error) alert(error.response.data.error);
+						if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
 					}).then(() => {
 						this.loading = false;
 					});

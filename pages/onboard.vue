@@ -63,7 +63,7 @@ export default {
 			chat: [],
 			newMessage: "",
 			responses: [],
-			current: 14 // 0
+			current: 0
 		}
 	},
 	computed: {
@@ -170,6 +170,7 @@ export default {
 					}
 				} else {
 					this.$axios.post("/settings", {
+						onboarded: "1",
 						name: this.user.name,
 						gender: this.user.gender,
 						informal_name: this.user.informal_name,

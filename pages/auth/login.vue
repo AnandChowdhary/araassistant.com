@@ -35,6 +35,20 @@ export default {
 			password: ""
 		}
 	},
+	computed: {
+		user() {
+			return this.$store.getters.user;
+		}
+	},
+	mounted() {
+		if (this.user.id) {
+			if (this.user.onboarded) {
+				this.$router.push("/dashboard");
+			} else {
+				this.$router.push("/onboard");
+			}
+		}
+	},
 	methods: {
 		login() {
 			this.loading = true;
@@ -43,12 +57,20 @@ export default {
 				password: this.password
 			}).then(data => {
 				this.$store.commit("updateAuth", data.token);
-				setTimeout(() => {
+				return this.$axios.setToken(data.token, "Bearer");
+			})
+			.then(() => {
+				if (this.user.onboarded) {
 					this.$router.push("/dashboard");
-				}, 10);
-			}).catch(error => {
-				if (error.response.data.error) alert(error.response.data.error);
+				} else {
+					this.$router.push("/onboard");
+				}
+			})
+			.catch(error => {
+				if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
 			}).then(() => {
+				this.email = "";
+				this.password = "";
 				this.loading = false;
 			});
 		}

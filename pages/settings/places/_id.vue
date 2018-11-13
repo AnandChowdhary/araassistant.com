@@ -236,7 +236,7 @@ export default {
 						this.data = response.data;
 						this.$router.push("/settings/places");
 					}).catch(error => {
-						if (error.response.data.error) alert(error.response.data.error);
+						if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
 					}).then(() => {
 						this.loading = false;
 					});
@@ -252,7 +252,7 @@ export default {
 					this.addressString = response.data.candidates[0];
 				} catch (e) {}
 			}).catch(error => {
-				if (error.response.data.error) alert(error.response.data.error);
+				if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
 			}).then(this.loading = false);
 		},
 		realFindLocation() {
@@ -261,7 +261,7 @@ export default {
 			}).then(response => {
 				this.locationRecommendations = response.data.predictions;
 			}).catch(error => {
-				if (error.response.data.error) alert(error.response.data.error);
+				if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
 			});
 		},
 		findLocation() {
@@ -292,7 +292,7 @@ export default {
 				this.$snackbar.open(this.editing ? "Your place or profile has been updated 👍" : "Your new place or profile has been added 👍");
 				this.$router.push("/settings/places");
 			}).catch(error => {
-				if (error.response.data.error) if (error.response.data.error) alert(error.response.data.error);
+				if (error.response.data.error) if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
 			}).then(() => {
 				this.loading = false;
 				this.add = {

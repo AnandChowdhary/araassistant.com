@@ -66,7 +66,7 @@ export default {
 		this.$axios.get("/emails").then(list => {
 			this.data = list.data.emails;
 		}).catch(error => {
-			if (error.response.data.error) alert(error.response.data.error);
+			if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
 		}).then(() => {
 			this.loading = false;
 		});
@@ -81,7 +81,7 @@ export default {
 				this.data = list.data.emails;
 				this.$snackbar.open("Your new email has been added 👍");
 			}).catch(error => {
-				if (error.response.data.error) alert(error.response.data.error);
+				if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
 			}).then(() => {
 				this.loading = false;
 				this.newEmail = "";
@@ -108,7 +108,7 @@ export default {
 						});
 						this.data = list.data.emails;
 					}).catch(error => {
-						if (error.response.data.error) alert(error.response.data.error);
+						if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
 					}).then(() => {
 						this.loading = false;
 					});
