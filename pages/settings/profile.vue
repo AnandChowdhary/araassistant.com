@@ -41,8 +41,7 @@
 					</b-field>
 					<b-field label="Language">
 						<b-select placeholder="Select your language" expanded v-model="language">
-							<option value="en-US">English (United States)</option>
-							<option value="en-IN">English (India)</option>
+							<option v-for="(item, index) in languages" :key="'l_' + index" :value="index">{{item}}</option>
 						</b-select>
 					</b-field>
 				</div>
@@ -69,11 +68,13 @@
 <script>
 import timezones from "compact-timezone-list";
 import countries from "country-list";
+import languages from "@/components/languages";
 export default {
 	data() {
 		return {
 			countries: countries().getCodeList(),
 			timezones: timezones,
+			languages: languages,
 			loading: false,
 			name: "",
 			gender: "",

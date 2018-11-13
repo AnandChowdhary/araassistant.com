@@ -31,11 +31,9 @@
 </template>
 
 <script>
-import BLogo from '@/components/Logo'
 
 export default {
   name: 'HomePage',
-  components: {BLogo},
   data() {
       return {
           features: [

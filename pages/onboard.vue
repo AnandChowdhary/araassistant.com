@@ -25,7 +25,12 @@
 									{{item.placeholder}}:
 								</div>
 								<b-field grouped>
-									<b-input v-model="newMessage"></b-input>
+									<b-select v-if="item.type === `select`" v-model="newMessage">
+										<option v-for="(option, index) in item.options" :key="'o_' + index" :value="typeof index === 'string' ? (item.uc ? index.toUpperCase() : index) : (item.value ? option[item.value] : option)">
+											{{item.value ? option[item.value] : option}}
+										</option>
+									</b-select>
+									<b-input v-else v-model="newMessage"></b-input>
 									<p class="control">
 										<button class="button is-primary" type="submit">Reply</button>
 									</p>
@@ -43,10 +48,13 @@
 </template>
 
 <script>
+import timezones from "compact-timezone-list";
+import countries from "country-list";
+import languages from "@/components/languages";
 export default {
 	data() {
 		return {
-			time: 500,
+			time: 100,
 			typing: false,
 			chat: [],
 			lastResponse: "",
@@ -63,8 +71,8 @@ export default {
 	},
 	mounted() {
 		let greeting = "morning";
-		if (new Date().getHours() > 12) greeting = "afternoon";
-		if (new Date().getHours() > 17) greeting = "evening";
+		if (new Date().getHours() >= 12) greeting = "afternoon";
+		if (new Date().getHours() >= 17) greeting = "evening";
 		this.say("Good " + greeting + ", " + this.user.informal_name + "!", ["Hi, Ara 👋"]);
 	},
 	methods: {
@@ -165,7 +173,33 @@ export default {
 					}]);
 					break;
 				case 6:
-					this.say(["That's it, thanks!"], []);
+					this.say(["Alright, thanks!", "When I write emails for you, I might have to say things like 'call his phone' or 'Skype with her'", "I know it's " + new Date().getFullYear() + " and it's silly to stick to binary genders, but I need the pronoun", "So, can you share your preferred gender with me?"], ["Male (his)", "Female (her)"]);
+					break;
+				case 7:
+					this.say(["Awesome!", "In which country do you live?"], [{
+						type: "select",
+						placeholder: "Select your country",
+						modal: "country",
+						uc: true,
+						options: countries().getCodeList()
+					}]);
+					break;
+				case 8:
+					this.say(["And what timezone are you in?", "I'll remember this when putting things on your calendar"], [{
+						type: "select",
+						placeholder: "Select your timezone",
+						modal: "timezone",
+						value: "tzCode",
+						options: timezones
+					}]);
+					break;
+				case 9:
+					this.say(["Perfect", "What language should I remember you speak?"], [{
+						type: "select",
+						placeholder: "Select your language",
+						modal: "language",
+						options: languages
+					}]);
 					break;
 			}
 		}
@@ -193,7 +227,7 @@ footer .text {
 .text {
 	background-color: #eee;
 	padding: 0.5rem 1rem;
-	border-radius: 5rem;
+	border-radius: 1.5rem;
 	display: inline-block;
 	font: inherit;
 	border: none;
@@ -201,16 +235,17 @@ footer .text {
 	margin: 0.5rem 0;
 }
 .message_ara .text {
+	max-width: 80%;
 	background-color: #3498db;
 	color: #fff;
-	border-bottom-left-radius: 1.5rem;
+	border-bottom-left-radius: 0.5rem;
 }
 .message_user {
 	display: flex;
 	justify-content: flex-end;
 }
 .message_user .text {
-	border-bottom-right-radius: 1.5rem;
+	border-bottom-right-radius: 0.5rem;
 }
 footer .message_user {
 	display: inline-block;
