@@ -114,6 +114,9 @@ export default {
 	mounted() {
 		this.duration = this.user.duration;
 		this.calendars = this.user.calendars;
+		try {
+			this.calendars = JSON.parse(this.user.calendars);
+		} catch (e) {}
 		this.scheduling_days = this.user.scheduling_days;
 		this.scheduling_start_time = this.user.scheduling_start_time;
 		this.scheduling_end_time = this.user.scheduling_end_time;

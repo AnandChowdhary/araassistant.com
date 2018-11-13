@@ -14,13 +14,24 @@
 				</div>
 			</div>
 		</div>
-		<footer>
+		<footer v-if="responses.length">
 			<div class="container">
 				<div class="columns columns is-mobile is-centered">
 					<div class="column is-half-tablet">
 						<h2 v-if="chat.length === 1" class="subtitle is-5">Click on a response to reply to Ara:</h2>
-						<div class="message_user">
-								<button @click.prevent="respond(item)" v-for="(item, index) in responses" :key="'r_' + index" class="responds text">
+						<div class="message_user" :key="'r_' + index" v-for="(item, index) in responses">
+							<form @submit.prevent="respond(newMessage, item.modal)" v-if="item && item.type">
+								<div style="margin-bottom: 1rem; font-weight: bold">
+									{{item.placeholder}}:
+								</div>
+								<b-field grouped>
+									<b-input v-model="newMessage"></b-input>
+									<p class="control">
+										<button class="button is-primary" type="submit">Reply</button>
+									</p>
+								</b-field>
+							</form>
+							<button v-else @click.prevent="respond(item)" class="responds text">
 								{{item.text || item}}
 							</button>
 						</div>
@@ -39,8 +50,10 @@ export default {
 			typing: false,
 			chat: [],
 			lastResponse: "",
+			newMessage: "",
 			responses: [],
-			current: 0
+			current: 0,
+			newDetails: {}
 		}
 	},
 	computed: {
@@ -64,12 +77,10 @@ export default {
 						from: "ara"
 					});
 					this.typing = false;
+					this.responses = responses;
 					setTimeout(() => {
-						this.responses = responses;
-						setTimeout(() => {
-							window.scrollTo(0, document.body.scrollHeight);
-						}, 5);
-					}, this.time / 2);
+						window.scrollTo(0, document.body.scrollHeight);
+					}, 5);
 				}, this.time);
 			} else {
 				let i = 0;
@@ -87,22 +98,25 @@ export default {
 						i++;
 					} else {
 						clearInterval(chatInterval);
+						this.responses = responses;
 						setTimeout(() => {
-							this.responses = responses;
-							setTimeout(() => {
-								window.scrollTo(0, document.body.scrollHeight);
-							}, 5);
-						}, this.time / 2);
+							window.scrollTo(0, document.body.scrollHeight);
+						}, 5);
 					}
 				}, this.time);
 			}
 		},
-		respond(input) {
+		respond(input, modal) {
 			let text = typeof input === "string" ? input : input.text;
 			if (text !== input && input.case) {
 				this.current = input.case;
 			} else {
 				this.current++;
+			}
+			if (modal) {
+				this.newDetails[modal] = text;
+				this.user[modal] = text;
+				console.log(text, modal, this.newDetails);
 			}
 			this.lastResponse = text;
 			this.chat.push({
@@ -121,17 +135,37 @@ export default {
 				case 2:
 					this.say("Good to know. Can I call you " + this.user.name + "?", [{
 						text: "Yes, that's my name",
-						case: 5
+						case: 4
 					}, {
 						text: "No, change my name",
-						case: 4
+						case: 3
+					}]);
+					break;
+				case 3:
+					this.say(["Okay, what's your name?"], [{
+						type: "input",
+						placeholder: "Enter your full name",
+						modal: "name"
 					}]);
 					break;
 				case 4:
-					this.say(["Okay, what's your name?"], ["ENTER NAME"]);
+					this.say(["Perfect, I'll call you " + this.user.name, "I have your email saved as " + this.user.email, "Do you have another email?"], [{
+						text: "Yes, add another email",
+						case: 5
+					}, {
+						text: "No, that's it",
+						case: 6
+					}]);
 					break;
 				case 5:
-					this.say(["Perfect", "I have your email saved as " + this.user.email, "Do you have another email?"], ["Yes, add another email", "No, that's it"]);
+					this.say(["What's the email address?"], [{
+						type: "input",
+						placeholder: "Enter your email",
+						modal: "new_email"
+					}]);
+					break;
+				case 6:
+					this.say(["That's it, thanks!"], []);
 					break;
 			}
 		}
@@ -150,6 +184,7 @@ footer {
 	left: 0; right: 0;
 	bottom: 0;
 	padding: 2rem 0;
+	text-align: right;
 }
 footer .text {
 	background-color: #fff;
@@ -176,6 +211,9 @@ footer .text {
 }
 .message_user .text {
 	border-bottom-right-radius: 1.5rem;
+}
+footer .message_user {
+	display: inline-block;
 }
 .responds {
 	margin-left: 1rem;
