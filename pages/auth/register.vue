@@ -113,6 +113,7 @@ export default {
 				if (!this.companyName && data.company && data.company.name) this.companyName = data.company.name || "";
 				if (data.person && data.person.timeZone) this.timezone = data.person.timeZone || data.company.timeZone || "";
 				if (data.person && data.person.geo) this.countryCode = data.person.geo.countryCode || data.company.geo.countryCode || "NL";
+				if (data.ipInfo && data.ipInfo.country) this.countryCode = data.ipInfo.country || this.countryCode;
 				this.next();
 			});
 		},
