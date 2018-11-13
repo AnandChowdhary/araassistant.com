@@ -121,7 +121,14 @@ export default {
 			this.$axios.$put("/auth/register", {
 				email: this.email,
 				name: this.firstName + " " + this.lastName,
-				password: this.password
+				password: this.password,
+				companyName: this.companyName,
+				companyDomain: this.companyDomain,
+				companyTitle: this.companyTitle,
+				companyDomain: this.companyDomain,
+				timezone: this.timezone,
+				country: this.countryCode,
+				onboarded: 0
 			}).then(data => {
 				this.next();
 			}).catch(error => {
