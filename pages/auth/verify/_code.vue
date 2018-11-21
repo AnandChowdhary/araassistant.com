@@ -3,10 +3,10 @@
 		<b-loading v-if="!done" :is-full-page="true" :active.sync="loading"></b-loading>
 		<div v-else class="content has-text-grey has-text-centered">
 			<p>
-				<b-icon class="ml" pack="fab" icon="google" size="is-large" />
+				<b-icon class="ml" pack="fas" icon="envelope" size="is-large" />
 			</p>
-			<h1 class="title">Calendar Connected</h1>
-			<p>Your Google Calendar has been successfully connected.</p>
+			<h1 class="title">Email confirmed</h1>
+			<p>Your email has been successfully confirmed.</p>
 		</div>
 	</main>
 </template>

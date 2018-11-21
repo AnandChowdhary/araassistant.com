@@ -58,7 +58,7 @@ import languages from "@/components/languages";
 export default {
 	data() {
 		return {
-			time: 100,
+			time: 500,
 			typing: false,
 			chat: [],
 			newMessage: "",
@@ -227,7 +227,7 @@ export default {
 					if (this.user.tokens) {
 						this.say(["I see that you've already connected your Google Calendar, so let's continue!"], ["Yes, let's do it"]);
 					} else {
-						this.say(["You haven't connected your Google Calendar yet, so let's get that out of the way first.", "Once you're done, come back here and we'll continue"], [{
+						this.say(["You haven't connected your Google Calendar yet, so let's get that out of the way first", "Once you're done, come back here and we'll continue"], [{
 							text: "Connect Google Calendar",
 							redirect_link: "/settings/reconnect"
 						}, "Done, let's continue!"]);
