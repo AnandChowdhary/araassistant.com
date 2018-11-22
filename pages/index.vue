@@ -1,11 +1,16 @@
 <template>
 	<main>
-		<b-loading v-if="!done" :is-full-page="true" :active.sync="loading"></b-loading>
+		<b-loading :is-full-page="true" :active.sync="loading"></b-loading>
 	</main>
 </template>
 
 <script>
 export default {
+	data() {
+		return {
+			loading: true
+		}
+	},
 	computed: {
 		user() {
 			return this.$store.getters.user;

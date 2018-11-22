@@ -20,6 +20,7 @@
 							</div>
 						</div>
 					</div>
+					<p style="margin-top: 1rem"><nuxt-link to="/auth/forgot">Forgot your password?</nuxt-link></p>
 				</div>
 			</div>
 		</div>
