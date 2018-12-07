@@ -17,9 +17,8 @@
 						{{ new Date(props.row.created_at * 1000).toLocaleDateString() }}
 					</b-table-column>
 					<b-table-column label="Verified">
-						<b-icon pack="fas"
-							:icon="props.row.verified ? 'check' : 'times'">
-						</b-icon>
+						<b-icon class="has-text-success" v-if="props.row.verified" pack="fas" icon="check" />
+						<b-icon class="has-text-danger" v-else pack="fas" icon="times" />
 					</b-table-column>
 					<b-table-column label="Delete">
 						<button type="button" @click.prevent="deleteEmail(props.row.id)" class="button is-danger is-outlined is-small">
@@ -43,6 +42,7 @@
 		<div class="card">
 			<form @submit.prevent="add" class="card-content">
 				<h3 class="title is-5">Have another email account?</h3>
+				<p>You can add all your work and personal emails, and Ara will understand you if you email her from any of them. You can also log in to this website from any of these emails.</p>
 				<b-field label="Email">
 					<b-input required v-model="newEmail" placeholder="Enter your email" />
 				</b-field>
@@ -118,3 +118,10 @@ export default {
 	}
 }
 </script>
+
+<style scoped>
+form p {
+	margin-top: -1rem;
+	margin-bottom: 1.5rem;
+}
+</style>

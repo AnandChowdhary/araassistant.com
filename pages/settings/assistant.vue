@@ -21,7 +21,7 @@
 					<b-field label="Default email">
 						<b-input v-model="default_email" disabled />
 					</b-field>
-					<p style="margin-bottom: 2rem">Ara uses this default email unless you use a custom SMTP email.</p>
+					<p style="margin-bottom: 2rem">Ara uses this default email unless you use a custom SMTP email. If you set up custom SMTP, make sure you add an email forwarded to the email above.</p>
 					<b-field>
 						<b-switch true-value="1" false-value="0" v-model="smtp_enabled">
 							Use a custom email account

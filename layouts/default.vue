@@ -97,4 +97,7 @@ export default {
 .v-step {
 	z-index: 10;
 }
+::selection {
+	background-color: rgba(0, 0, 0, 0.075);
+}
 </style>
