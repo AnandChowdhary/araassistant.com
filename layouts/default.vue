@@ -103,4 +103,7 @@ html {
 ::selection {
 	background-color: rgba(0, 0, 0, 0.075);
 }
+.card {
+	overflow: hidden;
+}
 </style>

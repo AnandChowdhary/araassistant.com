@@ -40,13 +40,26 @@
 							</li>
 						</ul>
 					</div>
-					<p v-else style="margin: 1rem 0">
-						<strong>Selected location:</strong> {{addressString.formatted_address || "None"}}
-						<button style="margin-left: 0.5rem" type="button" @click.prevent="addressString = {}" class="button is-info is-outlined is-small">
-							<b-icon style="margin-right: 0.25rem" pack="fas" icon="pencil-alt" />
-							Edit location
-						</button>
-					</p>
+					<div v-else style="margin: 1rem 0">
+						<div class="card">
+							<div class="columns">
+								<div class="column" style="padding-bottom: 0">
+									<img style="margin: -0.75rem 0" alt="Map location" :src="`https://maps.googleapis.com/maps/api/staticmap?center=${addressString.formatted_address}&zoom=13&size=400x175&maptype=roadmap&key=AIzaSyDM_uPNYcEGZwPhfG-BSfCRt6gdbs78Afs`">
+								</div>
+								<div class="column">
+									<div style="padding: 1rem 1rem 1.5rem 0">
+										<strong>Selected location:</strong> {{addressString.formatted_address || "None"}}
+										<div style="margin-top: 1rem">
+											<button type="button" @click.prevent="addressString = {}" class="button is-info is-outlined">
+											<b-icon style="margin-right: 0.25rem" pack="fas" icon="pencil-alt" />
+											Edit location
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<b-field v-else label="Value">
 					<b-input required v-model="value" placeholder="Enter details" />
@@ -57,7 +70,7 @@
 				<!-- isDefault -->
 				<div v-if="editing">
 					<button type="submit" class="button is-primary">Save changes to {{name || "place"}}</button>
-					<button type="button" @click.prevent="deletePlace" class="button is-danger is-outlined"><b-icon style="margin-right: 0.25rem" pack="fas" icon="trash" />Delete</button>
+					<button style="margin-left: 0.5rem" type="button" @click.prevent="deletePlace" class="button is-danger is-outlined"><b-icon style="margin-right: 0.25rem" pack="fas" icon="trash" />Delete</button>
 				</div>
 				<div v-else>
 					<button type="submit" class="button is-primary">Add new place or profile</button>
