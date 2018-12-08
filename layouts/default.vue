@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+	<div >
+		<nav v-if="$route.matched[0].name !== 'to-id'" class="navbar is-light" role="navigation" aria-label="main navigation">
 			<div class="navbar-brand">
 				<nuxt-link class="navbar-item" to="/">
 					<strong>Ara</strong>
