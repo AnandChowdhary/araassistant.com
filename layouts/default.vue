@@ -83,6 +83,9 @@ export default {
 
 <style>
 @import url("https://use.fontawesome.com/releases/v5.5.0/css/all.css");
+html {
+	background-color: whitesmoke;
+}
 .navbar-item.nuxt-link-exact-active {
 	background-color: #e8e8e8;
 	color: #363636;

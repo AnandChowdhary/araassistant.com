@@ -52,7 +52,7 @@
 					<b-input required v-model="value" placeholder="Enter details" />
 				</b-field>
 				<b-field label="Instructions">
-					<b-input type="textarea" v-model="instructions" placeholder="Add any additional instructions to share with guests here..." />
+					<markdown-editor v-model="instructions" placeholder="Add any additional instructions to share with guests here..." />
 				</b-field>
 				<!-- isDefault -->
 				<div v-if="editing">
@@ -71,6 +71,7 @@
 
 <script>
 import debounce from "lodash/debounce";
+import markdownEditor from "vue-simplemde/src/markdown-editor";
 export default {
 	data() {
 		return {
@@ -193,7 +194,7 @@ export default {
 			this.editing = true;
 			this.loading = true;
 			this.$axios.get("/locations/" + this.$route.params.id).then(response => {
-				this.instructions = response.data[0].instructions;
+				if (response.data[0].instructions) this.instructions = response.data[0].instructions;
 				this.name = response.data[0].name;
 				this.id = response.data[0].id;
 				this.option = response.data[0].option;
@@ -253,7 +254,7 @@ export default {
 				} catch (e) {}
 			}).catch(error => {
 				if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
-			}).then(this.loading = false);
+			}).then(() => { this.loading = false });
 		},
 		realFindLocation() {
 			this.$axios.post("/autocomplete", {
@@ -302,6 +303,19 @@ export default {
 				};
 			});
 		}
+	},
+	components: {
+		markdownEditor
 	}
 }
 </script>
+
+<style>
+@import "https://unpkg.com/simplemde@1.11.2/dist/simplemde.min.css";
+.CodeMirror, .CodeMirror-scroll {
+	min-height: 100px;
+}
+.editor-toolbar.fullscreen {
+	z-index: 100;
+}
+</style>

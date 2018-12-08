@@ -65,7 +65,7 @@
 					</div>
 					<button style="margin-top: 1rem" @click.prevent="reconnect" class="button is-secondary">
 						<b-icon class="ml" pack="fab" icon="google" style="margin-right: 0.5rem" />
-						Reconnect Google Calendar
+						<span v-if="calendars && calendars.length">Reconnect Google Calendar</span><span v-else>Reconnect Google Calendar</span>
 					</button>
 				</div>
 			</div>

@@ -3,6 +3,15 @@
 		<div class="container">
 			<h1 class="title" style="text-align: center">My meetings</h1>
 			<b-loading v-if="loading" :active.sync="loading"></b-loading>
+			<section class="section" v-else-if="!contexts.length">
+				<div class="content has-text-grey has-text-centered">
+					<p>
+						<b-icon class="ml" pack="fas" icon="frown-open" size="is-large" />
+					</p>
+					<p style="margin-top: 2rem">You don't have any meetings.</p>
+					<p>Organize one by emailing your assistant.</p>
+				</div>
+			</section>
 			<div class="columns is-mobile is-centered">
 				<div class="column is-three-quarters">
 					<div class="card" v-for="(context, index) in contexts" :key="index" style="margin-bottom: 2rem">
@@ -84,7 +93,7 @@ export default {
 	mounted() {
 		if (!this.$store.state.token) return this.$router.replace("/auth/login");
 		this.$axios.get("/contexts").then(data => {
-			this.contexts = data.data.contexts;
+			if (data.data && data.data.contexts) this.contexts = data.data.contexts;
 		}).then(() => this.loading = false);
 	},
 	computed: {

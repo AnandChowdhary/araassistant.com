@@ -26,7 +26,9 @@ export default {
 				token: this.$route.params.code
 			}).then(() => {
 				this.$snackbar.open("Your email has been verified 👍");
-				this.$router.push("/auth/login");
+				setTimeout(() => {
+					this.$router.push("/auth/login");
+				}, 5000);
 			}).catch(error => {
 				if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
 			}).then(() => this.loading = false);

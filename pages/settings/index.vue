@@ -6,7 +6,7 @@
 		</div>
 		<div class="columns">
 			<div class="column is-3">
-				<nuxt-link id="v-step-0" to="/settings/profile" class="button is-light is-medium is-fullwidth">
+				<nuxt-link id="v-step-0" to="/settings/profile" class="button is-white is-medium is-fullwidth">
 					<div>
 						<b-icon class="ml" pack="fas" icon="user" size="is-small" />
 						<div>Profile</div>
@@ -14,7 +14,7 @@
 				</nuxt-link>
 			</div>
 			<div class="column is-3">
-				<nuxt-link id="v-step-1" to="/settings/emails" class="button is-light is-medium is-fullwidth">
+				<nuxt-link id="v-step-1" to="/settings/emails" class="button is-white is-medium is-fullwidth">
 					<div>
 						<b-icon class="ml" pack="fas" icon="envelope" size="is-small" />
 						<div>Emails</div>
@@ -22,7 +22,7 @@
 				</nuxt-link>
 			</div>
 			<div class="column is-3">
-				<nuxt-link id="v-step-2" to="/settings/scheduling" class="button is-light is-medium is-fullwidth">
+				<nuxt-link id="v-step-2" to="/settings/scheduling" class="button is-white is-medium is-fullwidth">
 					<div>
 						<b-icon class="ml" pack="fas" icon="calendar" size="is-small" />
 						<div>Scheduling</div>
@@ -30,7 +30,7 @@
 				</nuxt-link>
 			</div>
 			<div class="column is-3">
-				<nuxt-link id="v-step-3" to="/settings/assistant" class="button is-light is-medium is-fullwidth">
+				<nuxt-link id="v-step-3" to="/settings/assistant" class="button is-white is-medium is-fullwidth">
 					<div>
 						<b-icon class="ml" pack="fas" icon="hands-helping" size="is-small" />
 						<div>Assistant</div>
@@ -40,7 +40,7 @@
 		</div>
 		<div class="columns">
 			<div class="column is-3">
-				<nuxt-link id="v-step-4" to="/settings/places" class="button is-light is-medium is-fullwidth">
+				<nuxt-link id="v-step-4" to="/settings/places" class="button is-white is-medium is-fullwidth">
 					<div>
 						<b-icon class="ml" pack="fas" icon="map-marked-alt" size="is-small" />
 						<div>Places</div>
@@ -48,7 +48,7 @@
 				</nuxt-link>
 			</div>
 			<div class="column is-3">
-				<nuxt-link id="v-step-5" to="/settings/templates" class="button is-light is-medium is-fullwidth">
+				<nuxt-link id="v-step-5" to="/settings/templates" class="button is-white is-medium is-fullwidth">
 					<div>
 						<b-icon class="ml" pack="fas" icon="file-contract" size="is-small" />
 						<div>Templates</div>
@@ -56,7 +56,7 @@
 				</nuxt-link>
 			</div>
 			<div class="column is-3">
-				<nuxt-link id="v-step-6" to="/settings/scheduling" class="button is-light is-medium is-fullwidth">
+				<nuxt-link id="v-step-6" to="/settings/scheduling" class="button is-white is-medium is-fullwidth">
 					<div>
 						<b-icon class="ml" pack="fas" icon="money-bill-wave" size="is-small" />
 						<div>Billing</div>
@@ -64,7 +64,7 @@
 				</nuxt-link>
 			</div>
 			<div class="column is-3">
-				<nuxt-link id="v-step-7" to="/feedback" class="button is-light is-medium is-fullwidth">
+				<nuxt-link id="v-step-7" to="/feedback" class="button is-white is-medium is-fullwidth">
 					<div>
 						<b-icon class="ml" pack="fas" icon="comments" size="is-small" />
 						<div>Feedback</div>
@@ -74,7 +74,7 @@
 		</div>
 		<div class="columns">
 			<div class="column is-3">
-				<nuxt-link id="v-step-8" to="/help" class="button is-light is-medium is-fullwidth">
+				<nuxt-link id="v-step-8" to="/help" class="button is-white is-medium is-fullwidth">
 					<div>
 						<b-icon class="ml" pack="fas" icon="question-circle" size="is-small" />
 						<div>Help &amp; Docs</div>

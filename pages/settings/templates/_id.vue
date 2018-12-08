@@ -16,7 +16,7 @@
 					<b-taginput v-model="labels" icon="label" placeholder="Add another label" />
 				</b-field>
 				<b-field label="Email body">
-					<b-input required type="textarea" v-model="body" placeholder="Enter the text for this template" />
+					<markdown-editor required v-model="body" placeholder="Enter the text for this template" />
 				</b-field>
 				<div v-if="editing">
 					<button type="submit" class="button is-primary">Save changes to {{name || "template"}}</button>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import markdownEditor from "vue-simplemde/src/markdown-editor";
 export default {
 	data() {
 		return {
@@ -52,7 +53,7 @@ export default {
 				this.name = response.data.results[0].name;
 				this.labels = response.data.results[0].labels;
 				this.subject = response.data.results[0].subject;
-				this.body = response.data.results[0].body;
+				if (response.data.results[0].body) this.body = response.data.results[0].body;
 			})
 		}
 	},
@@ -110,6 +111,19 @@ export default {
 				}
 			});
 		}
+	},
+	components: {
+		markdownEditor
 	}
 }
 </script>
+
+<style>
+@import "https://unpkg.com/simplemde@1.11.2/dist/simplemde.min.css";
+.CodeMirror, .CodeMirror-scroll {
+	min-height: 100px;
+}
+.editor-toolbar.fullscreen {
+	z-index: 100;
+}
+</style>

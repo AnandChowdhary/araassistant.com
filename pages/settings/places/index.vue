@@ -33,7 +33,10 @@
 					</b-table-column>
 				</template>
 				<template slot="empty">
-					<section class="section">
+					<section class="section" v-if="loading">
+						<div class="content has-text-grey has-text-centered" style="min-height: 100px" />
+					</section>
+					<section class="section" v-else>
 						<div class="content has-text-grey has-text-centered">
 							<p>
 								<b-icon class="ml" pack="fas" icon="frown-open" size="is-large" />
@@ -175,7 +178,9 @@ export default {
 			this.data = response.data;
 		}).catch(error => {
 			if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
-		}).then(this.loading = false);
+		}).then(() => {
+			this.loading = false
+		});
 	},
 	methods: {
 		updateOptions() {
