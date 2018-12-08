@@ -30,6 +30,9 @@ export default {
 			).then(profile => {
 				this.$store.commit("updateUser", profile.data.user);
 				this.$snackbar.open("Your Google Calendar has been linked 👍");
+				setTimeout(() => {
+					this.$router.push("/settings/scheduling");
+				}, 2500);
 				this.done = true;
 			}).catch(error => {
 				if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
