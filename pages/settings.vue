@@ -10,6 +10,7 @@
 							<ul>
 								<li><router-link to="/settings/profile">General</router-link></li>
 								<li><router-link to="/settings/emails">Your emails</router-link></li>
+								<li><router-link to="/settings/password">Password &amp; security</router-link></li>
 							</ul>
 						</li>
 						<li><router-link to="/settings/scheduling">Scheduling</router-link></li>
