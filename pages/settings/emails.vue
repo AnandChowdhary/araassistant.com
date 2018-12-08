@@ -11,6 +11,7 @@
 				:mobile-cards="true">
 				<template slot-scope="props">
 					<b-table-column field="email" label="Email">
+						<img class="website-logo" alt="Website logo" :src="`https://logo.clearbit.com/${props.row.email.split('@')[1]}`">
 						{{ props.row.email }}
 					</b-table-column>
 					<b-table-column field="date" label="Added" centered>
@@ -123,5 +124,15 @@ export default {
 form p {
 	margin-top: -1rem;
 	margin-bottom: 1.5rem;
+}
+td {
+	vertical-align: middle;
+}
+.website-logo {
+	height: 25px;
+	margin-right: 0.5rem;
+	width: 25px;
+	border-radius: 100%;
+	vertical-align: middle;
 }
 </style>

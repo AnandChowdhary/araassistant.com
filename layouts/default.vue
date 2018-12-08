@@ -106,4 +106,8 @@ html {
 .card {
 	overflow: hidden;
 }
+.card, .table-wrapper {
+	border-radius: 4px;
+	overflow: hidden;
+}
 </style>

@@ -23,6 +23,7 @@ module.exports = {
 			{ rel: "mask-icon", type: "image/png", href: "/safari-pinned-tab.svg", color: "#3498db" }
 		]
 	},
+	env: {},
 	loading: { color: "#fff" },
 	css: [
 	],
@@ -30,6 +31,7 @@ module.exports = {
 	],
 	modules: [
 		"@nuxtjs/axios",
+		"@nuxtjs/dotenv",
 		"nuxt-buefy"
 	],
 	axios: {

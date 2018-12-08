@@ -10,6 +10,10 @@
 								<b-loading v-if="loading" :active.sync="loading"></b-loading>
 								<transition-group name="fade" mode="out-in">
 									<form key="animation_1" @submit.prevent="enrichment" v-if="page === 0">
+										<p>Ara is your AI-powered business communication assistant. To register for Ara, you need a valid invitation code. You can get this from another user with an Ara assistant, or you can <nuxt-link to="/auth/invite">request an invitation</nuxt-link>.</p>
+										<b-field label="Invitation code">
+											<b-input required v-model="inviteCode" placeholder="Enter your invitation code" />
+										</b-field>
 										<b-field label="Email">
 											<b-input required v-model="email" placeholder="Enter your work email" />
 										</b-field>

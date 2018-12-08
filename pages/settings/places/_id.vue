@@ -44,7 +44,7 @@
 						<div class="card">
 							<div class="columns">
 								<div class="column" style="padding-bottom: 0">
-									<img style="margin: -0.75rem 0" alt="Map location" :src="`https://maps.googleapis.com/maps/api/staticmap?center=${addressString.formatted_address}&zoom=13&size=400x175&maptype=roadmap&key=AIzaSyDM_uPNYcEGZwPhfG-BSfCRt6gdbs78Afs`">
+									<img style="margin: -0.75rem 0" alt="Map location" :src="`https://maps.googleapis.com/maps/api/staticmap?center=${addressString.formatted_address}&zoom=13&size=400x175&maptype=roadmap&key=${googleMaps}`">
 								</div>
 								<div class="column">
 									<div style="padding: 1rem 1rem 1.5rem 0">
@@ -90,6 +90,7 @@ export default {
 		return {
 			editing: false,
 			debounce: debounce,
+			googleMaps: process.env.googleMaps,
 			loading: false,
 			id: undefined,
 			addressString: {},
