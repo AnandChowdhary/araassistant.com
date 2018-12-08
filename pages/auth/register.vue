@@ -90,6 +90,7 @@ export default {
 			email: "",
 			companyName: "",
 			companyDomain: "",
+			inviteCode: "",
 			companyTitle: "",
 			companyDomain: "",
 			timezone: "",
@@ -126,6 +127,7 @@ export default {
 			this.loading = true;
 			this.$axios.$put("/auth/register", {
 				email: this.email,
+				inviteCode: this.inviteCode,
 				name: this.firstName + " " + this.lastName,
 				password: this.password,
 				companyName: this.companyName,
