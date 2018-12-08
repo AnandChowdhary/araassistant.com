@@ -23,9 +23,9 @@
                                 </div>
                                 <div v-if="!slots.length">
                                     <h2 class="title">No slots found</h2>
-                                    <p>Sorry, no slots are available for today. You can try changing the date above.</p>
+                                    <p>Sorry, no slots are available for {{new Date(this.selectedDate).toLocaleDateString()}}. You can try changing the date above.</p>
                                 </div>
-                                <button v-else v-for="(slot, key) in slots" :key="'slot_' + key" class="button is-medium is-fullwidth">{{slot.text}}</button>
+                                <button v-else v-for="(slot, key) in slots" :key="'slot_' + key" class="button is-medium is-fullwidth">{{new Date(slot).toLocaleString()}}</button>
                                 <p style="margin-top: 1rem">If you have any questions, you can email {{user.informal_name}}'s assistant at {{user.assistant_email}}.</p>
 							</div>
 						</div>
@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import moment from "moment-timezone";
 export default {
     data() {
         const today = new Date();
@@ -47,7 +46,6 @@ export default {
             loading: false,
             slots: [],
             user: {},
-            events: [],
             selectedDate: today,
             minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
             maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 14)
@@ -75,9 +73,9 @@ export default {
     methods: {
         updateSlots() {
             this.loading = true;
-            this.$axios.get(`/schedule/${this.$route.params.id}`)
+            this.$axios.get(`/schedule/${this.$route.params.id}/${this.selectedDate.getUTCFullYear()}/${this.selectedDate.getUTCMonth() + 1}/${this.selectedDate.getDate()}`)
                 .then(response => {
-                    this.events = response.data;
+                    this.slots = response.data.slots;
                     this.loading = false;
                 });
         }
