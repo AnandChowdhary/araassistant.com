@@ -17,7 +17,7 @@
 						{{ props.row.option }}
 					</b-table-column>
 					<b-table-column field="value" label="Location">
-						{{ props.row.place && props.row.place.address_components ? props.row.place.name || props.row.place.formatted_address : props.row.value }}
+						{{ props.row.place && props.row.place.name ? props.row.place.name || props.row.place.formatted_address : props.row.value }}
 					</b-table-column>
 					<b-table-column label="Details">
 						<nuxt-link :to="`/settings/places/${props.row.id}`" class="button is-info is-outlined is-small">

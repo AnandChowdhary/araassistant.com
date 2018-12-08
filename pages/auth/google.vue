@@ -23,7 +23,6 @@ export default {
 		if (this.$route.query.code) {
 			this.loading = true;
 			this.$axios.post("/google", {
-				to: "https://araassistant.netlify.com",
 				code: this.$route.query.code,
 				scope: this.$route.query.scope
 			}).then(() =>

@@ -11,7 +11,7 @@
 						<b-input required v-model="assistant_name" placeholder="Enter a name for your assistant" />
 					</b-field>
 					<b-field label="Signature" message="Formatting in Markdown; you can use basic Ara variables like fullName in double curly brackets">
-						<b-input type="textarea" required v-model="assistant_signature" placeholder="Enter a name for your assistant" />
+						<markdown-editor required v-model="assistant_signature" placeholder="Enter a name for your assistant" />
 					</b-field>
 				</div>
 			</div>
@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import markdownEditor from "vue-simplemde/src/markdown-editor";
 export default {
 	data() {
 		return {
@@ -135,6 +136,16 @@ export default {
 				if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
 			}).then(() => this.loading = false);
 		}
+	},
+	components: {
+		markdownEditor
 	}
 }
 </script>
+
+<style>
+@import "https://unpkg.com/simplemde@1.11.2/dist/simplemde.min.css";
+.CodeMirror, .CodeMirror-scroll {
+	min-height: 150px;
+}
+</style>
