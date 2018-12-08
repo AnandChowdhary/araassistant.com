@@ -24,6 +24,7 @@
 							</div>
 						</div>
 					</div>
+					<p style="margin-top: 1rem">Already got an invite? <nuxt-link to="/auth/register">Register</nuxt-link></p>
 				</div>
 			</div>
 		</div>

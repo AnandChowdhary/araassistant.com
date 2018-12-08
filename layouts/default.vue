@@ -11,7 +11,7 @@
 					<span aria-hidden="true"></span>
 				</a>
 			</div>
-			<div id="navbarBasicExample" class="navbar-menu" v-if="user.id">
+			<div id="navbarBasicExample" class="navbar-menu has-background-white" v-if="user.id">
 				<div class="navbar-start">
 					<nuxt-link to="/dashboard" class="navbar-item">Dashboard</nuxt-link>
 					<nuxt-link to="/settings" class="navbar-item">Settings</nuxt-link>
@@ -34,10 +34,10 @@
 			</div>
 			<div id="navbarBasicExample" class="navbar-menu" v-else>
 				<div class="navbar-start">
-					<nuxt-link to="/dashboard" class="navbar-item">Features</nuxt-link>
-					<nuxt-link to="/dashboard" class="navbar-item">Pricing</nuxt-link>
-					<nuxt-link to="/dashboard" class="navbar-item">Privacy</nuxt-link>
-					<nuxt-link to="/dashboard" class="navbar-item">FAQ</nuxt-link>
+					<nuxt-link to="/features" class="navbar-item">Features</nuxt-link>
+					<nuxt-link to="/pricing" class="navbar-item">Pricing</nuxt-link>
+					<nuxt-link to="/privacy" class="navbar-item">Privacy</nuxt-link>
+					<nuxt-link to="/faq" class="navbar-item">FAQ</nuxt-link>
 				</div>
 				<div class="navbar-end">
 					<div class="navbar-item buttons">
@@ -109,5 +109,20 @@ html {
 .card, .table-wrapper {
 	border-radius: 4px;
 	overflow: hidden;
+}
+.navbar-item.nuxt-link-active {
+	background-color: #fff !important;
+}
+.navbar-item.nuxt-link-exact-active {
+	font-weight: bold;
+	background-color: whitesmoke !important;
+}
+.navbar-item.nuxt-link-exact-active:hover {
+	opacity: 1;
+	background-color: whitesmoke !important;
+}
+.navbar-item:hover {
+	opacity: 0.5;
+	background-color: transparent !important;
 }
 </style>

@@ -73,6 +73,7 @@
 							</div>
 						</div>
 					</div>
+					<p style="margin-top: 1rem">Already have an account? <nuxt-link to="/auth/login">Login</nuxt-link></p>
 				</div>
 			</div>
 		</div>
