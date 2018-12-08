@@ -52,7 +52,7 @@ export default {
 				this.$router.push("/onboard");
 			}
 		}
-		this.$axios.get("http://ipinfo.io/?token=8a036c8feb3737")
+		this.$axios.get("https://ipinfo.io/?token=8a036c8feb3737")
 			.then(ip => this.ipInfo = ip.data)
 			.catch(error => {});
 	}
