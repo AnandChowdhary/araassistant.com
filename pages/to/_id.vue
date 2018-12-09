@@ -2,7 +2,7 @@
 	<main>
 		<div class="container">
             <b-loading v-if="loading" :active.sync="loading" />
-			<div class="columns columns is-mobile is-centered">
+			<div class="columns columns is-desktop is-centered">
 				<div class="column is-half">
 					<div class="card">
 						<div v-if="Object.keys(user).length" class="card-content">
