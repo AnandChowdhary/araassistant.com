@@ -116,7 +116,10 @@ export default {
             .then(response => {
                 this.user = response.data;
                 this.updateSlots();
-            });
+            }).catch(error => {
+                this.loading = false;
+                if (error.response.data.error) this.$snackbar.open({ type: "is-danger", message: error.response.data.error });
+            })
     },
     methods: {
         chooseDate(slot) {
@@ -134,7 +137,7 @@ export default {
         },
         updateSlots() {
             this.loading = true;
-            this.$axios.get(`/schedule/${this.$route.params.id}/${this.selectedDate.getUTCFullYear()}/${this.selectedDate.getUTCMonth() + 1}/${this.selectedDate.getDate()}/${this.duration}`)
+            this.$axios.get(`/schedule/${this.user.id}/${this.selectedDate.getUTCFullYear()}/${this.selectedDate.getUTCMonth() + 1}/${this.selectedDate.getDate()}/${this.duration}`)
                 .then(response => {
                     this.slots = response.data;
                     const today = new Date();
