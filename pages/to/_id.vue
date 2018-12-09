@@ -73,9 +73,9 @@ export default {
     methods: {
         updateSlots() {
             this.loading = true;
-            this.$axios.get(`/schedule/${this.$route.params.id}/${this.selectedDate.getUTCFullYear()}/${this.selectedDate.getUTCMonth() + 1}/${this.selectedDate.getDate()}`)
+            this.$axios.get(`/schedule/${this.$route.params.id}/${this.selectedDate.getUTCFullYear()}/${this.selectedDate.getUTCMonth() + 1}/${this.selectedDate.getDate()}/${this.duration}`)
                 .then(response => {
-                    this.slots = response.data.slots;
+                    this.slots = response.data;
                     this.loading = false;
                 });
         }
