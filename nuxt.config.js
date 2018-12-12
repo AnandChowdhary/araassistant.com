@@ -23,6 +23,9 @@ module.exports = {
 			{ rel: "mask-icon", type: "image/png", href: "/safari-pinned-tab.svg", color: "#3498db" }
 		]
 	},
+  generate: {
+    fallback: true
+  },
 	env: {},
 	loading: { color: "#fff" },
 	css: [
