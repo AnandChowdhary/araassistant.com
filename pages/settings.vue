@@ -18,12 +18,6 @@
 						<li><router-link to="/settings/places">Places and profiles</router-link></li>
 						<li><router-link to="/settings/templates">Templates</router-link></li>
 					</ul>
-					<p class="menu-label">Billing</p>
-					<ul class="menu-list">
-						<li><router-link to="/settings/subscription">Subscription</router-link></li>
-						<li><router-link to="/settings/invoices">Invoices</router-link></li>
-						<li><router-link to="/settings/promotions">Promotions</router-link></li>
-					</ul>
 				</aside>
 			</div>
 			<div class="column"><nuxt /></div>
