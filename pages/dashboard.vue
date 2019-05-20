@@ -22,7 +22,7 @@
 										<div class="media">
 											<div class="media-left">
 												<figure class="image is-48x48">
-													<img class="is-rounded" :src="`https://platform.oswaldlabs.com/v1/profile-picture/${context.guests[0].address.toLowerCase()}`">
+													<img class="is-rounded" :src="`https://ui-avatars.com/api/?bold=true&name=${context.guests[0].name}`">
 												</figure>
 											</div>
 											<div class="media-content">
@@ -41,7 +41,7 @@
 											<b-icon class="ml" pack="fas" icon="calendar" size="is-small" />
 										</div>
 										<div>
-											{{context.location.name.split(",")[0]}}
+											{{context && context.location && context.location.name ? context.location.name.split(",")[0] : (context.location && context && context.location.place && context.location.place.formatted_address ? context.location.place.formatted_address : "")}}
 											<b-icon v-if="context.location.option === 'skype'" class="ml" pack="fab" icon="skype" size="is-small" />
 											<b-icon v-else-if="context.location.option === 'messenger'" class="ml" pack="fab" icon="facebook-messenger" size="is-small" />
 											<b-icon v-else-if="context.location.option === 'whatsapp'" class="ml" pack="fab" icon="whatsapp" size="is-small" />

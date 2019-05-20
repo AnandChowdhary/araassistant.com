@@ -15,13 +15,13 @@
 				<div class="navbar-start">
 					<nuxt-link to="/dashboard" class="navbar-item">Dashboard</nuxt-link>
 					<nuxt-link to="/settings" class="navbar-item">Settings</nuxt-link>
-					<nuxt-link to="/billing" class="navbar-item">Billing</nuxt-link>
-					<nuxt-link to="/feedback" class="navbar-item">Feedback</nuxt-link>
+					<nuxt-link to="/" class="navbar-item">Billing</nuxt-link>
+					<nuxt-link to="/" class="navbar-item">Feedback</nuxt-link>
 				</div>
 				<div class="navbar-end">
 					<nuxt-link to="/settings/profile" class="navbar-item">
 						<figure class="image" style="margin-right: 0.75rem">
-							<img style="width: auto" class="is-rounded" alt="" :src="`https://platform.oswaldlabs.com/v1/profile-picture/${user.email}`">
+							<img style="width: auto" class="is-rounded" alt="" :src="`https://ui-avatars.com/api/?bold=true&name=${user.name}`">
 						</figure>
 						{{user.name}}
 					</nuxt-link>
@@ -34,17 +34,17 @@
 			</div>
 			<div id="navbarBasicExample" class="navbar-menu" v-else>
 				<div class="navbar-start">
-					<nuxt-link to="/features" class="navbar-item">Features</nuxt-link>
-					<nuxt-link to="/pricing" class="navbar-item">Pricing</nuxt-link>
-					<nuxt-link to="/privacy" class="navbar-item">Privacy</nuxt-link>
-					<nuxt-link to="/faq" class="navbar-item">FAQ</nuxt-link>
+					<nuxt-link to="/" class="navbar-item">Features</nuxt-link>
+					<nuxt-link to="/" class="navbar-item">Pricing</nuxt-link>
+					<nuxt-link to="/" class="navbar-item">Privacy</nuxt-link>
+					<nuxt-link to="/" class="navbar-item">FAQ</nuxt-link>
 				</div>
 				<div class="navbar-end">
 					<div class="navbar-item buttons">
 						<nuxt-link to="/auth/register" class="button is-primary">Register</nuxt-link>
 						<nuxt-link to="/auth/login" class="button is-secondary">Login</nuxt-link>
 					</div>
-					
+
 				</div>
 			</div>
 		</nav>
