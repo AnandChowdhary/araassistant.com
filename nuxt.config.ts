@@ -39,7 +39,7 @@ const config: Configuration = {
       },
       {
         rel: "stylesheet",
-        href: "https://use.typekit.net/mov5itj.css"
+        href: "https://fonts.googleapis.com/css?family=Work+Sans:400,700&display=swap"
       }
     ],
     script: [

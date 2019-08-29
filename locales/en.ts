@@ -226,9 +226,9 @@ export default {
   pages: {
     index: {
       hero: {
-        title: "Staart is a SaaS starter for your next big idea.",
+        title: "Get work done.",
         intro:
-          "Written in TypeScript and Vue, Staart gives you a 6-month headstart in building your SaaS product. Free and open-source."
+          "Ara is an AI-powered assistant for work. Schedule meetings, send follow ups, and more over email."
       },
       features: {
         1: {

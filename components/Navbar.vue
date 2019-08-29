@@ -2,7 +2,7 @@
   <Trap v-if="isVisible" :disabled="!showNav" class="navbar">
     <div class="container">
       <nuxt-link class="item item--type-logo" to="/">
-        <img alt="" src="/android-chrome-72x72.png" />
+        <img alt="" src="/android-chrome-192x192.png" />
         <span>Staart</span>
       </nuxt-link>
       <nav v-if="isAuthenticated" :class="{ 'nav--visible-true': showNav }">
