@@ -3,7 +3,7 @@
     <div class="container">
       <nuxt-link class="item item--type-logo" to="/">
         <img alt="" src="/android-chrome-192x192.png" />
-        <span>Staart</span>
+        <span>Ara</span>
       </nuxt-link>
       <nav v-if="isAuthenticated" :class="{ 'nav--visible-true': showNav }">
         <nuxt-link v-if="user.role === 3" class="item" :to="`/admin/users`"
@@ -140,30 +140,8 @@
       </nav>
       <nav v-else :class="{ 'nav--visible-true': showNav }">
         <nuxt-link class="item" to="/">Solutions</nuxt-link>
-        <span>
-          <button
-            class="item"
-            aria-controls="resources"
-            :aria-expanded="(visible === 'resources').toString()"
-          >
-            Resources
-          </button>
-          <transition name="dropdown-fade">
-            <div
-              v-show="visible === 'resources'"
-              id="resources"
-              ref="dropdown-resources"
-              class="dropdown"
-            >
-              <nuxt-link class="item" to="/styleguide">Styleguide</nuxt-link>
-              <nuxt-link class="item" to="/policies/licenses"
-                >FOSS licenses</nuxt-link
-              >
-            </div>
-          </transition>
-        </span>
+        <nuxt-link class="item" to="/features">Features</nuxt-link>
         <nuxt-link class="item" to="/pricing">Pricing</nuxt-link>
-        <nuxt-link class="item" to="/docs">Docs</nuxt-link>
         <nuxt-link
           v-if="$route.path !== '/auth/login'"
           class="button"

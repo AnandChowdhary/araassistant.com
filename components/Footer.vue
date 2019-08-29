@@ -3,7 +3,7 @@
     <div v-if="!isAuthenticated" class="banner">
       <div class="hero hero--align-center">
         <h1>It's a no-brainer&mdash;get started now.</h1>
-        <p>Create an account in our fake startup to see Staart in action.</p>
+        <p>Create a free account and get your own assistant.</p>
         <div>
           <nuxt-link
             class="button button--size-large button--color-primary"
@@ -16,26 +16,23 @@
     <div class="container links">
       <div class="larger">
         <nuxt-link class="item item--type-logo" to="/">
-          <img alt="" src="/android-chrome-72x72.png" />
-          <span>Staart</span>
+          <img alt="" src="/android-chrome-192x192.png" />
+          <span>Ara</span>
         </nuxt-link>
         <p class="text text--mt-1">
           An
           <a target="_blank" href="https://o15y.com">O15Y</a>
-          project<br />Made by
-          <a target="_blank" href="https://anandchowdhary.com"
-            >Anand Chowdhary</a
-          >
+          company
         </p>
       </div>
       <div>
         <h2>Product</h2>
         <nav>
-          <nuxt-link to="/">Why Staart?</nuxt-link>
+          <nuxt-link to="/">Why Ara?</nuxt-link>
           <nuxt-link to="/">Enterprise</nuxt-link>
           <nuxt-link to="/">Security &amp; privacy</nuxt-link>
           <nuxt-link to="/pricing">Pricing</nuxt-link>
-          <nuxt-link to="/">Staart Demo</nuxt-link>
+          <nuxt-link to="/">Ara Demo</nuxt-link>
         </nav>
       </div>
       <div>

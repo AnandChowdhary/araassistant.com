@@ -5,7 +5,7 @@
         <div class="row">
           <div>
             <h1><Translate t="pages.index.hero.title" /></h1>
-            <p style="max-width: 500px">
+            <p style="max-width: 500px; font-size: 115%">
               <Translate t="pages.index.hero.intro" />
             </p>
             <div v-if="isAuthenticated">
@@ -25,7 +25,7 @@
               </nuxt-link>
             </div>
           </div>
-          <img class="b" alt="" src="/images/undraw_product_tour_foyt.svg" />
+          <img class="b" alt="" src="/images/undraw_happy_news_hxmt.svg" />
         </div>
       </div>
     </header>
@@ -143,7 +143,7 @@ export default class Home extends Vue {}
 
 <style lang="scss" scoped>
 header {
-  padding: 15rem 0 7.5rem 0;
+  padding: 15rem 0 5rem 0;
   margin-top: -7.5rem;
   h1 {
     margin: 0 0 2rem 0;

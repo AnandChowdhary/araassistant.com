@@ -26,7 +26,6 @@
             <select v-model="selectedCurrency">
               <option value="usd">USD</option>
               <option value="eur">EUR</option>
-              <option value="inr">INR</option>
             </select>
           </label>
         </div>
@@ -57,7 +56,7 @@
               <link itemprop="availability" href="https://schema.org/InStock" />
             </div>
             <div class="text text--size-small text--color-light">
-              per {{ selectedTerm === "annually" ? "year" : "month" }}
+              per user
             </div>
             <div class="text text--size-small text--color-light">
               billed {{ selectedTerm }}
@@ -87,11 +86,11 @@
             style="padding-left: 0"
           >
             <ul>
-              <li>Pageviews</li>
-              <li>Apps &amp; modes</li>
-              <li>Customization</li>
+              <li>Meetings</li>
+              <li>Automated emails</li>
+              <li>Custom domain</li>
               <li>Support</li>
-              <li>Branding</li>
+              <li>100% uptime SLA</li>
             </ul>
           </div>
         </div>
@@ -101,13 +100,13 @@
             <ul>
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
-                <span>Unlimited</span>
-                <span class="hide-desktop">pageviews</span>
+                <span>5 per month</span>
+                <span class="hide-desktop">meetings</span>
               </li>
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
-                <span>All 20+ features</span>
-                <span class="hide-desktop">apps &amp; modes</span>
+                <span>100 per month</span>
+                <span class="hide-desktop">outbound emails</span>
               </li>
               <li class="hide-mobile">
                 <font-awesome-icon class="i-n" icon="times" title="No" />
@@ -144,16 +143,16 @@
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
                 <span>Unlimited</span>
-                <span class="hide-desktop">pageviews</span>
+                <span class="hide-desktop">meetings</span>
               </li>
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
-                <span>All 20+ features</span>
-                <span class="hide-desktop">apps &amp; modes</span>
+                <span>Unlimited emails</span>
+                <span class="hide-desktop">outbound emails</span>
               </li>
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
-                <span>White labeling</span>
+                <span>@your-domain</span>
               </li>
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
@@ -181,16 +180,16 @@
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
                 <span>Unlimited</span>
-                <span class="hide-desktop">pageviews</span>
+                <span class="hide-desktop">meetings</span>
               </li>
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
-                <span>All 20+ features</span>
-                <span class="hide-desktop">apps &amp; modes</span>
+                <span>Unlimited emails</span>
+                <span class="hide-desktop">outbound emails</span>
               </li>
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
-                <span>White labeling</span>
+                <span>@your-domain</span>
               </li>
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
@@ -198,7 +197,7 @@
               </li>
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
-                <span>Hide "Powered by"</span>
+                <span>SLA available</span>
               </li>
             </ul>
             <div class="text text--mt-2">
@@ -211,7 +210,9 @@
           </div>
         </div>
       </div>
-      <div class="row row--padding-large text text--mt-4 hide-mobile">
+      <div
+        class="row row--padding-large text text--mt-4 text--mb-4 hide-mobile"
+      >
         <div>
           <div
             v-for="(feature, i) in moreFeatures"
@@ -257,45 +258,6 @@
           </div>
         </div>
       </div>
-      <section class="section">
-        <div class="text text--align-center">
-          <h2>More plans</h2>
-        </div>
-        <div class="addons row more-plans">
-          <div class="card card--type-padded">
-            <h3>For tracking &amp; analytics</h3>
-            <p>
-              Track as many events as you like after your fixed quota for $0.001
-              per event.
-            </p>
-            <a href="#">Purchase Analytics pack &rarr;</a>
-          </div>
-          <div class="card card--type-padded">
-            <h3>For open-source</h3>
-            <p>
-              $1,000 in credits for open-source projects under permissive
-              licenses.
-            </p>
-            <a href="#">Apply for FOSS &rarr;</a>
-          </div>
-          <div class="card card--type-padded">
-            <h3>For students</h3>
-            <p>
-              $1,000 in credits for student developers with a verified
-              university email account.
-            </p>
-            <a href="#">Create student account &rarr;</a>
-          </div>
-          <div class="card card--type-padded">
-            <h3>For non-profits</h3>
-            <p>
-              Up to 50% off on all plans and services for registered section
-              501(c)(3) non-profits
-            </p>
-            <a href="#">Contact us &rarr;</a>
-          </div>
-        </div>
-      </section>
     </div>
   </main>
 </template>
@@ -325,20 +287,17 @@ export default class Pricing extends Vue {
   selectedTerm = "monthly";
   proPrices = {
     monthly: {
-      usd: 15000,
-      eur: 13000,
-      inr: 1200000
+      usd: 995,
+      eur: 895
     },
     annually: {
-      usd: 150000,
-      eur: 130000,
-      inr: 12000000
+      usd: 9900,
+      eur: 8900
     }
   };
   currencySymbols = {
     usd: "$",
-    eur: "€",
-    inr: "₹"
+    eur: "€"
   };
   moreFeatures = {
     Team: {
@@ -367,14 +326,6 @@ export default class Pricing extends Vue {
       ],
       "Two-factor authentication": [true, true, true],
       "Data export & delete": [true, true, true]
-    },
-    Developers: {
-      "Developer API": [true, true, true],
-      "IFTTT integrations": [true, true, true],
-      "99.99% uptime SLA": [false, true, true],
-      "Increased rate limit": [false, false, true],
-      "Self-hosted service": [false, false, true],
-      "Reseller accounts": [false, false, true]
     }
   };
   private changeCurrency(currency: string) {
