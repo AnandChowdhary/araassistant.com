@@ -28,21 +28,19 @@
       <div>
         <h2>Product</h2>
         <nav>
-          <nuxt-link to="/">Why Ara?</nuxt-link>
+          <nuxt-link to="/">AI assistant</nuxt-link>
           <nuxt-link to="/">Enterprise</nuxt-link>
-          <nuxt-link to="/">Security &amp; privacy</nuxt-link>
+          <nuxt-link to="/">Privacy</nuxt-link>
           <nuxt-link to="/pricing">Pricing</nuxt-link>
-          <nuxt-link to="/">Ara Demo</nuxt-link>
         </nav>
       </div>
       <div>
         <h2>Use cases</h2>
         <nav>
-          <nuxt-link to="/">Insert a user case</nuxt-link>
-          <nuxt-link to="/">These can be customers</nuxt-link>
-          <nuxt-link to="/">Different types</nuxt-link>
-          <nuxt-link to="/">Information here</nuxt-link>
-          <nuxt-link to="/">Starter template</nuxt-link>
+          <nuxt-link to="/">Schedule meetings</nuxt-link>
+          <nuxt-link to="/">Follow up emails</nuxt-link>
+          <nuxt-link to="/">Automated replies</nuxt-link>
+          <nuxt-link to="/">Email reminders</nuxt-link>
         </nav>
       </div>
       <div>
@@ -51,7 +49,6 @@
           <nuxt-link to="/">Blog</nuxt-link>
           <nuxt-link to="/">Developer API</nuxt-link>
           <nuxt-link to="/">Help Center</nuxt-link>
-          <nuxt-link to="/">Partners</nuxt-link>
           <button onclick="window.agastya.open()">Accessibility</button>
         </nav>
       </div>
@@ -69,9 +66,7 @@
         <nav>
           <nuxt-link to="/">About us</nuxt-link>
           <nuxt-link to="/">O15Y</nuxt-link>
-          <nuxt-link to="/">News</nuxt-link>
           <nuxt-link to="/">Presskit</nuxt-link>
-          <nuxt-link to="/">Careers</nuxt-link>
         </nav>
       </div>
     </div>

@@ -36,7 +36,7 @@
             <div>
               <font-awesome-icon
                 class="icon icon--size-lg"
-                icon="credit-card"
+                icon="calendar"
                 fixed-width
               />
               <h3><Translate t="pages.index.features.1.title" /></h3>
@@ -45,7 +45,7 @@
             <div>
               <font-awesome-icon
                 class="icon icon--size-lg"
-                icon="users"
+                icon="envelope-open"
                 fixed-width
               />
               <h3><Translate t="pages.index.features.2.title" /></h3>
@@ -54,7 +54,7 @@
             <div>
               <font-awesome-icon
                 class="icon icon--size-lg"
-                icon="code"
+                icon="hands-helping"
                 fixed-width
               />
               <h3><Translate t="pages.index.features.3.title" /></h3>
@@ -63,7 +63,7 @@
             <div>
               <font-awesome-icon
                 class="icon icon--size-lg"
-                icon="laptop"
+                icon="language"
                 fixed-width
               />
               <h3><Translate t="pages.index.features.4.title" /></h3>
@@ -98,7 +98,8 @@ import {
   faLaptop,
   faHandsHelping,
   faCalendar,
-  faImage
+  faImage,
+  faEnvelopeOpen
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faNodeJs,
@@ -111,6 +112,7 @@ library.add(
   faMagic,
   faUserLock,
   faCalendar,
+  faEnvelopeOpen,
   faImage,
   faHandsHelping,
   faFingerprint,
@@ -126,7 +128,8 @@ library.add(
   faLanguage,
   faAccessibleIcon,
   faRocket,
-  faCreditCard
+  faCreditCard,
+  faLanguage
 );
 
 @Component({

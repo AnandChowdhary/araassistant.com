@@ -36,6 +36,10 @@
           autocomplete="new-password"
           help="Tip: Use a strong password generator"
         />
+        <p>
+          You agree with our
+          <router-link to="/policies/privacy">policies</router-link>.
+        </p>
         <button
           class="button button--width-full button--size-large"
           type="submit"

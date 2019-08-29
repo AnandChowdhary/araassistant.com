@@ -232,23 +232,20 @@ export default {
       },
       features: {
         1: {
-          title: "SaaS Billing",
-          intro:
-            "Subscriptions, credit cards, invoices, and more, powered by Stripe"
+          title: "Schedule meetings",
+          intro: "Easily set up meetings based on your calendar availability"
         },
         2: {
-          title: "Teams",
-          intro: "Users can invite their teams and manage roles and permissions"
+          title: "Follow up emails",
+          intro: "Nudge people by sending automatic follow-up emails"
         },
         3: {
-          title: "Platform",
-          intro:
-            "Authentication, scoped API keys, and more ways to use your SaaS"
+          title: "Automated replies",
+          intro: "Send templated replies for common queries & topics"
         },
         4: {
-          title: "Full-stack",
-          intro:
-            "Node.js backend written in TypeScript with a beautiful Vue PWA."
+          title: "100+ languages",
+          intro: "Send emails in multiple languages and translate replies"
         }
       },
       lists: {

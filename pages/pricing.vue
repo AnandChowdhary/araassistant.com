@@ -100,13 +100,11 @@
             <ul>
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
-                <span>5 per month</span>
-                <span class="hide-desktop">meetings</span>
+                <span>5 meetings/month</span>
               </li>
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
-                <span>100 per month</span>
-                <span class="hide-desktop">outbound emails</span>
+                <span>100 emails/month</span>
               </li>
               <li class="hide-mobile">
                 <font-awesome-icon class="i-n" icon="times" title="No" />
@@ -142,8 +140,7 @@
             <ul>
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
-                <span>Unlimited</span>
-                <span class="hide-desktop">meetings</span>
+                <span>Unlimited meetings</span>
               </li>
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
@@ -179,7 +176,7 @@
             <ul>
               <li>
                 <font-awesome-icon class="i-y" icon="check" title="Yes" />
-                <span>Unlimited</span>
+                <span>Unlimited meetings</span>
                 <span class="hide-desktop">meetings</span>
               </li>
               <li>
@@ -300,6 +297,16 @@ export default class Pricing extends Vue {
     eur: "€"
   };
   moreFeatures = {
+    Assistant: {
+      Customize: [
+        "Name, signature",
+        "Name, email, signature",
+        "Name, email, signature"
+      ],
+      Campaigns: ["10 campaigns", "Unlimited campaigns", "Unlimited campaigns"],
+      Templates: ["10 templates", "Unlimited templates", "Unlimited templates"],
+      'Hide "Help" link': [false, false, "Custom unsubscribe"]
+    },
     Team: {
       "Team members": [
         "3 users included",
@@ -322,10 +329,18 @@ export default class Pricing extends Vue {
       "Compliant hosting": [
         "Hosted in Europe",
         "Hosted in Europe",
-        "Hosted in EU/US/IN"
+        "10+ hosting options"
       ],
-      "Two-factor authentication": [true, true, true],
-      "Data export & delete": [true, true, true]
+      "Two-factor authentication": [
+        "TOTP-based 2FA",
+        "TOTP-based 2FA",
+        "TOTP, SMS, hardware"
+      ],
+      "Data export & delete": [
+        "Export & delete data",
+        "Export & delete data",
+        "Export & delete data"
+      ]
     }
   };
   private changeCurrency(currency: string) {

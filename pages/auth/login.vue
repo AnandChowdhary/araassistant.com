@@ -29,38 +29,12 @@
         >
           Login to your account
         </button>
-        <client-only>
-          <div class="row text text--mt-1">
-            <button
-              v-for="service in ['Google', 'Apple', 'Salesforce']"
-              :key="`login_${service}`"
-              :class="
-                `button button--width-full button--size-large button--color-info button--color-brand-${service.toLowerCase()}`
-              "
-              type="button"
-              :aria-label="`Login with ${service}`"
-              data-balloon-pos="down"
-              @click="oauthLogin(service.toLowerCase())"
-            >
-              <font-awesome-icon
-                v-if="service !== 'more'"
-                class="icon"
-                :icon="['fab', service.toLowerCase()]"
-                fixed-width
-              />
-            </button>
-            <button
-              class="button button--width-full button--size-large button--color-info"
-              style="width: 20%"
-              type="button"
-              aria-label="More services"
-              data-balloon-pos="down"
-              @click="() => (showMore = true)"
-            >
-              <font-awesome-icon class="icon" icon="ellipsis-h" fixed-width />
-            </button>
-          </div>
-        </client-only>
+        <button
+          class="button button--width-full button--size-large button--color-info text text--mt-1"
+          type="submit"
+        >
+          Login with Google
+        </button>
       </form>
     </Card>
     <div class="row text text--mt-1">
@@ -69,40 +43,6 @@
         >Create an account</nuxt-link
       >
     </div>
-    <transition name="modal">
-      <Modal v-if="showMore" :on-close="() => (showMore = false)">
-        <h2>Login with third-party services</h2>
-        <p>
-          You can securely login with these services. We never share your
-          personal information with third-parties.
-        </p>
-        <div class="social-buttons">
-          <button
-            v-for="service in [
-              'Apple',
-              'Google',
-              'Salesforce',
-              'Microsoft',
-              'Facebook',
-              'GitHub',
-              'Weixin'
-            ]"
-            :key="`option_${service}`"
-            class="button"
-            type="button"
-            @click="oauthLogin(service.toLowerCase())"
-          >
-            <font-awesome-icon
-              v-if="service !== 'more'"
-              class="icon"
-              :icon="['fab', service.toLowerCase()]"
-              fixed-width
-            />
-            <span>{{ service }}</span>
-          </button>
-        </div>
-      </Modal>
-    </transition>
   </main>
 </template>
 

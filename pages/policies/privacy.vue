@@ -1,7 +1,7 @@
 <template lang="md">
 # Privacy Policy
 
-Your privacy is very important to us. It is our policy to respect your privacy regarding any information we may collect from you across our website, { Product }, and any other sites or applications we own and operate.
+Your privacy is very important to us. It is our policy to respect your privacy regarding any information we may collect from you across our website, Ara, and any other sites or applications we own and operate.
 
 ## Information we collect
 
@@ -13,6 +13,9 @@ Your privacy is very important to us. It is our policy to respect your privacy r
 
 **When you leave a review:** We ask for your name, email address and review of our website. This information is not needed to purchase a subscription. We will never publish your email address, but may choose to publish your name and review (in whole or in part) to help promote our site and product. By supplying this information, you consent to us using your details in this manner.
 
+**When you open an email from Ara:** We do not ask for any information when you open an email from Ara, but we use email pixel tracking to track email opens, clicks, and other activity for the email. This information helps us tell the sender whether their email was opened and to schedule follow up emails. During this process, we collect your computer's Internet Protocol (IP) address, your browser type and version, and other standard data provided by your web browser or email client.
+
+**When you send an email to Ara:** We store a copy of your email along with information we get from the email headers, such as your email, mail provider, etc. This information is required for us to understand and reply to your emails, and to make our services better by, for example, using your email to train our AI.
 ## Our legal bases for processing
 
 We process information lawfully, fairly and transparently. We only collect and process information about you only where:
@@ -42,7 +45,7 @@ We collect, hold, use and disclose information for the following purposes:
 
 ## Disclosure of personal information to third parties
 
-{ Product } is supported by third-party providers to facilitate the provision of a transactional website. These include DNS management, web hosting, payment processing (Stripe and Chargebee) and web analytics (Google Analytics and Oswald Labs).
+Ara is supported by third-party providers to facilitate the provision of a transactional website. These include DNS management, web hosting, payment processing (Stripe and Chargebee) and web analytics (Google Analytics and Oswald Labs).
 
 We will comply with government and law enforcement requests for data, as required by law, in connection with any actual or prospective legal proceedings, or in order to establish, exercise or defend our legal rights.
 
@@ -54,7 +57,7 @@ The data we retain is stored and processed in the European Union (Frankfurt, Ger
 
 ## Your rights as our user
 
-**Choice and consent:** By providing your information to us, you consent to us collecting, holding, using and disclosing it in accordance with this privacy policy. You are free to refuse our request for information, with the understanding that we may be unable to provide you with generated Terms of Service and Privacy Policy statements without it. If you’re under 18 years of age, you must supply evidence of your parent or legal guardian’s knowledge and permission of you providing us with information. If you're under the age of 13, you may not use { Product }.
+**Choice and consent:** By providing your information to us, you consent to us collecting, holding, using and disclosing it in accordance with this privacy policy. You are free to refuse our request for information, with the understanding that we may be unable to provide you with generated Terms of Service and Privacy Policy statements without it. If you’re under 18 years of age, you must supply evidence of your parent or legal guardian’s knowledge and permission of you providing us with information. If you're under the age of 13, you may not use Ara.
 
 **Information from third parties:** If we receive information about you from a third party, we’ll protect it as set out in this privacy policy. If you are a third party providing information about somebody else (eg. an agency operating on behalf of a client), you represent and warrant that you have that person’s consent to provide their information to us.
 
@@ -78,13 +81,13 @@ If we or our assets are acquired, or in the unlikely event that we go out of bus
 
 ## About this policy
 
-This privacy policy only covers { Product }'s own collecting and handling of data. We only work with partners and third-party providers whose privacy policies align with ours, however we cannot accept responsibility or liability for their respective privacy practices.
+This privacy policy only covers Ara's own collecting and handling of data. We only work with partners and third-party providers whose privacy policies align with ours, however we cannot accept responsibility or liability for their respective privacy practices.
 
 Our website may link to external sites that are not operated by us. Please be aware that we have no control over the content and policies of those sites, and cannot accept responsibility or liability for their respective privacy practices.
 
 At our discretion, we may update this policy to reflect current acceptable practices. We will take reasonable steps to let users know about significant changes via our website. Your continued use of this site after any changes to this policy will be regarded as acceptance of our practices around data and personal information.
 
-If you have any concerns or questions about how we handle your data and personal information, feel free to contact us at { Email }.
+If you have any concerns or questions about how we handle your data and personal information, feel free to contact us at ara@o15y.com.
 
 This policy is effective as of January 1, 2019.
 </template>
