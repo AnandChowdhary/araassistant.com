@@ -6,7 +6,7 @@
 
 This repository contains the code for Ara's upcoming web app written in Vue.js\/TypeScript.
 
-This project is based on [Staart UI](https://github.com/AnandChowdhary/araassistant.com).
+This project is based on [Staart UI](https://github.com/o15y/staart-ui).
 
 **⚠️ WARNING:** This repository is currently in development and will contain breaking changes. Do not use it in production.
 
