@@ -88,7 +88,7 @@ const config: Configuration = {
   axios: {
     baseURL:
       process.env.NODE_ENV === "production"
-        ? "https://staart.caprover.oswaldlabs.com/v1"
+        ? "https://ara.caprover.oswaldlabs.com/v1"
         : "http://localhost:7007/v1"
   },
   scrollBehavior() {
