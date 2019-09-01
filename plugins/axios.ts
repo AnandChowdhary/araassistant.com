@@ -33,7 +33,7 @@ export default function({
         $axios.setHeader("X-Requested-With", "XMLHttpRequest");
 
         // Don't worry, this is a public API key and you can see this :)
-        // $axios.setHeader("X-Api-Key", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwib3JnYW5pemF0aW9uSWQiOjEsInJlZmVycmVyUmVzdHJpY3Rpb25zIjoic3RhYXJ0LWRlbW8ubzE1eS5jb20sbG9jYWxob3N0LG9zd2FsZGxhYnMuY29tLHNlcnZlby5uZXQiLCJpYXQiOjE1NjM0NDg5MTUsImV4cCI6ODg1MTc4MDUzMzAxMiwiaXNzIjoic3RhYXJ0Iiwic3ViIjoiYXBpLWtleSIsImp0aSI6IjVlNTViMTY4ZGU1NCJ9.2_VIQ9yLa-4mTyJOMKLtKLlbUGVH15U2P32PalYK6_A");
+        $axios.setHeader("X-Api-Key", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQwZThhN2MtM2w4anhsanZ4ZyIsIm9yZ2FuaXphdGlvbklkIjoiZDBlOGE3Yy0zbDhqeGxqdnhnIiwicmVmZXJyZXJSZXN0cmljdGlvbnMiOiJhcmEtYXNzaXN0YW50Lm5ldGxpZnkuY29tLGFyYWFzc2lzdGFudC5jb20sbG9jYWxob3N0Iiwic2NvcGVzIjoib3JnUmVhZCIsImlhdCI6MTU2NzMzMzM2MSwiZXhwIjo4ODQ3OTE5NzcyMzMwLCJpc3MiOiJhcmFhc3Npc3RhbnQuY29tIiwic3ViIjoiYXBpLWtleSIsImp0aSI6IjczMTYwZTJjYTc2NyJ9.V7vCq862CykP2D1h7mvvQFLkvMyHLBxIXkmgdQvm24U");
         try {
           const token = config.headers.common.Authorization.replace(
             "Bearer ",
