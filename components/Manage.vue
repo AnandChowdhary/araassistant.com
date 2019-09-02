@@ -9,6 +9,18 @@
           <font-awesome-icon class="nav-icon" icon="cog" fixed-width />
           <span>Settings</span>
         </nuxt-link>
+        <nuxt-link class="item" :to="`/manage/${$route.params.team}/locations`">
+          <font-awesome-icon
+            class="nav-icon"
+            icon="location-arrow"
+            fixed-width
+          />
+          <span>Locations</span>
+        </nuxt-link>
+        <nuxt-link class="item" :to="`/manage/${$route.params.team}/templates`">
+          <font-awesome-icon class="nav-icon" icon="sticky-note" fixed-width />
+          <span>Templates</span>
+        </nuxt-link>
         <nuxt-link
           class="item item--type-parent"
           :to="`/manage/${$route.params.team}/team/members`"
@@ -118,7 +130,9 @@ import {
   faBoxOpen,
   faUser,
   faMoneyBillWave,
-  faCode
+  faCode,
+  faLocationArrow,
+  faStickyNote
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faDatabase,
@@ -127,7 +141,9 @@ library.add(
   faBoxOpen,
   faUser,
   faCode,
-  faMoneyBillWave
+  faMoneyBillWave,
+  faLocationArrow,
+  faStickyNote
 );
 
 @Component({

@@ -89,7 +89,7 @@ const config: Configuration = {
     baseURL:
       process.env.NODE_ENV === "production"
         ? "https://ara.caprover.oswaldlabs.com/v1"
-        : "http://localhost:7007/v1"
+        : "http://localhost:7042/v1"
   },
   scrollBehavior() {
     return { x: 0, y: 0 };
