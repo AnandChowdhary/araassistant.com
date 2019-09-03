@@ -12,7 +12,7 @@
         <nuxt-link
           v-if="activeOrganization"
           class="item"
-          :to="`/dashboard/${activeOrganization}`"
+          :to="`/dashboard/${activeOrganization}/meetings`"
           >Dashboard</nuxt-link
         >
         <nuxt-link v-else class="item" to="/dashboard">Dashboard</nuxt-link>
