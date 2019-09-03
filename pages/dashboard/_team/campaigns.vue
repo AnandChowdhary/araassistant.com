@@ -46,7 +46,7 @@ export default class Dashboard extends Vue {
   private async search() {
     if (!this.query) return;
     const result = (await this.$axios.get(
-      `/organizations/anands-assistant/leads/domain?q=${this.query}`
+      `/organizations/${this.$route.params.team}/leads/domain?q=${this.query}`
     )).data;
     this.query = "";
     this.emails = result.data;
@@ -54,7 +54,7 @@ export default class Dashboard extends Vue {
 
   private async save(contact: any) {
     await this.$axios.put(
-      `/organizations/anands-assistant/leads/contacts`,
+      `/organizations/${this.$route.params.team}/leads/contacts`,
       contact
     );
   }
