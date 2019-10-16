@@ -1,128 +1,57 @@
 <template>
-	<div >
-		<nav v-if="$route.matched[0].name !== 'to-id'" class="navbar is-light" role="navigation" aria-label="main navigation">
-			<div class="navbar-brand">
-				<nuxt-link class="navbar-item" to="/">
-					<strong>Ara</strong>
-				</nuxt-link>
-				<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-					<span aria-hidden="true"></span>
-					<span aria-hidden="true"></span>
-					<span aria-hidden="true"></span>
-				</a>
-			</div>
-			<div id="navbarBasicExample" class="navbar-menu has-background-white" v-if="user.id">
-				<div class="navbar-start">
-					<nuxt-link to="/dashboard" class="navbar-item">Dashboard</nuxt-link>
-					<nuxt-link to="/settings" class="navbar-item">Settings</nuxt-link>
-					<nuxt-link to="/" class="navbar-item">Billing</nuxt-link>
-					<nuxt-link to="/" class="navbar-item">Feedback</nuxt-link>
-				</div>
-				<div class="navbar-end">
-					<nuxt-link to="/settings/profile" class="navbar-item">
-						<figure class="image" style="margin-right: 0.75rem">
-							<img style="width: auto" class="is-rounded" alt="" :src="`https://ui-avatars.com/api/?bold=true&name=${user.name}`">
-						</figure>
-						{{user.name}}
-					</nuxt-link>
-					<div class="navbar-item">
-						<div class="buttons">
-							<button @click.prevent="logout" class="button is-light">Logout</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="navbarBasicExample" class="navbar-menu" v-else>
-				<div class="navbar-start">
-					<nuxt-link to="/" class="navbar-item">Features</nuxt-link>
-					<nuxt-link to="/" class="navbar-item">Pricing</nuxt-link>
-					<nuxt-link to="/" class="navbar-item">Privacy</nuxt-link>
-					<nuxt-link to="/" class="navbar-item">FAQ</nuxt-link>
-				</div>
-				<div class="navbar-end">
-					<div class="navbar-item buttons">
-						<nuxt-link to="/auth/register" class="button is-primary">Register</nuxt-link>
-						<nuxt-link to="/auth/login" class="button is-secondary">Login</nuxt-link>
-					</div>
-
-				</div>
-			</div>
-		</nav>
-		<div style="margin: 2rem 0">
-			<nuxt />
-		</div>
-	</div>
+  <div>
+    <a href="#content" class="sr-only sr-only-focusable sk">Skip navigation</a>
+    <Navbar />
+    <Layout />
+    <Footer />
+    <client-only>
+      <notifications
+        aria-live="alert"
+        width="100%"
+        group="auth"
+        position="top center"
+      />
+    </client-only>
+  </div>
 </template>
 
-<script>
-export default {
-	data() {
-		return {}
-	},
-	created() {
-		if (this.token) {
-			this.$axios.setToken(this.token, "Bearer");
-		}
-	},
-	computed: {
-		user() {
-			return this.$store.getters.user;
-		},
-		token() {
-			return this.$store.getters.token;
-		}
-	},
-	methods: {
-		logout() {
-			this.$store.commit("logout");
-			this.$router.push("/auth/login");
-		}
-	}
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import Navbar from "@/components/Navbar.vue";
+import Layout from "@/components/Layout.vue";
+import Footer from "@/components/Footer.vue";
+
+@Component({
+  components: {
+    Navbar,
+    Layout,
+    Footer
+  }
+})
+export default class Default extends Vue {
+  private created() {
+    try {
+      if (this.$store.state.auth.isAuthenticated)
+        this.$axios.setToken(this.$store.state.auth.tokens.token, "Bearer");
+      if (this.$store.state.auth && this.$store.state.auth.user) {
+        if (this.$store.state.auth.user.prefersReducedMotion)
+          if (document && document.body)
+            document.documentElement.classList.add("prefers-reduced-motion");
+        if (this.$store.state.auth.user.prefersColorSchemeDark)
+          if (document && document.body)
+            document.documentElement.classList.add("prefers-color-scheme-dark");
+        this.$store
+          .dispatch("auth/safeRefresh")
+          .then(() => {})
+          .catch(() => {});
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 </script>
 
-<style>
-@import url("https://use.fontawesome.com/releases/v5.5.0/css/all.css");
-html {
-	background-color: whitesmoke;
-}
-.navbar-item.nuxt-link-exact-active {
-	background-color: #e8e8e8;
-	color: #363636;
-}
-.card + .card {
-	margin-top: 1rem;
-}
-.list {
-	margin-left: 2rem;
-	list-style-type: disc;
-}
-.v-step {
-	z-index: 10;
-}
-::selection {
-	background-color: rgba(0, 0, 0, 0.075);
-}
-.card {
-	overflow: hidden;
-}
-.card, .table-wrapper {
-	border-radius: 4px;
-	overflow: hidden;
-}
-.navbar-item.nuxt-link-active {
-	background-color: #fff !important;
-}
-.navbar-item.nuxt-link-exact-active {
-	font-weight: bold;
-	background-color: whitesmoke !important;
-}
-.navbar-item.nuxt-link-exact-active:hover {
-	opacity: 1;
-	background-color: whitesmoke !important;
-}
-.navbar-item:hover {
-	opacity: 0.5;
-	background-color: transparent !important;
-}
+<style lang="scss">
+@import "../styles/app.scss";
 </style>

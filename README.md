@@ -1,22 +1,15 @@
-# araassistant.com
+# 💁 Ara
 
-> AI-powered business communication assistant
+[![Dependencies](https://img.shields.io/david/AnandChowdhary/araassistant.com.svg)](https://david-dm.org/AnandChowdhary/araassistant.com)
+[![Dev dependencies](https://img.shields.io/david/dev/AnandChowdhary/araassistant.com.svg)](https://david-dm.org/AnandChowdhary/araassistant.com)
+![Type definitions](https://img.shields.io/badge/types-TypeScript-blue.svg)
 
-## Build Setup
+This repository contains the code for Ara's upcoming web app written in Vue.js\/TypeScript.
 
-``` bash
-# install dependencies
-$ yarn install
+This project is based on [Staart UI](https://github.com/o15y/staart-ui).
 
-# serve with hot reload at localhost:3000
-$ yarn run dev
+**⚠️ WARNING:** This repository is currently in development and will contain breaking changes. Do not use it in production.
 
-# build for production and launch server
-$ yarn run build
-$ yarn start
+## License
 
-# generate static project
-$ yarn run generate
-```
-
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+For now, this project is not available under an open-source license.
