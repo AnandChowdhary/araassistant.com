@@ -35,14 +35,7 @@
           <td><TimeAgo :date="member.createdAt" /></td>
           <td>{{ membershipRoles[member.role] || member.role }}</td>
           <td class="text text--align-right">
-            <div
-              v-if="
-                user &&
-                  member.userId !== user.id &&
-                  loggedInMembership !== 4 &&
-                  (loggedInMembership === 3 ? member.role > 2 : true)
-              "
-            >
+            <div v-if="user">
               <router-link
                 v-if="user && member.userId !== user.id"
                 :to="`/manage/${$route.params.team}/team/${member.id}`"
@@ -198,7 +191,6 @@ export default class ManageMembers extends Vue {
   showDelete = null;
   loadingMore = false;
   membershipRoles = locale.membershipRoles;
-  loggedInMembership = 3;
 
   newUserName = "";
   newUserEmail = "";
@@ -208,9 +200,6 @@ export default class ManageMembers extends Vue {
     this.memberships = {
       ...this.$store.getters["manage/memberships"](this.$route.params.team)
     };
-    this.loggedInMembership = parseInt(
-      this.$store.getters["manage/loggedInMembership"](this.$route.params.team)
-    );
   }
 
   private mounted() {
@@ -266,7 +255,15 @@ export default class ManageMembers extends Vue {
         id,
         team: this.$route.params.team
       })
-      .then(memberships => (this.memberships = { ...memberships }))
+      .then(memberships => {
+        this.memberships = { ...memberships };
+        if (this.user && this.user.id && this.user.id === id) {
+          // You just left the team
+          this.$router.push(
+            `/users/${this.user.username || this.user.id}/memberships`
+          );
+        }
+      })
       .catch(() => {})
       .finally(() => (this.loading = ""));
   }

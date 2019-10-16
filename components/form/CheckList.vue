@@ -59,10 +59,9 @@ export default class CommaList extends Vue {
   @Prop() help;
   @Prop() autocomplete;
   @Prop({ required: true }) options;
-  @Prop({ default: false }) json;
   labelId = "";
   list = [""];
-  commaList: string | string[] = "";
+  commaList = "";
 
   private created() {
     this.labelId = Math.random()
@@ -71,13 +70,7 @@ export default class CommaList extends Vue {
   }
 
   private mounted() {
-    if (this.value) {
-      if (this.json) {
-        this.list = [...this.value];
-      } else {
-        this.list = [...this.value.split(",")];
-      }
-    }
+    if (this.value) this.list = this.value.split(",");
   }
 
   private add() {
@@ -99,11 +92,7 @@ export default class CommaList extends Vue {
   }
 
   private update() {
-    if (this.json) {
-      this.commaList = this.list.filter(item => !!item);
-    } else {
-      this.commaList = this.list.filter(item => !!item).join(",");
-    }
+    this.commaList = this.list.filter(item => !!item).join(",");
     this.$emit("input", this.commaList);
   }
 

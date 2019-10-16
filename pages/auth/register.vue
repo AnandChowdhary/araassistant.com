@@ -10,7 +10,8 @@
     />
     <Card v-else>
       <h1>Register</h1>
-      <form v-meta-ctrl-enter="register" @submit.prevent="register">
+      <Loading v-if="isLoading" message="Creating your account" />
+      <form v-else v-meta-ctrl-enter="register" @submit.prevent="register">
         <Input
           v-model="name"
           type="text"
@@ -60,12 +61,14 @@ import { Component, Vue } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import Card from "@/components/Card.vue";
 import LargeMessage from "@/components/LargeMessage.vue";
+import Loading from "@/components/Loading.vue";
 import Input from "@/components/form/Input.vue";
 
 @Component({
   components: {
     Card,
     LargeMessage,
+    Loading,
     Input
   },
   computed: mapGetters({
@@ -77,8 +80,10 @@ export default class Login extends Vue {
   email = "";
   password = "";
   isAuthenticated!: boolean;
+  isLoading = false;
   completedRegistration = false;
   private register() {
+    this.isLoading = true;
     this.$store
       .dispatch("auth/register", {
         email: this.email,
@@ -95,6 +100,7 @@ export default class Login extends Vue {
         this.name = "";
         this.email = "";
         this.password = "";
+        this.isLoading = false;
       });
   }
   private created() {

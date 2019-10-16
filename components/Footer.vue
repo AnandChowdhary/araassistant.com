@@ -22,7 +22,10 @@
         <p class="text text--mt-1">
           An
           <a target="_blank" href="https://o15y.com">O15Y</a>
-          company
+          project<br />Made by
+          <a target="_blank" href="https://anandchowdhary.com"
+            >Anand Chowdhary</a
+          >
         </p>
       </div>
       <div>

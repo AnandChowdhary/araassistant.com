@@ -310,7 +310,8 @@ code {
     text-align: center;
   }
   h1 {
-    font-size: 250%;
+    font-size: 200%;
+    font-weight: normal;
   }
 }
 
@@ -421,8 +422,7 @@ code {
 
 }
 
-.form-group input, .input,
-.form-group textarea, .textarea {
+.form-group input, .input {
   font: inherit;
   padding: 0.75rem;
   display: block;
@@ -447,10 +447,6 @@ code {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
   }
-}
-
-.form-group textarea, .textarea {
-  height: 7.5rem;
 }
 
 .container--type-settings {
