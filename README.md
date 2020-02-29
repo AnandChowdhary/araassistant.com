@@ -1,8 +1,6 @@
 # 💁 Ara
 
-[![Dependencies](https://img.shields.io/david/AnandChowdhary/araassistant.com.svg)](https://david-dm.org/AnandChowdhary/araassistant.com)
-[![Dev dependencies](https://img.shields.io/david/dev/AnandChowdhary/araassistant.com.svg)](https://david-dm.org/AnandChowdhary/araassistant.com)
-![Type definitions](https://img.shields.io/badge/types-TypeScript-blue.svg)
+[![GitHub Actions](https://github.com/o15y/araassistant.com/workflows/Node%20CI/badge.svg)](https://github.com/o15y/araassistant.com/actions) [![Dependencies](https://img.shields.io/david/o15y/araassistant.com.svg)](https://david-dm.org/o15y/araassistant.com) [![Dev dependencies](https://img.shields.io/david/dev/o15y/araassistant.com.svg)](https://david-dm.org/o15y/araassistant.com) ![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/o15y/araassistant.com.svg) ![Type definitions](https://img.shields.io/badge/types-TypeScript-blue.svg)
 
 This repository contains the code for Ara's upcoming web app written in Vue.js\/TypeScript.
 
