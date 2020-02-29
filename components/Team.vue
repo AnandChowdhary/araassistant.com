@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="`/manage/${team.username || team.id}/settings`"
+    :to="`/teams/${team.username || team.id}/settings/general`"
     class="team"
   >
     <div
@@ -34,6 +34,9 @@ export default class User extends Vue {
   display: inline-block;
   > * {
     display: inline-block;
+  }
+  &:hover {
+    text-decoration: none;
   }
 }
 .text--type-you {

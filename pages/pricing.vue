@@ -292,10 +292,12 @@ export default class Pricing extends Vue {
       eur: 8900
     }
   };
+
   currencySymbols = {
     usd: "$",
     eur: "€"
   };
+
   moreFeatures = {
     Assistant: {
       Customize: [
@@ -343,12 +345,15 @@ export default class Pricing extends Vue {
       ]
     }
   };
+
   private changeCurrency(currency: string) {
     this.selectedCurrency = currency;
   }
+
   get calculatedPrice() {
     return this.proPrices[this.selectedTerm][this.selectedCurrency];
   }
+
   get currencySymbol() {
     return this.currencySymbols[this.selectedCurrency];
   }

@@ -7,7 +7,7 @@ jest.setTimeout(60000);
 const publicDir = join(__dirname, "..", "public");
 
 beforeAll(async () => {
-  exec("yarn generate");
+  exec("npm run generate");
 });
 
 test("index.html is created", () => {
@@ -17,7 +17,7 @@ test("index.html is created", () => {
 test("index.html has a title", () => {
   readFileSync(join(publicDir, "index.html"))
     .toString()
-    .includes("<title>Staart UI");
+    .includes("<title>StartupName");
 });
 
 test("pwa is build", () => {

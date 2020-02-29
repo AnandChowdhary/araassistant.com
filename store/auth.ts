@@ -94,19 +94,33 @@ export const actions: ActionTree<RootState, RootState> = {
   async safeRefresh({ state, dispatch }) {
     const token = state.tokens.token;
     if (!token) return;
+    console.log(
+      "Safe refresh: Token expires at",
+      new Date(decode(token).exp * 1000)
+    );
     if (decode(token).exp * 1000 < new Date().getTime()) {
+      console.log("Safe refreshing...");
       return dispatch("refresh");
     }
   },
-  async refresh({ state, commit }) {
-    if (!state.tokens.refresh) throw new Error();
+  async refresh({ state, dispatch, commit }) {
+    const refreshToken = state.tokens.refresh;
+    if (!refreshToken) throw new Error();
+    if (decode(refreshToken).exp * 1000 < new Date().getTime()) {
+      dispatch("logout");
+      window.location.href = "/";
+      return;
+    }
     commit("startLoading");
     try {
-      const tokens: Tokens = (await this.$axios.post("/auth/refresh", {
-        token: state.tokens.refresh
-      })).data;
+      const tokens: Tokens = (
+        await this.$axios.post("/auth/refresh", {
+          token: refreshToken
+        })
+      ).data;
       this.$axios.setToken(tokens.token, "Bearer");
       commit("setAuthentication", tokens);
+      commit("stopLoading");
       return tokens.token;
     } catch (error) {
       commit("stopLoading");
@@ -116,9 +130,11 @@ export const actions: ActionTree<RootState, RootState> = {
   async oauthLogin({ commit }, { service, code }) {
     commit("startLoading");
     try {
-      const tokens = (await this.$axios.post(`/auth/oauth/${service}`, {
-        code
-      })).data;
+      const tokens = (
+        await this.$axios.post(`/auth/oauth/${service}`, {
+          code
+        })
+      ).data;
       if (tokens.twoFactorToken) {
         commit("set2FA", tokens.twoFactorToken);
         return "2fa";
@@ -135,10 +151,9 @@ export const actions: ActionTree<RootState, RootState> = {
     await this.$axios.post("/auth/reset-password/request", context);
   },
   async resetPassword({ commit }, context) {
-    const response = (await this.$axios.post(
-      "/auth/reset-password/recover",
-      context
-    )).data;
+    const response = (
+      await this.$axios.post("/auth/reset-password/recover", context)
+    ).data;
   },
   logout({ commit }) {
     commit("removeAuthentication");

@@ -4,14 +4,24 @@
       <div class="container">
         <div class="row">
           <div>
-            <h1><Translate t="pages.index.hero.title" /></h1>
-            <p style="max-width: 500px; font-size: 115%">
+            <h1>
+              <Translate t="pages.index.hero.title" />
+            </h1>
+            <p class="lead">
               <Translate t="pages.index.hero.intro" />
             </p>
             <div v-if="isAuthenticated">
               <nuxt-link
+                v-if="
+                  memberships &&
+                    memberships.data &&
+                    memberships.data.length &&
+                    memberships.data[0].organization
+                "
                 class="button button--size-large button--color-primary"
-                to="/dashboard"
+                :to="
+                  `/teams/${memberships.data[0].organization.username}/products`
+                "
               >
                 <Translate t="buttons.goToDashboard" />
               </nuxt-link>
@@ -39,8 +49,12 @@
                 icon="calendar"
                 fixed-width
               />
-              <h3><Translate t="pages.index.features.1.title" /></h3>
-              <p><Translate t="pages.index.features.1.intro" /></p>
+              <h3>
+                <Translate t="pages.index.features.1.title" />
+              </h3>
+              <p>
+                <Translate t="pages.index.features.1.intro" />
+              </p>
             </div>
             <div>
               <font-awesome-icon
@@ -48,8 +62,12 @@
                 icon="envelope-open"
                 fixed-width
               />
-              <h3><Translate t="pages.index.features.2.title" /></h3>
-              <p><Translate t="pages.index.features.2.intro" /></p>
+              <h3>
+                <Translate t="pages.index.features.2.title" />
+              </h3>
+              <p>
+                <Translate t="pages.index.features.2.intro" />
+              </p>
             </div>
             <div>
               <font-awesome-icon
@@ -57,8 +75,12 @@
                 icon="hands-helping"
                 fixed-width
               />
-              <h3><Translate t="pages.index.features.3.title" /></h3>
-              <p><Translate t="pages.index.features.3.intro" /></p>
+              <h3>
+                <Translate t="pages.index.features.3.title" />
+              </h3>
+              <p>
+                <Translate t="pages.index.features.3.intro" />
+              </p>
             </div>
             <div>
               <font-awesome-icon
@@ -66,8 +88,12 @@
                 icon="language"
                 fixed-width
               />
-              <h3><Translate t="pages.index.features.4.title" /></h3>
-              <p><Translate t="pages.index.features.4.intro" /></p>
+              <h3>
+                <Translate t="pages.index.features.4.title" />
+              </h3>
+              <p>
+                <Translate t="pages.index.features.4.intro" />
+              </p>
             </div>
           </div>
         </div>
@@ -107,6 +133,8 @@ import {
   faAccessibleIcon
 } from "@fortawesome/free-brands-svg-icons";
 import Translate from "@/components/Translate.vue";
+import { Memberships } from "../types/users";
+import { emptyPagination } from "../types/manage";
 library.add(
   faSync,
   faMagic,
@@ -141,7 +169,40 @@ library.add(
     FontAwesomeIcon
   }
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  memberships: Memberships = emptyPagination;
+  isAuthenticated!: boolean;
+  private created() {
+    if (!this.isAuthenticated) return;
+    this.load();
+    const user = this.$store.getters["auth/user"];
+    if (user && user.username) {
+      this.memberships = {
+        ...this.$store.getters["users/memberships"](user.username)
+      };
+    }
+  }
+
+  private load() {
+    if (!this.isAuthenticated) return;
+    const user = this.$store.getters["auth/user"];
+    if (
+      user &&
+      user.username &&
+      (!this.memberships ||
+        !this.memberships.data ||
+        !this.memberships.data.length)
+    )
+      this.$store
+        .dispatch("users/getMemberships", { slug: user.username })
+        .then(memberships => {
+          this.memberships = { ...memberships };
+        })
+        .catch(error => {
+          throw new Error(error);
+        });
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -152,6 +213,10 @@ header {
     margin: 0 0 2rem 0;
     font-size: 400%;
   }
+}
+.lead {
+  font-size: 110%;
+  max-width: 500px;
 }
 h2 {
   font-weight: 300;

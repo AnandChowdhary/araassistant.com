@@ -33,31 +33,21 @@
         <tbody>
           <tr>
             <td>
-              <button class="button">
-                Default button
-              </button>
+              <button class="button">Default button</button>
             </td>
             <td>
-              <button class="button button--state-hover">
-                Default button
-              </button>
+              <button class="button button--state-hover">Default button</button>
             </td>
             <td>
-              <button class="button button--state-focus">
-                Default button
-              </button>
+              <button class="button button--state-focus">Default button</button>
             </td>
             <td>
-              <button class="button button--state-cta">
-                Default button
-              </button>
+              <button class="button button--state-cta">Default button</button>
             </td>
           </tr>
           <tr>
             <td>
-              <button class="button button--color-danger">
-                Danger button
-              </button>
+              <button class="button button--color-danger">Danger button</button>
             </td>
             <td>
               <button class="button button--color-danger button--state-hover">
@@ -99,9 +89,7 @@
           </tr>
           <tr>
             <td>
-              <button class="button button--color-info">
-                Info button
-              </button>
+              <button class="button button--color-info">Info button</button>
             </td>
             <td>
               <button class="button button--color-info button--state-hover">
@@ -146,133 +134,53 @@
       <h2>Colors</h2>
       <h3>Text colors</h3>
       <div class="row row--type-colors">
-        <div class="text text--color-white">
-          White
-        </div>
-        <div class="text text--color-light-gray">
-          Light gray
-        </div>
-        <div class="text text--color-red">
-          Red
-        </div>
-        <div class="text text--color-pink">
-          Pink
-        </div>
-        <div class="text text--color-dull-purple">
-          Dull purple
-        </div>
-        <div class="text text--color-purple">
-          Purple
-        </div>
-        <div class="text text--color-deep-purple">
-          Deep purple
-        </div>
-        <div class="text text--color-blue">
-          Blue
-        </div>
-        <div class="text text--color-cyan">
-          Cyan
-        </div>
-        <div class="text text--color-teal">
-          Teal
-        </div>
+        <div class="text text--color-white">White</div>
+        <div class="text text--color-light-gray">Light gray</div>
+        <div class="text text--color-red">Red</div>
+        <div class="text text--color-pink">Pink</div>
+        <div class="text text--color-dull-purple">Dull purple</div>
+        <div class="text text--color-purple">Purple</div>
+        <div class="text text--color-deep-purple">Deep purple</div>
+        <div class="text text--color-blue">Blue</div>
+        <div class="text text--color-cyan">Cyan</div>
+        <div class="text text--color-teal">Teal</div>
       </div>
       <div class="row row--type-colors">
-        <div class="text text--color-green">
-          Green
-        </div>
-        <div class="text text--color-light-green">
-          Light green
-        </div>
-        <div class="text text--color-lime">
-          Lime
-        </div>
-        <div class="text text--color-yellow">
-          Yellow
-        </div>
-        <div class="text text--color-amber">
-          Amber
-        </div>
-        <div class="text text--color-orange">
-          Orange
-        </div>
-        <div class="text text--color-brown">
-          Brown
-        </div>
-        <div class="text text--color-gray">
-          Gray
-        </div>
-        <div class="text text--color-blue-gray">
-          Blue gray
-        </div>
-        <div class="text text--color-black">
-          Black
-        </div>
+        <div class="text text--color-green">Green</div>
+        <div class="text text--color-light-green">Light green</div>
+        <div class="text text--color-lime">Lime</div>
+        <div class="text text--color-yellow">Yellow</div>
+        <div class="text text--color-amber">Amber</div>
+        <div class="text text--color-orange">Orange</div>
+        <div class="text text--color-brown">Brown</div>
+        <div class="text text--color-gray">Gray</div>
+        <div class="text text--color-blue-gray">Blue gray</div>
+        <div class="text text--color-black">Black</div>
       </div>
       <h3>Background colors</h3>
       <div class="row row--type-colors">
-        <div class="bg bg--color-white">
-          White
-        </div>
-        <div class="bg bg--color-light-gray">
-          Light gray
-        </div>
-        <div class="bg bg--color-red">
-          Red
-        </div>
-        <div class="bg bg--color-pink">
-          Pink
-        </div>
-        <div class="bg bg--color-dull-purple">
-          Dull purple
-        </div>
-        <div class="bg bg--color-purple">
-          Purple
-        </div>
-        <div class="bg bg--color-deep-purple">
-          Deep purple
-        </div>
-        <div class="bg bg--color-blue">
-          Blue
-        </div>
-        <div class="bg bg--color-cyan">
-          Cyan
-        </div>
-        <div class="bg bg--color-teal">
-          Teal
-        </div>
+        <div class="bg bg--color-white">White</div>
+        <div class="bg bg--color-light-gray">Light gray</div>
+        <div class="bg bg--color-red">Red</div>
+        <div class="bg bg--color-pink">Pink</div>
+        <div class="bg bg--color-dull-purple">Dull purple</div>
+        <div class="bg bg--color-purple">Purple</div>
+        <div class="bg bg--color-deep-purple">Deep purple</div>
+        <div class="bg bg--color-blue">Blue</div>
+        <div class="bg bg--color-cyan">Cyan</div>
+        <div class="bg bg--color-teal">Teal</div>
       </div>
       <div class="row row--type-colors">
-        <div class="bg bg--color-green">
-          Green
-        </div>
-        <div class="bg bg--color-light-green">
-          Light green
-        </div>
-        <div class="bg bg--color-lime">
-          Lime
-        </div>
-        <div class="bg bg--color-yellow">
-          Yellow
-        </div>
-        <div class="bg bg--color-amber">
-          Amber
-        </div>
-        <div class="bg bg--color-orange">
-          Orange
-        </div>
-        <div class="bg bg--color-brown">
-          Brown
-        </div>
-        <div class="bg bg--color-gray">
-          Gray
-        </div>
-        <div class="bg bg--color-blue-gray">
-          Blue gray
-        </div>
-        <div class="bg bg--color-black">
-          Black
-        </div>
+        <div class="bg bg--color-green">Green</div>
+        <div class="bg bg--color-light-green">Light green</div>
+        <div class="bg bg--color-lime">Lime</div>
+        <div class="bg bg--color-yellow">Yellow</div>
+        <div class="bg bg--color-amber">Amber</div>
+        <div class="bg bg--color-orange">Orange</div>
+        <div class="bg bg--color-brown">Brown</div>
+        <div class="bg bg--color-gray">Gray</div>
+        <div class="bg bg--color-blue-gray">Blue gray</div>
+        <div class="bg bg--color-black">Black</div>
       </div>
       <h2>Card</h2>
       <div class="card">This is a card</div>
@@ -420,13 +328,11 @@ library.add(
 const countries = {};
 const allCountries = getAllCountries();
 for (const country in allCountries) {
-  if (allCountries.hasOwnProperty(country)) {
-    const cc = country.toLowerCase();
-    countries[cc] = {
-      value: allCountries[country].name
-      // img: `https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/flags/1x1/${cc}.svg`
-    };
-  }
+  const cc = country.toLowerCase();
+  countries[cc] = {
+    value: allCountries[country].name
+    // img: `https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/flags/1x1/${cc}.svg`
+  };
 }
 
 @Component({

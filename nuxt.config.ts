@@ -58,7 +58,12 @@ const config: Configuration = {
       },
       {
         type: "text/javascript",
-        src: "https://platform-beta.oswaldlabs.com/v1/agastya/load/ara.js",
+        src: "https://platform.oswaldlabs.com/v1/agastya/load/ara.js",
+        async: true
+      },
+      {
+        type: "text/javascript",
+        src: "https://unpkg.com/feeedback@1.0.2/docs/index.js",
         async: true
       }
     ]
@@ -92,8 +97,8 @@ const config: Configuration = {
   axios: {
     baseURL:
       process.env.NODE_ENV === "production"
-        ? "https://ara.caprover.oswaldlabs.com/v1"
-        : "http://localhost:7042/v1"
+        ? "https://ara.prod.oswaldlabs.com/v1"
+        : "http://localhost:7007/v1"
   },
   scrollBehavior() {
     return { x: 0, y: 0 };
@@ -116,6 +121,9 @@ const config: Configuration = {
   typescript: {
     typeCheck: true,
     ignoreNotFoundWarnings: true
+  },
+  sitemap: {
+    hostname: "https://staart-ui.o15y.now.sh"
   }
 };
 

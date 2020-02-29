@@ -16,7 +16,7 @@
         @submit.prevent="setupTeam"
       >
         <div class="card card--type-padded">
-          <div class="emoji">👨‍👩‍👦‍👦</div>
+          <div class="emoji">🏢</div>
           <h2>Yes, I have a team</h2>
           <p>If you have a team, you can invite them in the next step.</p>
           <div>
@@ -76,6 +76,7 @@ export default class OnboardingTeam extends Vue {
     if (this.user && this.user.nickname)
       this.teamName = `${this.user.nickname}'s team`;
   }
+
   private setupTeam() {
     this.teamName = this.teamName || `${this.user.nickname}'s team`;
     this.loading = true;

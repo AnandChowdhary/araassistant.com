@@ -22,7 +22,8 @@
         <p class="text text--mt-1">
           An
           <a target="_blank" href="https://o15y.com">O15Y</a>
-          project<br />Made by
+          project
+          <br />Made by
           <a target="_blank" href="https://anandchowdhary.com"
             >Anand Chowdhary</a
           >
@@ -58,10 +59,10 @@
       <div>
         <h2>Policies</h2>
         <nav>
-          <nuxt-link to="/">Terms of use</nuxt-link>
-          <nuxt-link to="/policies/privacy/">Privacy</nuxt-link>
-          <nuxt-link to="/">Cookies</nuxt-link>
-          <nuxt-link to="/">GDPR</nuxt-link>
+          <nuxt-link to="/policies/terms">Terms of use</nuxt-link>
+          <nuxt-link to="/policies/privacy">Privacy</nuxt-link>
+          <nuxt-link to="/policies/cookies">Cookies</nuxt-link>
+          <nuxt-link to="/policies/sla">Enterprise SLA</nuxt-link>
         </nav>
       </div>
       <div>
@@ -88,6 +89,7 @@ export default class Footer extends Vue {
   private onRouteChanged() {
     this.updateNavBar();
   }
+
   private updateNavBar() {
     try {
       this.isAuthenticated = !!this.$store.state.auth.isAuthenticated;
@@ -98,6 +100,7 @@ export default class Footer extends Vue {
       this.isVisible = true;
     }
   }
+
   private mounted() {
     this.updateNavBar();
   }

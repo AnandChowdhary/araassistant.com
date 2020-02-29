@@ -1,33 +1,84 @@
 <template>
-  <Trap v-if="isVisible" :disabled="!showNav" class="navbar">
+  <div v-if="isVisible" :class="{ navbar: true, 'navbar-auth': light }">
     <div class="container">
-      <nuxt-link class="item item--type-logo" to="/">
-        <img alt="" src="/android-chrome-192x192.png" />
-        <span>Ara</span>
-      </nuxt-link>
-      <nav v-if="isAuthenticated" :class="{ 'nav--visible-true': showNav }">
-        <nuxt-link v-if="user.role === 3" class="item" :to="`/admin/users`"
-          >Admin</nuxt-link
+      <div class="flex">
+        <nuxt-link class="item item--type-logo" to="/">
+          <img alt src="/android-chrome-72x72.png" />
+          <span>StartupName</span>
+        </nuxt-link>
+        <div
+          v-if="
+            isAuthenticated &&
+              $route.path.startsWith('/teams/') &&
+              memberships &&
+              memberships.data &&
+              memberships.data.length
+          "
+          class="team-selector"
         >
-        <nuxt-link
-          v-if="activeOrganization"
-          class="item"
-          :to="`/dashboard/${activeOrganization}/meetings`"
-          >Dashboard</nuxt-link
+          <button
+            aria-controls="teams"
+            :aria-expanded="(visible === 'teams').toString()"
+            class="item item-teams"
+          >
+            {{ selectedTeam.name }}
+            <font-awesome-icon icon="angle-down" />
+          </button>
+          <transition name="dropdown-fade">
+            <div
+              v-show="visible === 'teams' && user"
+              id="teams"
+              ref="dropdown-teams"
+              class="dropdown dropdown-teams"
+            >
+              <div
+                v-if="
+                  memberships && memberships.data && memberships.data.length
+                "
+              >
+                <span
+                  v-for="(membership, i) in memberships.data"
+                  :key="`m${membership.id}${i}`"
+                >
+                  <nuxt-link
+                    v-if="membership && membership.organization"
+                    class="item"
+                    :to="
+                      $route.path.replace(
+                        `/teams/${selectedTeam.username}`,
+                        `/teams/${membership.organization.username}`
+                      )
+                    "
+                    >{{ (membership.organization || {}).name }}</nuxt-link
+                  >
+                </span>
+                <hr />
+                <nuxt-link
+                  class="item item-action"
+                  :to="`/users/${user.username || user.id}/teams`"
+                  >Create a new team</nuxt-link
+                >
+              </div>
+            </div>
+          </transition>
+        </div>
+      </div>
+      <nav v-if="isAuthenticated">
+        <button
+          class="item item--type-less"
+          aria-label="Feedback"
+          data-balloon-pos="down"
+          @click="feedback"
         >
-        <nuxt-link v-else class="item" to="/dashboard">Dashboard</nuxt-link>
-        <nuxt-link
-          v-if="activeOrganization"
-          class="item"
-          :to="`/manage/${activeOrganization}/settings`"
-          >Settings</nuxt-link
-        >
-        <nuxt-link v-else class="item" to="/settings">Settings</nuxt-link>
-        <nuxt-link class="item" to="/docs">Docs</nuxt-link>
+          <font-awesome-icon
+            class="nav-icon hide-mobile"
+            icon="comment"
+            fixed-width
+          />
+        </button>
         <span>
           <button
             class="item item--type-less"
-            to="/settings/account"
             aria-label="Help"
             data-balloon-pos="down"
             aria-controls="help"
@@ -38,7 +89,6 @@
               icon="question-circle"
               fixed-width
             />
-            <span class="hide-desktop">Help</span>
           </button>
           <transition name="dropdown-fade">
             <div
@@ -48,9 +98,9 @@
               class="dropdown"
             >
               <button class="item" @click="feedback">Feedback</button>
-              <nuxt-link class="item" to="/settings/account"
-                >Help Center</nuxt-link
-              >
+              <!-- <nuxt-link class="item" to="/settings/account">
+                Help Center
+              </nuxt-link>-->
               <button class="item" onclick="window.agastya.open()">
                 Accessibility
               </button>
@@ -60,16 +110,12 @@
         <span class="hide-mobile">
           <button
             class="item item--type-less item--type-last"
-            to="/settings/notifications"
             aria-label="Notifications"
             data-balloon-pos="down"
             aria-controls="notifications"
             :aria-expanded="(visible === 'notifications').toString()"
           >
             <font-awesome-icon class="nav-icon" icon="bell" fixed-width />
-            <span v-if="notificationCount" class="notif-count">{{
-              notificationCount
-            }}</span>
           </button>
           <transition name="dropdown-fade">
             <div
@@ -79,7 +125,7 @@
               class="dropdown"
               style="width: 350px"
             >
-              <Notifications :on-count="updateNotificationCount" />
+              <Notifications />
             </div>
           </transition>
         </span>
@@ -89,7 +135,7 @@
             aria-controls="account"
             :aria-expanded="(visible === 'account').toString()"
           >
-            <img alt="" :src="user.profilePicture" />
+            <img alt :src="user.profilePicture" />
             {{ user.nickname }}
           </button>
           <transition name="dropdown-fade">
@@ -101,42 +147,28 @@
             >
               <nuxt-link
                 class="item"
-                :to="`/users/${user.username || user.id}/profile`"
-                >Profile</nuxt-link
+                :to="`/users/${user.username || user.id}/account/profile`"
+                >User settings</nuxt-link
               >
-              <div
-                v-if="
-                  memberships && memberships.data && memberships.data.length
-                "
-              >
-                <div class="subheading">Your teams</div>
-                <span
-                  v-for="(membership, i) in memberships.data"
-                  :key="`m${membership.id}${i}`"
-                >
-                  <nuxt-link
-                    v-if="membership && membership.organization"
-                    class="item"
-                    :to="
-                      `/manage/${membership.organization.username ||
-                        membership.organization.id}/settings`
-                    "
-                    >{{ (membership.organization || {}).name }}</nuxt-link
-                  >
-                </span>
-              </div>
               <nuxt-link
-                v-else
                 class="item"
-                :to="`/users/${user.username || user.id}/memberships`"
-                >Your teams</nuxt-link
+                :to="`/users/${user.username || user.id}/teams`"
+                >Teams</nuxt-link
               >
+              <nuxt-link
+                class="item"
+                :to="
+                  `/users/${user.username || user.id}/developer/access-tokens`
+                "
+                >Developer</nuxt-link
+              >
+              <hr />
               <button class="item" @click="logout">Logout</button>
             </div>
           </transition>
         </span>
       </nav>
-      <nav v-else :class="{ 'nav--visible-true': showNav }">
+      <nav v-else>
         <nuxt-link class="item" to="/">Solutions</nuxt-link>
         <nuxt-link class="item" to="/features">Features</nuxt-link>
         <nuxt-link class="item" to="/pricing">Pricing</nuxt-link>
@@ -151,85 +183,66 @@
         >
       </nav>
     </div>
-    <button class="button button--type-nav" @click="showNav = !showNav">
-      <font-awesome-icon
-        v-if="showNav"
-        class="icon nav-icon icon--mr-1"
-        icon="times"
-        fixed-width
-      />
-      <font-awesome-icon
-        v-else
-        class="icon nav-icon icon--mr-1"
-        icon="bars"
-        fixed-width
-      />
-      <span v-if="showNav">Hide menu</span>
-      <span v-else>Menu</span>
-    </button>
-  </Trap>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import Trap from "vue-focus-lock";
-// import Feeedback from "feeedback";
 import {
   faBell,
   faQuestionCircle,
   faBars,
-  faTimes
+  faTimes,
+  faComment,
+  faAngleDown
 } from "@fortawesome/free-solid-svg-icons";
+import vSelect from "vue-select";
+import Notifications from "@/components/Notifications.vue";
 import { Memberships } from "../types/settings";
 import { emptyPagination } from "../types/manage";
 import { emptyUser } from "../types/users";
-import Notifications from "@/components/Notifications.vue";
-library.add(faBell, faQuestionCircle, faBars, faTimes);
-// const feedback = new Feeedback({
-//   onSubmit: result =>
-//     new Promise((resolve, reject) => {
-//       if (window.agastya && typeof window.agastya.secureTrack === "function")
-//         window.agastya.secureTrack({ feedback: result });
-//       resolve();
-//     })
-// });
+library.add(faBell, faQuestionCircle, faBars, faTimes, faComment, faAngleDown);
 
 @Component({
   components: {
     FontAwesomeIcon,
     Notifications,
-    Trap
+    vSelect
   }
 })
 export default class Card extends Vue {
   visible: string | null = null;
   memberships: Memberships = emptyPagination;
   isVisible = true;
-  notificationCount = 0;
-  showNav = false;
   activeOrganization: string | null = null;
   isAuthenticated = false;
+  light = false;
   user = emptyUser;
+  selectedTeam = { username: "", name: "" };
   @Watch("$route")
   private onRouteChanged() {
     this.updateNavBar();
   }
+
   @Watch("visible")
   private changedVisible() {
     if (this.visible === "account") {
       this.load();
     }
   }
+
   private updateNavBar() {
+    this.light =
+      this.$route.path.startsWith("/teams/") ||
+      this.$route.path.startsWith("/users/");
     try {
       this.isAuthenticated = this.$store.state.auth.isAuthenticated;
       if (this.isAuthenticated) {
         this.user = this.$store.state.auth.user;
       }
     } catch (error) {}
-    this.showNav = false;
     if (this.$route.path.startsWith("/onboarding")) {
       this.isVisible = false;
     } else {
@@ -241,23 +254,31 @@ export default class Card extends Vue {
       this.activeOrganization = this.$store.getters["auth/activeOrganization"];
     }
     const user = this.$store.getters["auth/user"];
-    if (user && user.username)
+    if (user && user.username) {
       this.memberships = {
         ...this.$store.getters["users/memberships"](user.username)
       };
+      const team = this.memberships?.data?.find(
+        i => i.organization.username === this.$route.params.team
+      );
+      this.selectedTeam = {
+        name: team?.organization.name || "",
+        username: team?.organization.username || ""
+      };
+    }
   }
-  private updateNotificationCount(count: number) {
-    this.notificationCount = count;
-  }
+
   private logout() {
     this.$store.dispatch("auth/logout");
     this.isAuthenticated = false;
     this.user = emptyUser;
     this.$router.push("/");
   }
+
   private mounted() {
     this.updateNavBar();
   }
+
   private created() {
     if (typeof document !== "undefined" && document.body)
       document.body.addEventListener("click", event => {
@@ -281,9 +302,30 @@ export default class Card extends Vue {
         });
       });
   }
+
   private feedback() {
-    // feedback.open();
+    if (!(window as any).Feeedback) return;
+    const feedback = new (window as any).Feeedback({
+      onSubmit: result =>
+        new Promise((resolve, reject) => {
+          if (
+            (window as any).agastya &&
+            typeof (window as any).agastya.secureTrack === "function"
+          )
+            (window as any).agastya.secureTrack({ feedback: result });
+          if ((window as any).ga)
+            (window as any).ga(
+              "send",
+              "feedback",
+              result.rating,
+              result.message
+            );
+          resolve();
+        })
+    });
+    feedback.open();
   }
+
   private load() {
     const user = this.$store.getters["auth/user"];
     if (
@@ -312,6 +354,10 @@ export default class Card extends Vue {
   align-items: center;
 }
 
+.flex {
+  display: flex;
+}
+
 .button--type-nav {
   position: absolute;
   top: 0.5rem;
@@ -321,6 +367,10 @@ export default class Card extends Vue {
     transform: translateY(-0.05rem);
     display: inline-block;
   }
+}
+
+hr {
+  opacity: 0.25;
 }
 
 @media (max-width: 500px) {
@@ -417,7 +467,7 @@ nav .item {
   transform: translateX(-50%);
   width: 100%;
   min-width: 175px;
-  display: none;
+  color: #000;
   top: 95%;
   background: #fff;
   box-shadow: 0px 0px 0px 1px rgba(136, 152, 170, 0.1),
@@ -439,19 +489,16 @@ nav .item {
     z-index: 1;
   }
 }
-.dropdown {
-  display: block;
-}
 .dropdown .item {
   padding: 0.5rem 1.5rem;
   display: block;
   width: 100%;
 }
 nav .item.item--type-less {
-  padding: 1.5rem 0.5rem;
+  padding: 1.5rem 1rem;
 }
 nav .item.item--type-last {
-  padding-right: 0;
+  padding-right: 0.5rem;
 }
 nav .item.item--type-user {
   padding-right: 0.5rem;
@@ -461,7 +508,7 @@ nav .item.item--type-user {
 }
 .nav-icon {
   opacity: 0.7;
-  transform: scale(1.1);
+  transform: scale(1.25);
 }
 nav .item.item--type-less:hover {
   opacity: 1;
@@ -495,5 +542,21 @@ nav .item.item--type-less:hover {
   font-weight: bold;
   text-transform: uppercase;
   font-size: 85%;
+}
+
+.item-teams {
+  font-size: 125%;
+  margin-left: 2rem;
+  padding: 0;
+  svg {
+    margin-left: 0.5rem;
+  }
+}
+.team-selector {
+  position: relative;
+}
+.dropdown-teams {
+  top: 3rem;
+  margin-left: 1rem;
 }
 </style>

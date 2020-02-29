@@ -109,10 +109,20 @@ export default class Login extends Vue {
       })
       .then(response => {
         if (response === "2fa") {
-          this.$router.push("/auth/2fa");
+          return this.$router.push("/auth/2fa");
         } else {
-          this.$router.push(this.redirect || "/dashboard");
         }
+      })
+      .then(() => this.$store.dispatch("users/getMemberships", { slug: "me" }))
+      .then(memberships => {
+        if (
+          memberships?.data.length &&
+          memberships?.data[0]?.organization?.username
+        )
+          return this.$router.replace(
+            `/teams/${memberships.data[0].organization.username}/products`
+          );
+        return this.$router.replace("/");
       })
       .catch(error => {
         throw new Error(error);
@@ -122,11 +132,13 @@ export default class Login extends Vue {
         this.password = "";
       });
   }
+
   private created() {
     this.redirect = this.$route.query.redirect as string | undefined;
     if (this.isAuthenticated)
       return this.$router.replace(this.redirect || "/dashboard");
   }
+
   private async oauthLogin(service: string) {
     this.$store.commit("auth/startLoading");
     const link = (await this.$axios.get(`/auth/oauth/${service}`)).data
