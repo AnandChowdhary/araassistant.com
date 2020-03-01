@@ -45,9 +45,11 @@ export default class Dashboard extends Vue {
 
   private async search() {
     if (!this.query) return;
-    const result = (await this.$axios.get(
-      `/organizations/${this.$route.params.team}/leads/domain?q=${this.query}`
-    )).data;
+    const result = (
+      await this.$axios.get(
+        `/organizations/${this.$route.params.team}/leads/domain?q=${this.query}`
+      )
+    ).data;
     this.query = "";
     this.emails = result.data;
   }

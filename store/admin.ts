@@ -50,9 +50,9 @@ export const mutations: MutationTree<RootState> = {
 
 export const actions: ActionTree<RootState, RootState> = {
   async getUsers({ commit }, { start = 0 }) {
-    const users: any = (await this.$axios.get(
-      `/admin/users?start=${start}&itemsPerPage=20`
-    )).data;
+    const users: any = (
+      await this.$axios.get(`/admin/users?start=${start}&itemsPerPage=20`)
+    ).data;
     commit("setUsers", {
       users,
       start,
@@ -62,9 +62,11 @@ export const actions: ActionTree<RootState, RootState> = {
     return users;
   },
   async getOrganizations({ commit }, { start = 0 }) {
-    const organizations: any = (await this.$axios.get(
-      `/admin/organizations?start=${start}&itemsPerPage=20`
-    )).data;
+    const organizations: any = (
+      await this.$axios.get(
+        `/admin/organizations?start=${start}&itemsPerPage=20`
+      )
+    ).data;
     commit("setOrganizations", {
       organizations,
       start,
@@ -74,9 +76,9 @@ export const actions: ActionTree<RootState, RootState> = {
     return organizations;
   },
   async getServerLogs({ commit }, { range, from }) {
-    const serverLogs: any = (await this.$axios.get(
-      `/admin/server-logs?range=${range}&from=${from}`
-    )).data;
+    const serverLogs: any = (
+      await this.$axios.get(`/admin/server-logs?range=${range}&from=${from}`)
+    ).data;
     commit("setServerLogs", {
       serverLogs,
       range,

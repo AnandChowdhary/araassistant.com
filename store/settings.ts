@@ -96,9 +96,9 @@ export const actions: ActionTree<RootState, RootState> = {
     return dispatch("getUser");
   },
   async getEmails({ commit }, start = 0) {
-    const emails: Email[] = (await this.$axios.get(
-      `/users/me/emails?start=${start}`
-    )).data;
+    const emails: Email[] = (
+      await this.$axios.get(`/users/me/emails?start=${start}`)
+    ).data;
     commit("setEmails", { emails, start });
   },
   async addEmail({ dispatch }, context) {
@@ -114,15 +114,15 @@ export const actions: ActionTree<RootState, RootState> = {
     return dispatch("getEmails");
   },
   async getEvents({ commit }, start = 0) {
-    const securityEvents: SecurityEvent[] = (await this.$axios.get(
-      `/users/me/events?start=${start}&sort=desc`
-    )).data;
+    const securityEvents: SecurityEvent[] = (
+      await this.$axios.get(`/users/me/events?start=${start}&sort=desc`)
+    ).data;
     commit("setSecurityEvents", { securityEvents, start });
   },
   async getBackupCodes({ commit }, context) {
-    const backupCodes: BackupCode[] = (await this.$axios.get(
-      "/users/me/backup-codes"
-    )).data;
+    const backupCodes: BackupCode[] = (
+      await this.$axios.get("/users/me/backup-codes")
+    ).data;
     commit("setBackupCodes", backupCodes);
   },
   async getExport({ commit }, context) {
@@ -139,9 +139,9 @@ export const actions: ActionTree<RootState, RootState> = {
     await this.$axios.delete("/users/me");
   },
   async getMemberships({ commit }, start = 0) {
-    const memberships: Membership[] = (await this.$axios.get(
-      `/users/me/memberships?start=${start}`
-    )).data;
+    const memberships: Membership[] = (
+      await this.$axios.get(`/users/me/memberships?start=${start}`)
+    ).data;
     commit("setMemberships", { memberships, start });
     return memberships;
   },

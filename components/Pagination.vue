@@ -58,6 +58,7 @@ export default class Pagination extends Vue {
   get numberOfPages() {
     return Math.max(Math.floor(this.numberOfItems / this.itemsPerPage), 1);
   }
+
   get showPages() {
     const startPage = Math.max(1, this.activePage - 2);
     const endPage = Math.min(this.activePage + 2, this.numberOfPages);
@@ -65,6 +66,7 @@ export default class Pagination extends Vue {
     for (let i = startPage; i <= endPage; i++) x.push(i);
     return x;
   }
+
   @Watch("activePage")
   onPageChanged(activePage: number) {
     if (typeof this.onChange === "function") return this.onChange(activePage);

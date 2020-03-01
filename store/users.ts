@@ -193,9 +193,9 @@ export const actions: ActionTree<RootState, RootState> = {
     commit("clearAll");
   },
   async getAccessTokens({ commit }, { slug, start = 0 }) {
-    const accessTokens: any = (await this.$axios.get(
-      `/users/${slug}/access-tokens?start=${start}`
-    )).data;
+    const accessTokens: any = (
+      await this.$axios.get(`/users/${slug}/access-tokens?start=${start}`)
+    ).data;
     commit("setAccessTokens", {
       slug,
       accessTokens,
@@ -205,9 +205,9 @@ export const actions: ActionTree<RootState, RootState> = {
     return accessTokens;
   },
   async getAccessToken({ commit }, { slug, id }) {
-    const accessToken: any = (await this.$axios.get(
-      `/users/${slug}/access-tokens/${id}`
-    )).data;
+    const accessToken: any = (
+      await this.$axios.get(`/users/${slug}/access-tokens/${id}`)
+    ).data;
     commit("setAccessToken", { slug, accessToken, id });
     return accessToken;
   },
@@ -234,9 +234,9 @@ export const actions: ActionTree<RootState, RootState> = {
     return dispatch("getAccessToken", context);
   },
   async getMemberships({ commit }, { slug, start = 0 }) {
-    const memberships: any = (await this.$axios.get(
-      `/users/${slug}/memberships?start=${start}`
-    )).data;
+    const memberships: any = (
+      await this.$axios.get(`/users/${slug}/memberships?start=${start}`)
+    ).data;
     commit("setMemberships", {
       slug,
       memberships,
@@ -246,9 +246,9 @@ export const actions: ActionTree<RootState, RootState> = {
     return memberships;
   },
   async getMembership({ commit }, { slug, id }) {
-    const membership: any = (await this.$axios.get(
-      `/users/${slug}/memberships/${id}`
-    )).data;
+    const membership: any = (
+      await this.$axios.get(`/users/${slug}/memberships/${id}`)
+    ).data;
     commit("setMembership", { slug, membership, id });
     return membership;
   },
@@ -259,9 +259,9 @@ export const actions: ActionTree<RootState, RootState> = {
     return dispatch("getMemberships", { slug: context.slug });
   },
   async getEmails({ commit }, { slug, start = 0 }) {
-    const emails: any = (await this.$axios.get(
-      `/users/${slug}/emails?start=${start}`
-    )).data;
+    const emails: any = (
+      await this.$axios.get(`/users/${slug}/emails?start=${start}`)
+    ).data;
     commit("setEmails", { slug, emails, start, next: emails.next });
     return emails;
   },
@@ -341,9 +341,9 @@ export const actions: ActionTree<RootState, RootState> = {
   },
 
   async getSessions({ commit }, { slug, start = 0 }) {
-    const sessions: any = (await this.$axios.get(
-      `/users/${slug}/sessions?start=${start}`
-    )).data;
+    const sessions: any = (
+      await this.$axios.get(`/users/${slug}/sessions?start=${start}`)
+    ).data;
     commit("setSessions", {
       slug,
       sessions,
@@ -353,9 +353,9 @@ export const actions: ActionTree<RootState, RootState> = {
     return sessions;
   },
   async getSession({ commit }, { slug, id }) {
-    const session: any = (await this.$axios.get(
-      `/users/${slug}/sessions/${id}`
-    )).data;
+    const session: any = (
+      await this.$axios.get(`/users/${slug}/sessions/${id}`)
+    ).data;
     commit("setSession", { slug, session, id });
     return session;
   },
@@ -370,9 +370,9 @@ export const actions: ActionTree<RootState, RootState> = {
     return dispatch("getSessions", { slug: context.slug });
   },
   async getIdentities({ commit }, { slug, start = 0 }) {
-    const identities: any = (await this.$axios.get(
-      `/users/${slug}/identities?start=${start}`
-    )).data;
+    const identities: any = (
+      await this.$axios.get(`/users/${slug}/identities?start=${start}`)
+    ).data;
     commit("setIdentities", {
       slug,
       identities,
@@ -382,9 +382,9 @@ export const actions: ActionTree<RootState, RootState> = {
     return identities;
   },
   async getIdentity({ commit }, { slug, id }) {
-    const identity: any = (await this.$axios.get(
-      `/users/${slug}/identities/${id}`
-    )).data;
+    const identity: any = (
+      await this.$axios.get(`/users/${slug}/identities/${id}`)
+    ).data;
     commit("setIdentity", { slug, identity, id });
     return identity;
   },

@@ -237,9 +237,9 @@ export const mutations: MutationTree<RootState> = {
 
 export const actions: ActionTree<RootState, RootState> = {
   async getOrganization({ commit }, context) {
-    const org: Organization = (await this.$axios.get(
-      `/organizations/${context}`
-    )).data;
+    const org: Organization = (
+      await this.$axios.get(`/organizations/${context}`)
+    ).data;
     commit("setOrganization", org);
     return org;
   },
@@ -262,9 +262,9 @@ export const actions: ActionTree<RootState, RootState> = {
     );
   },
   async getMembers({ commit }, { team, start = 0 }) {
-    const members = (await this.$axios.get(
-      `/organizations/${team}/memberships?start=${start}`
-    )).data;
+    const members = (
+      await this.$axios.get(`/organizations/${team}/memberships?start=${start}`)
+    ).data;
     commit("setMembers", { team, members, start, next: members.next });
     return members;
   },
@@ -296,9 +296,9 @@ export const actions: ActionTree<RootState, RootState> = {
     return dispatch("getMembership", { team: context.team, id: context.id });
   },
   async getBilling({ commit }, team) {
-    const billing: any = (await this.$axios.get(
-      `/organizations/${team}/billing`
-    )).data;
+    const billing: any = (
+      await this.$axios.get(`/organizations/${team}/billing`)
+    ).data;
     commit("setBilling", { billing, team });
     return billing;
   },
@@ -309,23 +309,25 @@ export const actions: ActionTree<RootState, RootState> = {
     return dispatch("getBilling", context.team);
   },
   async getInvoices({ commit }, { team, start = 0 }) {
-    const invoices: any = (await this.$axios.get(
-      `/organizations/${team}/invoices?start=${start}`
-    )).data;
+    const invoices: any = (
+      await this.$axios.get(`/organizations/${team}/invoices?start=${start}`)
+    ).data;
     commit("setInvoices", { team, invoices, start, next: invoices.next });
     return invoices;
   },
   async getInvoice({ commit }, { team, id }) {
-    const invoice: any = (await this.$axios.get(
-      `/organizations/${team}/invoices/${id}`
-    )).data;
+    const invoice: any = (
+      await this.$axios.get(`/organizations/${team}/invoices/${id}`)
+    ).data;
     commit("setInvoice", { team, invoice, id });
     return invoice;
   },
   async getSubscriptions({ commit }, { team, start = 0 }) {
-    const subscriptions: any = (await this.$axios.get(
-      `/organizations/${team}/subscriptions?start=${start}`
-    )).data;
+    const subscriptions: any = (
+      await this.$axios.get(
+        `/organizations/${team}/subscriptions?start=${start}`
+      )
+    ).data;
     commit("setSubscriptions", {
       team,
       subscriptions,
@@ -335,9 +337,9 @@ export const actions: ActionTree<RootState, RootState> = {
     return subscriptions;
   },
   async getSubscription({ commit }, { team, id }) {
-    const subscription: any = (await this.$axios.get(
-      `/organizations/${team}/subscriptions/${id}`
-    )).data;
+    const subscription: any = (
+      await this.$axios.get(`/organizations/${team}/subscriptions/${id}`)
+    ).data;
     commit("setSubscription", { team, subscription, id });
     return subscription;
   },
@@ -356,22 +358,22 @@ export const actions: ActionTree<RootState, RootState> = {
     return dispatch("getSubscriptions", { team });
   },
   async getPricingPlans({ commit }, context) {
-    const subscriptions: any = (await this.$axios.get(
-      `/organizations/${context}/pricing`
-    )).data;
+    const subscriptions: any = (
+      await this.$axios.get(`/organizations/${context}/pricing`)
+    ).data;
     commit("setPricingPlans", subscriptions);
   },
   async getSources({ commit }, { team, start = 0 }) {
-    const sources: any = (await this.$axios.get(
-      `/organizations/${team}/sources?start=${start}`
-    )).data;
+    const sources: any = (
+      await this.$axios.get(`/organizations/${team}/sources?start=${start}`)
+    ).data;
     commit("setSources", { team, sources, start, next: sources.next });
     return sources;
   },
   async getSource({ commit }, { team, id }) {
-    const source: any = (await this.$axios.get(
-      `/organizations/${team}/sources/${id}`
-    )).data;
+    const source: any = (
+      await this.$axios.get(`/organizations/${team}/sources/${id}`)
+    ).data;
     commit("setSource", { team, source, id });
     return source;
   },
@@ -398,23 +400,25 @@ export const actions: ActionTree<RootState, RootState> = {
     return dispatch("getSource", { team: context.team, id: context.id });
   },
   async getApiKeys({ commit }, { team, start = 0 }) {
-    const apiKeys: any = (await this.$axios.get(
-      `/organizations/${team}/api-keys?start=${start}`
-    )).data;
+    const apiKeys: any = (
+      await this.$axios.get(`/organizations/${team}/api-keys?start=${start}`)
+    ).data;
     commit("setApiKeys", { team, apiKeys, start, next: apiKeys.next });
     return apiKeys;
   },
   async getApiKey({ commit }, { team, id }) {
-    const apiKey: any = (await this.$axios.get(
-      `/organizations/${team}/api-keys/${id}`
-    )).data;
+    const apiKey: any = (
+      await this.$axios.get(`/organizations/${team}/api-keys/${id}`)
+    ).data;
     commit("setApiKey", { team, apiKey, id });
     return apiKey;
   },
   async getApiKeyLogs({ commit }, { team, id, range, from }) {
-    const apiKeyLogs: any = (await this.$axios.get(
-      `/organizations/${team}/api-keys/${id}/logs?range=${range}&from=${from}`
-    )).data;
+    const apiKeyLogs: any = (
+      await this.$axios.get(
+        `/organizations/${team}/api-keys/${id}/logs?range=${range}&from=${from}`
+      )
+    ).data;
     commit("setApiKeyLogs", { team, apiKeyLogs, range, id, from });
     return apiKeyLogs;
   },
@@ -441,16 +445,16 @@ export const actions: ActionTree<RootState, RootState> = {
     return dispatch("getApiKey", context);
   },
   async getDomains({ commit }, { team, start = 0 }) {
-    const domains: any = (await this.$axios.get(
-      `/organizations/${team}/domains?start=${start}`
-    )).data;
+    const domains: any = (
+      await this.$axios.get(`/organizations/${team}/domains?start=${start}`)
+    ).data;
     commit("setDomains", { team, domains, start, next: domains.next });
     return domains;
   },
   async getDomain({ commit }, { team, id }) {
-    const domain: any = (await this.$axios.get(
-      `/organizations/${team}/domains/${id}`
-    )).data;
+    const domain: any = (
+      await this.$axios.get(`/organizations/${team}/domains/${id}`)
+    ).data;
     commit("setDomain", { team, domain, id });
     return domain;
   },
@@ -487,16 +491,16 @@ export const actions: ActionTree<RootState, RootState> = {
     return dispatch("getDomain", context);
   },
   async getWebhooks({ commit }, { team, start = 0 }) {
-    const webhooks: any = (await this.$axios.get(
-      `/organizations/${team}/webhooks?start=${start}`
-    )).data;
+    const webhooks: any = (
+      await this.$axios.get(`/organizations/${team}/webhooks?start=${start}`)
+    ).data;
     commit("setWebhooks", { team, webhooks, start, next: webhooks.next });
     return webhooks;
   },
   async getWebhook({ commit }, { team, id }) {
-    const webhook: any = (await this.$axios.get(
-      `/organizations/${team}/webhooks/${id}`
-    )).data;
+    const webhook: any = (
+      await this.$axios.get(`/organizations/${team}/webhooks/${id}`)
+    ).data;
     commit("setWebhook", { team, webhook, id });
     return webhook;
   },
@@ -525,9 +529,9 @@ export const actions: ActionTree<RootState, RootState> = {
   async getEvents({ commit, rootGetters }) {
     const org = rootGetters["auth/activeOrganization"];
     const organizationId = org.organizationId;
-    const events: any = (await this.$axios.get(
-      `/organizations/${organizationId}/events`
-    )).data;
+    const events: any = (
+      await this.$axios.get(`/organizations/${organizationId}/events`)
+    ).data;
     commit("setRecentEvents", events);
   }
 };

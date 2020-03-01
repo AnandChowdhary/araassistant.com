@@ -126,6 +126,7 @@ import {
   faCreditCard,
   faUsers,
   faLaptop,
+  faEnvelopeOpen,
   faHandsHelping,
   faCalendar,
   faImage
