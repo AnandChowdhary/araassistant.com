@@ -85,8 +85,7 @@ export default class CommaList extends Vue {
   }
 
   private mounted() {
-    if (this.value && typeof this.value === "string")
-      this.list = this.value.split(",");
+    if (this.value) this.list = this.value.split(",");
   }
 
   private add() {

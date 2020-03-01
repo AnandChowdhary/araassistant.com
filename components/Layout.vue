@@ -27,7 +27,6 @@ import Policies from "@/components/Policies.vue";
   components: {
     Users,
     Admin,
-    Dashboard,
     Policies,
     TeamLayout
   }

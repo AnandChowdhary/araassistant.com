@@ -13,7 +13,7 @@ const config: Configuration = {
       {
         hid: "description",
         name: "description",
-        content: "AI-powered assistant for work"
+        content: "Ara"
       }
     ],
     link: [
@@ -42,7 +42,8 @@ const config: Configuration = {
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css?family=Work+Sans:400,700&display=swap"
+        href:
+          "https://fonts.googleapis.com/css?family=Work+Sans:400,700&display=swap"
       }
     ],
     script: [
@@ -58,7 +59,7 @@ const config: Configuration = {
       },
       {
         type: "text/javascript",
-        src: "https://platform.oswaldlabs.com/v1/agastya/load/ara.js",
+        src: "https://platform.oswaldlabs.com/v1/agastya/load/d1b9d3cd29.js",
         async: true
       },
       {

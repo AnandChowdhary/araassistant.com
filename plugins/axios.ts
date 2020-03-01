@@ -30,9 +30,8 @@ export default function({
       new Promise((resolve, reject) => {
         config.data = removeNulls(removeReadOnlyValues(config.data));
         $axios.setHeader("X-Requested-With", "XMLHttpRequest");
-
         // Don't worry, this is a public API key and you can see this :)
-        $axios.setHeader("X-Api-Key", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQwZThhN2MtM2w4anhsanZ4ZyIsIm9yZ2FuaXphdGlvbklkIjoiZDBlOGE3Yy0zbDhqeGxqdnhnIiwicmVmZXJyZXJSZXN0cmljdGlvbnMiOiJhcmEtYXNzaXN0YW50Lm5ldGxpZnkuY29tLGFyYWFzc2lzdGFudC5jb20sbG9jYWxob3N0Iiwic2NvcGVzIjoib3JnUmVhZCIsImlhdCI6MTU2NzMzMzM2MSwiZXhwIjo4ODQ3OTE5NzcyMzMwLCJpc3MiOiJhcmFhc3Npc3RhbnQuY29tIiwic3ViIjoiYXBpLWtleSIsImp0aSI6IjczMTYwZTJjYTc2NyJ9.V7vCq862CykP2D1h7mvvQFLkvMyHLBxIXkmgdQvm24U");
+        // $axios.setHeader("X-Api-Key", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQwZThhN2MtM2w4anhsanZ4ZyIsIm9yZ2FuaXphdGlvbklkIjoiZDBlOGE3Yy0zbDhqeGxqdnhnIiwicmVmZXJyZXJSZXN0cmljdGlvbnMiOiJhcmEtYXNzaXN0YW50Lm5ldGxpZnkuY29tLGFyYWFzc2lzdGFudC5jb20sbG9jYWxob3N0Iiwic2NvcGVzIjoib3JnUmVhZCIsImlhdCI6MTU2NzMzMzM2MSwiZXhwIjo4ODQ3OTE5NzcyMzMwLCJpc3MiOiJhcmFhc3Npc3RhbnQuY29tIiwic3ViIjoiYXBpLWtleSIsImp0aSI6IjczMTYwZTJjYTc2NyJ9.V7vCq862CykP2D1h7mvvQFLkvMyHLBxIXkmgdQvm24U");
         try {
           const token = config.headers.common.Authorization.replace(
             "Bearer ",
@@ -69,12 +68,12 @@ export default function({
           type: "notification notification--color-success"
         });
       } else if (response.data.message) {
-          Vue.notify({
-            group: "auth",
-            text: messages[response.data.message] || messages.success,
-            type: "notification notification--color-success"
-          });
-        } else {
+        Vue.notify({
+          group: "auth",
+          text: messages[response.data.message] || messages.success,
+          type: "notification notification--color-success"
+        });
+      } else {
         Vue.notify({
           group: "auth",
           text: messages.success,
