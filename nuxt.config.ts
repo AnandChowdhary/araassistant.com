@@ -89,7 +89,7 @@ const config: Configuration = {
     [
       "@nuxtjs/google-analytics",
       {
-        id: "UA-79176349-16"
+        id: "UA-128250981-1"
       }
     ],
     "~/modules/ts-fix.ts"
