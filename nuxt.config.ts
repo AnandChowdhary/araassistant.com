@@ -59,7 +59,7 @@ const config: Configuration = {
       },
       {
         type: "text/javascript",
-        src: "https://platform.oswaldlabs.com/v1/agastya/load/d1b9d3cd29.js",
+        src: "https://platform.oswaldlabs.com/v1/agastya/load/ara.js",
         async: true
       },
       {
