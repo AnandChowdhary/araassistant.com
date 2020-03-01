@@ -35,11 +35,7 @@
               </nuxt-link>
             </div>
           </div>
-          <img class="b" alt="" src="/images/undraw_happy_news_hxmt.svg" /><img
-            class="b"
-            alt
-            src="/images/undraw_product_tour_foyt.svg"
-          />
+          <img class="b" alt="" src="/images/undraw_happy_news_hxmt.svg" />
         </div>
       </div>
     </header>
