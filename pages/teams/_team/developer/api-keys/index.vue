@@ -130,8 +130,8 @@
         <div class="text text--mt-2">
           <h2>Create API key</h2>
           <p>
-            You can use API keys to programmatically access StartupName in your
-            applications.
+            You can use API keys to programmatically access Ara Assistant in
+            your applications.
           </p>
           <form @submit.prevent="createApiKey">
             <CheckList

@@ -3,7 +3,7 @@
 
 > This (Service Level Agreement) SLA only applies to custom enterprise plans. If your team needs an SLA, you can request it by getting in touch with us on our [Contact](/contact) page.
 
-StartupName commits to provide a level of service for our enterprise customers demonstrating:
+Ara Assistant commits to provide a level of service for our enterprise customers demonstrating:
 
 1. **100% Uptime**: We'll serve our APIs and applications 100% of the time without qualification
 2. **Penalties**: If our APIs or applications fail to meet the above service level, you'll receive a credit equal to

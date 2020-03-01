@@ -32,7 +32,7 @@ We collect, hold, use and disclose information for the following purposes:
 - for analytics, market research and business development, including to operate and improve our website, associated applications and - associated social media platforms; and
 - to comply with our legal obligations and resolve any disputes that we may have.
 
-StartupName is supported by third-party providers to facilitate the provision of a transactional website. These include DNS management, web hosting, payment processing (Stripe and Chargebee) and web analytics (Google Analytics and Oswald Labs).
+Ara Assistant is supported by third-party providers to facilitate the provision of a transactional website. These include DNS management, web hosting, payment processing (Stripe and Chargebee) and web analytics (Google Analytics and Oswald Labs).
 
 We will comply with government and law enforcement requests for data, as required by law, in connection with any actual or prospective legal proceedings, or in order to establish, exercise or defend our legal rights.
 
@@ -42,7 +42,7 @@ The data we retain is stored and processed in the European Union (Frankfurt, Ger
 
 If we or our assets are acquired, or in the unlikely event that we go out of business or enter bankruptcy, we would include data among the assets transferred to any parties who acquire us. You acknowledge that such transfers may occur, and that any parties who acquire us may continue to use your personal information according to this policy.
 
-This privacy policy only covers StartupName's own collecting and handling of data. We only work with partners and third-party providers whose privacy policies align with ours, however we cannot accept responsibility or liability for their respective privacy practices.
+This privacy policy only covers Ara Assistant's own collecting and handling of data. We only work with partners and third-party providers whose privacy policies align with ours, however we cannot accept responsibility or liability for their respective privacy practices.
 
 Our website may link to external sites that are not operated by us. Please be aware that we have no control over the content and policies of those sites, and cannot accept responsibility or liability for their respective privacy practices.
 

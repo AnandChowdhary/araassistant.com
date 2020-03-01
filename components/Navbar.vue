@@ -4,7 +4,7 @@
       <div class="flex">
         <nuxt-link class="item item--type-logo" to="/">
           <img alt src="/android-chrome-72x72.png" />
-          <span>StartupName</span>
+          <span>Ara Assistant</span>
         </nuxt-link>
         <div
           v-if="

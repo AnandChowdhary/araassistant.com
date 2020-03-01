@@ -106,7 +106,7 @@
         </div>
         <h2>Create another team</h2>
         <p>
-          To invite your team to StartupName, get started by creating a new
+          To invite your team to Ara Assistant, get started by creating a new
           team.
         </p>
         <form @submit.prevent="createNewTeam">
