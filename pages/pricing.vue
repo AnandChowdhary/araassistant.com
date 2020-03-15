@@ -33,10 +33,10 @@
           <div class="card card--type-padded text text--align-center">
             <h2 class="plan">Free</h2>
             <div class="price">
-              <span itemprop="priceCurrency" content="USD">{{
-                currencySymbol
-              }}</span
-              ><span itemprop="price" content="0.00">0</span>
+              <span itemprop="priceCurrency" content="USD">
+                {{ currencySymbol }}
+              </span>
+              <span itemprop="price" content="0.00">0</span>
               <link itemprop="availability" href="https://schema.org/InStock" />
             </div>
             <div class="text text--size-small text--color-light">&nbsp;</div>
@@ -47,16 +47,16 @@
           <div class="card card--type-padded text text--align-center">
             <h2 class="plan">Pro</h2>
             <div class="price">
-              <span itemprop="priceCurrency" :content="selectedCurrency">{{
-                currencySymbol
-              }}</span
-              ><span itemprop="price" :content="calculatedPrice">{{
-                calculatedPrice | currency
-              }}</span>
+              <span itemprop="priceCurrency" :content="selectedCurrency">
+                {{ currencySymbol }}
+              </span>
+              <span itemprop="price" :content="calculatedPrice">
+                {{ calculatedPrice | currency }}
+              </span>
               <link itemprop="availability" href="https://schema.org/InStock" />
             </div>
             <div class="text text--size-small text--color-light">
-              per user
+              per user{{ selectedTerm === "annually" ? " per month" : "" }}
             </div>
             <div class="text text--size-small text--color-light">
               billed {{ selectedTerm }}
@@ -129,12 +129,12 @@
           <div class="card card--type-padded text text--align-center">
             <h2 class="hide-desktop">
               Pro for
-              <span itemprop="priceCurrency" :content="selectedCurrency">{{
-                currencySymbol
-              }}</span
-              ><span itemprop="price" :content="calculatedPrice">{{
-                calculatedPrice | currency
-              }}</span>
+              <span itemprop="priceCurrency" :content="selectedCurrency">
+                {{ currencySymbol }}
+              </span>
+              <span itemprop="price" :content="calculatedPrice">
+                {{ calculatedPrice | currency }}
+              </span>
               <link itemprop="availability" href="https://schema.org/InStock" />
             </h2>
             <ul>
@@ -220,9 +220,7 @@
               <h3>{{ i }}</h3>
             </div>
             <ul>
-              <li v-for="(feature1, j) in feature" :key="`g${j}`">
-                {{ j }}
-              </li>
+              <li v-for="(feature1, j) in feature" :key="`g${j}`">{{ j }}</li>
             </ul>
           </div>
         </div>
@@ -246,9 +244,9 @@
                 </span>
                 <span v-else>
                   <font-awesome-icon class="i-y" icon="check" title="Yes" />
-                  <span v-if="typeof feature1[k] === 'string'">
-                    {{ feature1[k] }}
-                  </span>
+                  <span v-if="typeof feature1[k] === 'string'">{{
+                    feature1[k]
+                  }}</span>
                 </span>
               </li>
             </ul>
@@ -281,22 +279,19 @@ library.add(faCheck, faTimes, faArrowRight);
 })
 export default class Pricing extends Vue {
   selectedCurrency = "usd";
-  selectedTerm = "monthly";
+  selectedTerm = "annually";
   proPrices = {
     monthly: {
-      usd: 995,
-      eur: 895
+      usd: 600,
+      eur: 500
     },
     annually: {
-      usd: 9900,
-      eur: 8900
+      usd: 6000,
+      eur: 4800
     }
   };
 
-  currencySymbols = {
-    usd: "$",
-    eur: "€"
-  };
+  currencySymbols = { usd: "$", eur: "€" };
 
   moreFeatures = {
     Assistant: {
@@ -307,14 +302,15 @@ export default class Pricing extends Vue {
       ],
       Campaigns: ["10 campaigns", "Unlimited campaigns", "Unlimited campaigns"],
       Templates: ["10 templates", "Unlimited templates", "Unlimited templates"],
+      Locations: [
+        "10 saved locations",
+        "Unlimited saved locations",
+        "Unlimited saved locations"
+      ],
       'Hide "Help" link': [false, false, "Custom unsubscribe"]
     },
     Team: {
-      "Team members": [
-        "3 users included",
-        "5 users included",
-        "Unlimited users"
-      ],
+      "Team members": ["Up to 3 users", "Unlimited users", "Unlimited users"],
       "IP whitelisting": [
         "Whitelist IP/CIDRs",
         "Whitelist IP/CIDRs",
@@ -351,7 +347,9 @@ export default class Pricing extends Vue {
   }
 
   get calculatedPrice() {
-    return this.proPrices[this.selectedTerm][this.selectedCurrency];
+    const price = this.proPrices[this.selectedTerm][this.selectedCurrency];
+    if (this.selectedTerm === "annually") return price / 12;
+    return price;
   }
 
   get currencySymbol() {
@@ -372,6 +370,9 @@ select {
 .price {
   font-size: 200%;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 ul {
   margin: 0;
